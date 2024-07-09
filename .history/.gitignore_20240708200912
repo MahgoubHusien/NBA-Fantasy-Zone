@@ -1,0 +1,38 @@
+# Ignore the .env file
+.env
+
+# Ignore PostgreSQL data directory (if applicable)
+pgdata/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# Ignore node_modules directory (if you have Node.js dependencies)
+node_modules/
+
+# Ignore compiled files
+*.o
+*.so
+*.a
+*.out
+
+# Ignore OS generated files
+*.swp
+*~
