@@ -1,6 +1,8 @@
 # Ignore the .env file
 .env
 
+.history
+
 # Ignore PostgreSQL data directory (if applicable)
 pgdata/
 
