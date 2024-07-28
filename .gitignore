@@ -40,8 +40,8 @@ target/
 .vscode/
 
 # Ignore data files or directories that should not be tracked
-mvp/player/
-mvp/team/
+/player/
+/team/
 games/
 data/
 
