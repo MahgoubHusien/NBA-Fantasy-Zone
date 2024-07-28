@@ -40,6 +40,9 @@ target/
 .vscode/
 
 # Ignore data files or directories that should not be tracked
+player/
+team/
+games/
 data/
 
 # Ignore node_modules directory (if you have Node.js dependencies)
