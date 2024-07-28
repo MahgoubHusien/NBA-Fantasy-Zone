@@ -1,9 +1,17 @@
 import os
 import time
+import logging
 import pandas as pd
 import psycopg2
 from dotenv import load_dotenv
 from nba_api.stats.endpoints import leaguedashplayerstats, commonplayerinfo, PlayerFantasyProfileBarGraph
+
+# Configure logging
+logging.basicConfig(
+    filename='logs/update_data.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 # Load environment variables from .env file
 load_dotenv()
@@ -44,8 +52,7 @@ def check_and_create_tables(conn):
     """
     
     create_current_player_stats_table_query = """
-    DROP TABLE IF EXISTS current_player_stats;
-    CREATE TABLE current_player_stats (
+    CREATE TABLE IF NOT EXISTS current_player_stats (
         player_id INT PRIMARY KEY,
         player_name VARCHAR(100),
         team_abbreviation VARCHAR(20),
@@ -149,7 +156,7 @@ def check_and_create_tables(conn):
         cur.execute(create_current_player_stats_table_query)
         cur.execute(create_fantasy_stats_table_query)
         conn.commit()
-    print("Tables checked and created if not exists.")
+    logging.info("Tables checked and created if not exists.")
 
 check_and_create_tables(conn)
 
@@ -194,7 +201,23 @@ def fetch_and_insert_player_info(player_id, conn):
         query_common_player_info = """
         INSERT INTO common_player_info (player_id, first_name, last_name, team_id, team_name, team_abbreviation, jersey, position, height, weight, ppg, apg, rpg, spg, topg, bpg, pfpg)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        ON CONFLICT (player_id) DO NOTHING;
+        ON CONFLICT (player_id) DO UPDATE SET
+            first_name = EXCLUDED.first_name,
+            last_name = EXCLUDED.last_name,
+            team_id = EXCLUDED.team_id,
+            team_name = EXCLUDED.team_name,
+            team_abbreviation = EXCLUDED.team_abbreviation,
+            jersey = EXCLUDED.jersey,
+            position = EXCLUDED.position,
+            height = EXCLUDED.height,
+            weight = EXCLUDED.weight,
+            ppg = EXCLUDED.ppg,
+            apg = EXCLUDED.apg,
+            rpg = EXCLUDED.rpg,
+            spg = EXCLUDED.spg,
+            topg = EXCLUDED.topg,
+            bpg = EXCLUDED.bpg,
+            pfpg = EXCLUDED.pfpg;
         """
         with conn.cursor() as cur:
             cur.execute(query_common_player_info, (
@@ -217,9 +240,9 @@ def fetch_and_insert_player_info(player_id, conn):
                 player_data['PFPG']
             ))
             conn.commit()
-        print(f"Inserted player info for {player_data['FIRST_NAME']} {player_data['LAST_NAME']}")
+        logging.info(f"Inserted/Updated player info for {player_data['FIRST_NAME']} {player_data['LAST_NAME']}")
     except Exception as e:
-        print(f"Error fetching or inserting player info for player_id {player_id}: {e}")
+        logging.error(f"Error fetching or inserting player info for player_id {player_id}: {e}")
         conn.rollback()  # Rollback the transaction on error
 
 def fetch_and_insert_fantasy_stats(player_id, conn):
@@ -278,9 +301,9 @@ def fetch_and_insert_fantasy_stats(player_id, conn):
                     season_stats['FG_PCT']
                 ))
                 conn.commit()
-            print(f"Inserted/Updated fantasy stats for player_id {player_id}")
+            logging.info(f"Inserted/Updated fantasy stats for player_id {player_id}")
     except Exception as e:
-        print(f"Error fetching or inserting fantasy stats for player_id {player_id}: {e}")
+        logging.error(f"Error fetching or inserting fantasy stats for player_id {player_id}: {e}")
         conn.rollback()  # Rollback the transaction on error
 
 def fetch_and_insert_league_dash_stats(player_id, conn):
@@ -293,7 +316,70 @@ def fetch_and_insert_league_dash_stats(player_id, conn):
         INSERT INTO current_player_stats (player_id, player_name, team_abbreviation, age, gp, w, l, w_pct, min, fgm, fga, fg_pct, fg3m, fg3a, fg3_pct, ftm, fta, ft_pct, oreb, dreb, reb, ast, tov, stl, blk, blka, pf, pfd, pts, plus_minus, nba_fantasy_pts, dd2, td3,
             gp_rank, w_rank, l_rank, w_pct_rank, min_rank, fgm_rank, fga_rank, fg_pct_rank, fg3m_rank, fg3a_rank, fg3_pct_rank, ftm_rank, fta_rank, ft_pct_rank, oreb_rank, dreb_rank, reb_rank, ast_rank, tov_rank, stl_rank, blk_rank, blka_rank, pf_rank, pfd_rank, pts_rank, plus_minus_rank, nba_fantasy_pts_rank, dd2_rank, td3_rank, cfid, cfparams)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        ON CONFLICT (player_id) DO NOTHING;
+        ON CONFLICT (player_id) DO UPDATE SET
+            player_name = EXCLUDED.player_name,
+            team_abbreviation = EXCLUDED.team_abbreviation,
+            age = EXCLUDED.age,
+            gp = EXCLUDED.gp,
+            w = EXCLUDED.w,
+            l = EXCLUDED.l,
+            w_pct = EXCLUDED.w_pct,
+            min = EXCLUDED.min,
+            fgm = EXCLUDED.fgm,
+            fga = EXCLUDED.fga,
+            fg_pct = EXCLUDED.fg_pct,
+            fg3m = EXCLUDED.fg3m,
+            fg3a = EXCLUDED.fg3a,
+            fg3_pct = EXCLUDED.fg3_pct,
+            ftm = EXCLUDED.ftm,
+            fta = EXCLUDED.fta,
+            ft_pct = EXCLUDED.ft_pct,
+            oreb = EXCLUDED.oreb,
+            dreb = EXCLUDED.dreb,
+            reb = EXCLUDED.reb,
+            ast = EXCLUDED.ast,
+            tov = EXCLUDED.tov,
+            stl = EXCLUDED.stl,
+            blk = EXCLUDED.blk,
+            blka = EXCLUDED.blka,
+            pf = EXCLUDED.pf,
+            pfd = EXCLUDED.pfd,
+            pts = EXCLUDED.pts,
+            plus_minus = EXCLUDED.plus_minus,
+            nba_fantasy_pts = EXCLUDED.nba_fantasy_pts,
+            dd2 = EXCLUDED.dd2,
+            td3 = EXCLUDED.td3,
+            gp_rank = EXCLUDED.gp_rank,
+            w_rank = EXCLUDED.w_rank,
+            l_rank = EXCLUDED.l_rank,
+            w_pct_rank = EXCLUDED.w_pct_rank,
+            min_rank = EXCLUDED.min_rank,
+            fgm_rank = EXCLUDED.fgm_rank,
+            fga_rank = EXCLUDED.fga_rank,
+            fg_pct_rank = EXCLUDED.fg_pct_rank,
+            fg3m_rank = EXCLUDED.fg3m_rank,
+            fg3a_rank = EXCLUDED.fg3a_rank,
+            fg3_pct_rank = EXCLUDED.fg3_pct_rank,
+            ftm_rank = EXCLUDED.ftm_rank,
+            fta_rank = EXCLUDED.fta_rank,
+            ft_pct_rank = EXCLUDED.ft_pct_rank,
+            oreb_rank = EXCLUDED.oreb_rank,
+            dreb_rank = EXCLUDED.dreb_rank,
+            reb_rank = EXCLUDED.reb_rank,
+            ast_rank = EXCLUDED.ast_rank,
+            tov_rank = EXCLUDED.tov_rank,
+            stl_rank = EXCLUDED.stl_rank,
+            blk_rank = EXCLUDED.blk_rank,
+            blka_rank = EXCLUDED.blka_rank,
+            pf_rank = EXCLUDED.pf_rank,
+            pfd_rank = EXCLUDED.pfd_rank,
+            pts_rank = EXCLUDED.pts_rank,
+            plus_minus_rank = EXCLUDED.plus_minus_rank,
+            nba_fantasy_pts_rank = EXCLUDED.nba_fantasy_pts_rank,
+            dd2_rank = EXCLUDED.dd2_rank,
+            td3_rank = EXCLUDED.td3_rank,
+            cfid = EXCLUDED.cfid,
+            cfparams = EXCLUDED.cfparams;
         """
         
         with conn.cursor() as cur:
@@ -307,9 +393,9 @@ def fetch_and_insert_league_dash_stats(player_id, conn):
                 player_stats_dict.get('DD2_RANK', None), player_stats_dict.get('TD3_RANK', None), player_stats_dict.get('CFID', None), player_stats_dict.get('CFPARAMS', None)
             ))
             conn.commit()
-        print(f"Inserted league dash player stats for player_id {player_id}")
+        logging.info(f"Inserted/Updated league dash player stats for player_id {player_id}")
     except Exception as e:
-        print(f"Error fetching or inserting league dash player stats for player_id {player_id}: {e}")
+        logging.error(f"Error fetching or inserting league dash player stats for player_id {player_id}: {e}")
         conn.rollback()  # Rollback the transaction on error
 
 player_ids = fetch_all_player_ids()
@@ -322,7 +408,7 @@ for i in range(0, len(player_ids), batch_size):
         fetch_and_insert_player_info(player_id, conn)
         fetch_and_insert_fantasy_stats(player_id, conn)
         fetch_and_insert_league_dash_stats(player_id, conn)
-    print(f"Batch {i//batch_size + 1} processed, sleeping for 30 seconds.")
-    time.sleep(30)
+    logging.info(f"Batch {i//batch_size + 1} processed, sleeping for 30 seconds.")
+    time.sleep(10)
 
 conn.close()

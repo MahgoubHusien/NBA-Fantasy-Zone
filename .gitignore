@@ -26,8 +26,21 @@ env/
 *.sql
 *.sqlite
 
+# Java and Spring Boot
+*.class
+*.jar
+*.war
+target/
+.classpath
+.project
+.settings/
+
 # Ignore node_modules directory (if you have Node.js dependencies)
 node_modules/
+.next/
+.nuxt/
+dist/
+out/
 
 # Ignore compiled files
 *.o
@@ -38,3 +51,6 @@ node_modules/
 # Ignore OS generated files
 *.swp
 *~
+
+
+
