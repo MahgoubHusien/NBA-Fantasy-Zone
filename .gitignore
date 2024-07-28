@@ -35,6 +35,13 @@ target/
 .project
 .settings/
 
+# Ignore IDE and editor-specific settings
+.idea/
+.vscode/
+
+# Ignore data files or directories that should not be tracked
+data/
+
 # Ignore node_modules directory (if you have Node.js dependencies)
 node_modules/
 .next/
