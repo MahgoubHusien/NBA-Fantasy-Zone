@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react"
-import { SideNavItems } from "./types"
+import { SideNavItem } from "./types"
 
-export const SIDENAV_ITEMS: SideNavItems[] = [
+export const SIDENAV_ITEMS: SideNavItem[] = [
     {
         title: "Home",
         path: "/",
@@ -31,6 +31,11 @@ export const SIDENAV_ITEMS: SideNavItems[] = [
         title: "League Leaders",
         path: "/league-leaders",
         icon: <Icon icon="carbon:medal-filled" width = "24" height = "24" />,
+    },
+    {
+        title: "Contact",
+        path: "/contact",
+        icon: <Icon icon="carbon:email-filled" width = "24" height = "24" />,
     }
 
 ]
