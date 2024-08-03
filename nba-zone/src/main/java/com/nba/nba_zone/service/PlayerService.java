@@ -33,6 +33,22 @@ public class PlayerService {
         return commonPlayerInfoRepository.findAll();
     }
 
+    public CommonPlayerInfo getCommonPlayerInfoById(Long id) {
+        return commonPlayerInfoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Player not found"));
+    }
+
+    // Current Player Stats Methods
+    public List<CurrentPlayerStats> getAllCurrentPlayerStats() {
+        return currentPlayerStatsRepository.findAll();
+    }
+
+    public CurrentPlayerStats getCurrentPlayerStatsById(Long id) {
+        return currentPlayerStatsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Player not found"));
+    }
+
+
     public List<CommonPlayerInfo> getTopScorers(int limit) {
         return commonPlayerInfoRepository.findAll().stream()
                 .sorted(Comparator.comparingDouble(CommonPlayerInfo::getPpg).reversed())
@@ -175,8 +191,8 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
-    public CommonPlayerInfo getPlayerById(Long id) {
-        return commonPlayerInfoRepository.findById(id)
+    public PlayerFantasyStats getPlayerFantasyStatsById(Long id) {
+        return playerFantasyStatsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Player not found"));
     }
 

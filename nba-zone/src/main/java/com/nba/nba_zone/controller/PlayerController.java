@@ -28,6 +28,27 @@ public class PlayerController {
         return playerService.getAllCommonPlayerInfo();
     }
 
+    // Retrieve common player info by player ID
+    @GetMapping("/commonPlayerInfo/{id}")
+    public ResponseEntity<CommonPlayerInfo> getCommonPlayerInfoById(@PathVariable Long id) {
+        CommonPlayerInfo playerInfo = playerService.getCommonPlayerInfoById(id);
+        return new ResponseEntity<>(playerInfo, HttpStatus.OK);
+    }
+
+    // Retrieve current player stats by player ID
+    @GetMapping("/currentPlayerStats/{id}")
+    public ResponseEntity<CurrentPlayerStats> getCurrentPlayerStatsById(@PathVariable Long id) {
+        CurrentPlayerStats playerStats = playerService.getCurrentPlayerStatsById(id);
+        return new ResponseEntity<>(playerStats, HttpStatus.OK);
+    }
+
+    // Retrieve player fantasy stats by player ID
+    @GetMapping("/playerFantasyStats/{id}")
+    public ResponseEntity<PlayerFantasyStats> getPlayerFantasyStatsById(@PathVariable Long id) {
+        PlayerFantasyStats playerFantasyStats = playerService.getPlayerFantasyStatsById(id);
+        return new ResponseEntity<>(playerFantasyStats, HttpStatus.OK);
+    }
+
     // Retrieve top scorers
     @GetMapping("/top-scorers")
     public List<CommonPlayerInfo> getTopScorers(@RequestParam int limit) {
@@ -153,11 +174,17 @@ public class PlayerController {
     public List<CommonPlayerInfo> findPlayersByTeamAndPosition(@RequestParam String teamAbbreviation, @RequestParam String position) {
         return playerService.findPlayersByTeamAndPosition(teamAbbreviation, position);
     }
+    // Retrieve players with fantasy points greater than a specified value
+    @GetMapping("/fantasy-points-greater-than")
+    public ResponseEntity<List<PlayerFantasyStats>> findByNbaFantasyPtsSeasonGreaterThan(@RequestParam Double nbaFantasyPtsSeason) {
+        List<PlayerFantasyStats> players = playerService.findByNbaFantasyPtsSeasonGreaterThan(nbaFantasyPtsSeason);
+        return new ResponseEntity<>(players, HttpStatus.OK);
+    }
 
-    // Retrieve a player by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<CommonPlayerInfo> getPlayerById(@PathVariable Long id) {
-        CommonPlayerInfo player = playerService.getPlayerById(id);
+    // Retrieve the player with the highest fantasy points
+    @GetMapping("/top-fantasy-player")
+    public ResponseEntity<PlayerFantasyStats> findTopByOrderByNbaFantasyPtsSeasonDesc() {
+        PlayerFantasyStats player = playerService.findTopByOrderByNbaFantasyPtsSeasonDesc();
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
@@ -182,17 +209,5 @@ public class PlayerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // Retrieve players with fantasy points greater than a specified value
-    @GetMapping("/fantasy-points-greater-than")
-    public ResponseEntity<List<PlayerFantasyStats>> findByNbaFantasyPtsSeasonGreaterThan(@RequestParam Double nbaFantasyPtsSeason) {
-        List<PlayerFantasyStats> players = playerService.findByNbaFantasyPtsSeasonGreaterThan(nbaFantasyPtsSeason);
-        return new ResponseEntity<>(players, HttpStatus.OK);
-    }
 
-    // Retrieve the player with the highest fantasy points
-    @GetMapping("/top-fantasy-player")
-    public ResponseEntity<PlayerFantasyStats> findTopByOrderByNbaFantasyPtsSeasonDesc() {
-        PlayerFantasyStats player = playerService.findTopByOrderByNbaFantasyPtsSeasonDesc();
-        return new ResponseEntity<>(player, HttpStatus.OK);
-    }
 }

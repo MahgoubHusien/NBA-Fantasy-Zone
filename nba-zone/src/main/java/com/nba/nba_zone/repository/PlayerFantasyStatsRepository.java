@@ -6,9 +6,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PlayerFantasyStatsRepository extends JpaRepository<PlayerFantasyStats, Long> {
+
+    Optional<PlayerFantasyStats> findByPlayerId(Integer playerId);
 
     // Method to find players by fantasy points per season greater than a specified value
     List<PlayerFantasyStats> findByNbaFantasyPtsSeasonGreaterThan(Double nbaFantasyPtsSeason);
