@@ -14,7 +14,7 @@ public class DataUpdateScheduler {
     public void runPythonScript() {
         try {
             // Path to the Python script
-            String scriptPath = "./data/players.py";
+            String scriptPath = "./data/players.p";
 
             // Command to execute the Python script
             ProcessBuilder processBuilder = new ProcessBuilder("python3", scriptPath);
@@ -29,7 +29,7 @@ public class DataUpdateScheduler {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    System.out.println(line); // Replace with logging if needed
+                    System.out.println(line);
                 }
             }
 
@@ -41,7 +41,7 @@ public class DataUpdateScheduler {
                 System.out.println("Python script executed successfully.");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Replace with logging if needed
+            e.printStackTrace();
         }
     }
 }

@@ -49,107 +49,103 @@ public class PlayerController {
         return new ResponseEntity<>(playerFantasyStats, HttpStatus.OK);
     }
 
-    // Retrieve top scorers
-    @GetMapping("/top-scorers")
-    public List<CommonPlayerInfo> getTopScorers(@RequestParam int limit) {
-        return playerService.getTopScorers(limit);
-    }
-
-    // Retrieve top total points
+    // Sort methods returning CommonPlayerInfo
     @GetMapping("/top-total-points")
-    public List<CurrentPlayerStats> getTopTotalPoints(@RequestParam int limit) {
-        return playerService.getTopTotalPoints(limit);
+    public List<CommonPlayerInfo> getTopTotalPoints() {
+        return playerService.getTopTotalPoints();
     }
 
-    // Retrieve top total assists
     @GetMapping("/top-total-assists")
-    public List<CurrentPlayerStats> getTopTotalAssists(@RequestParam int limit) {
-        return playerService.getTopTotalAssists(limit);
+    public List<CommonPlayerInfo> getTopTotalAssists() {
+        return playerService.getTopTotalAssists();
     }
 
-    // Retrieve top total rebounds
     @GetMapping("/top-total-rebounds")
-    public List<CurrentPlayerStats> getTopTotalRebounds(@RequestParam int limit) {
-        return playerService.getTopTotalRebounds(limit);
+    public List<CommonPlayerInfo> getTopTotalRebounds() {
+        return playerService.getTopTotalRebounds();
     }
 
-    // Retrieve top total steals
     @GetMapping("/top-total-steals")
-    public List<CurrentPlayerStats> getTopTotalSteals(@RequestParam int limit) {
-        return playerService.getTopTotalSteals(limit);
+    public List<CommonPlayerInfo> getTopTotalSteals() {
+        return playerService.getTopTotalSteals();
     }
 
-    // Retrieve top total blocks
     @GetMapping("/top-total-blocks")
-    public List<CurrentPlayerStats> getTopTotalBlocks(@RequestParam int limit) {
-        return playerService.getTopTotalBlocks(limit);
+    public List<CommonPlayerInfo> getTopTotalBlocks() {
+        return playerService.getTopTotalBlocks();
     }
 
-    // Retrieve top free throw shooters
     @GetMapping("/top-free-throw-shooters")
-    public List<CurrentPlayerStats> getTopFreeThrowShooters(@RequestParam int limit) {
-        return playerService.getTopFreeThrowShooters(limit);
+    public List<CommonPlayerInfo> getTopFreeThrowShooters() {
+        return playerService.getTopFreeThrowShooters();
     }
 
-    // Retrieve top three-point shooters
     @GetMapping("/top-three-point-shooters")
-    public List<CurrentPlayerStats> getTopThreePointShooters(@RequestParam int limit) {
-        return playerService.getTopThreePointShooters(limit);
+    public List<CommonPlayerInfo> getTopThreePointShooters() {
+        return playerService.getTopThreePointShooters();
     }
 
-    // Retrieve top offensive rebounders
     @GetMapping("/top-offensive-rebounders")
-    public List<CurrentPlayerStats> getTopOffensiveRebounders(@RequestParam int limit) {
-        return playerService.getTopOffensiveRebounders(limit);
+    public List<CommonPlayerInfo> getTopOffensiveRebounders() {
+        return playerService.getTopOffensiveRebounders();
     }
 
-    // Retrieve top defensive rebounders
     @GetMapping("/top-defensive-rebounders")
-    public List<CurrentPlayerStats> getTopDefensiveRebounders(@RequestParam int limit) {
-        return playerService.getTopDefensiveRebounders(limit);
+    public List<CommonPlayerInfo> getTopDefensiveRebounders() {
+        return playerService.getTopDefensiveRebounders();
     }
 
-    // Retrieve most efficient players
     @GetMapping("/most-efficient-players")
-    public List<CurrentPlayerStats> getMostEfficientPlayers(@RequestParam int limit) {
-        return playerService.getMostEfficientPlayers(limit);
+    public List<CommonPlayerInfo> getMostEfficientPlayers() {
+        return playerService.getMostEfficientPlayers();
     }
 
-    // Retrieve most efficient scorers
     @GetMapping("/most-efficient-scorers")
-    public List<CurrentPlayerStats> getMostEfficientScorers(@RequestParam int limit) {
-        return playerService.getMostEfficientScorers(limit);
+    public List<CommonPlayerInfo> getMostEfficientScorers() {
+        return playerService.getMostEfficientScorers();
     }
 
-    // Retrieve most foul-prone players
     @GetMapping("/most-foul-prone-players")
-    public List<CurrentPlayerStats> getMostFoulPronePlayers(@RequestParam int limit) {
-        return playerService.getMostFoulPronePlayers(limit);
+    public List<CommonPlayerInfo> getMostFoulPronePlayers() {
+        return playerService.getMostFoulPronePlayers();
     }
 
-    // Retrieve best assist-to-turnover ratio
-    @GetMapping("/best-assist-to-turnover-ratio")
-    public List<CurrentPlayerStats> getBestAssistToTurnoverRatio(@RequestParam int limit) {
-        return playerService.getBestAssistToTurnoverRatio(limit);
-    }
-
-    // Retrieve most minutes played
     @GetMapping("/most-minutes-played")
-    public List<CurrentPlayerStats> getMostMinutesPlayed(@RequestParam int limit) {
-        return playerService.getMostMinutesPlayed(limit);
+    public List<CommonPlayerInfo> getMostMinutesPlayed() {
+        return playerService.getMostMinutesPlayed();
     }
 
-    // Retrieve most double-doubles
     @GetMapping("/most-double-doubles")
-    public List<CurrentPlayerStats> getMostDoubleDoubles(@RequestParam int limit) {
-        return playerService.getMostDoubleDoubles(limit);
+    public List<CommonPlayerInfo> getMostDoubleDoubles() {
+        return playerService.getMostDoubleDoubles();
     }
 
-    // Retrieve most triple-doubles
     @GetMapping("/most-triple-doubles")
-    public List<CurrentPlayerStats> getMostTripleDoubles(@RequestParam int limit) {
-        return playerService.getMostTripleDoubles(limit);
+    public List<CommonPlayerInfo> getMostTripleDoubles() {
+        return playerService.getMostTripleDoubles();
     }
+
+    @GetMapping("/top-ppg")
+    public List<CommonPlayerInfo> getTopPpg() {
+        return playerService.getTopPpg();
+    }
+
+    @GetMapping("/top-apg")
+    public List<CommonPlayerInfo> getTopApg() {
+        return playerService.getTopApg();
+    }
+
+    @GetMapping("/top-rpg")
+    public List<CommonPlayerInfo> getTopRpg() {
+        return playerService.getTopRpg();
+    }
+
+    // New endpoint for top fantasy points
+    @GetMapping("/top-fantasy-points")
+    public List<CommonPlayerInfo> getTopFantasyPoints() {
+        return playerService.getTopFantasyPoints();
+    }
+
 
     // Search players by name
     @GetMapping("/search-players")
@@ -208,6 +204,4 @@ public class PlayerController {
         playerService.deletePlayer(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }

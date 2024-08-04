@@ -7,11 +7,11 @@ import com.nba.nba_zone.repository.CommonPlayerInfoRepository;
 import com.nba.nba_zone.repository.CurrentPlayerStatsRepository;
 import com.nba.nba_zone.repository.PlayerFantasyStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,125 +49,118 @@ public class PlayerService {
     }
 
 
-    public List<CommonPlayerInfo> getTopScorers(int limit) {
+
+    // Method to fetch and map sorted CurrentPlayerStats to CommonPlayerInfo
+    private List<CommonPlayerInfo> mapSortedStatsToCommonInfo(List<CurrentPlayerStats> sortedStats) {
+        return sortedStats.stream()
+                .map(stats -> commonPlayerInfoRepository.findByPlayerId(stats.getPlayerId()).orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    // Sort Methods
+    public List<CommonPlayerInfo> getTopTotalPoints() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "pts"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getTopTotalAssists() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "ast"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getTopTotalRebounds() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "reb"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getTopTotalSteals() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "stl"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getTopTotalBlocks() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "blk"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getTopFreeThrowShooters() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "ftPct"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getTopThreePointShooters() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "fg3Pct"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getTopOffensiveRebounders() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "oreb"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getTopDefensiveRebounders() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "dreb"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getMostEfficientPlayers() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "plusMinus"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getMostEfficientScorers() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "fgPct"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getMostFoulPronePlayers() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "pf"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getMostMinutesPlayed() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "min"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getMostDoubleDoubles() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "dd2"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getMostTripleDoubles() {
+        List<CurrentPlayerStats> sortedStats = currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "td3"));
+        return mapSortedStatsToCommonInfo(sortedStats);
+    }
+
+    public List<CommonPlayerInfo> getTopPpg() {
         return commonPlayerInfoRepository.findAll().stream()
                 .sorted(Comparator.comparingDouble(CommonPlayerInfo::getPpg).reversed())
-                .limit(limit)
                 .collect(Collectors.toList());
     }
 
-    public List<CurrentPlayerStats> getTopTotalPoints(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getPts).reversed())
-                .limit(limit)
+    public List<CommonPlayerInfo> getTopApg() {
+        return commonPlayerInfoRepository.findAll().stream()
+                .sorted(Comparator.comparingDouble(CommonPlayerInfo::getApg).reversed())
                 .collect(Collectors.toList());
     }
 
-    public List<CurrentPlayerStats> getTopTotalAssists(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getAst).reversed())
-                .limit(limit)
+    public List<CommonPlayerInfo> getTopRpg() {
+        return commonPlayerInfoRepository.findAll().stream()
+                .sorted(Comparator.comparingDouble(CommonPlayerInfo::getRpg).reversed())
                 .collect(Collectors.toList());
     }
 
-    public List<CurrentPlayerStats> getTopTotalRebounds(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getReb).reversed())
-                .limit(limit)
+    public List<CommonPlayerInfo> getTopFantasyPoints() {
+        List<PlayerFantasyStats> sortedStats = playerFantasyStatsRepository.findAll(Sort.by(Sort.Direction.DESC, "nbaFantasyPtsSeason"));
+        return sortedStats.stream()
+                .map(stats -> commonPlayerInfoRepository.findByPlayerId(stats.getPlayerId()).orElse(null))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
-    public List<CurrentPlayerStats> getTopTotalSteals(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getStl).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
 
-    public List<CurrentPlayerStats> getTopTotalBlocks(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getBlk).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getTopFreeThrowShooters(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getFtPct).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getTopThreePointShooters(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getFg3Pct).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getTopOffensiveRebounders(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getOreb).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getTopDefensiveRebounders(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getDreb).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getMostEfficientPlayers(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getPlusMinus).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getMostEfficientScorers(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getFgPct).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getMostFoulPronePlayers(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getPf).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getBestAssistToTurnoverRatio(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .filter(player -> player.getTov() != 0) // Avoid division by zero
-                .sorted((p1, p2) -> Double.compare(p2.getAst() / p2.getTov(), p1.getAst() / p1.getTov()))
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getMostMinutesPlayed(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingDouble(CurrentPlayerStats::getMin).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getMostDoubleDoubles(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingInt(CurrentPlayerStats::getDd2Rank).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    public List<CurrentPlayerStats> getMostTripleDoubles(int limit) {
-        return currentPlayerStatsRepository.findAll().stream()
-                .sorted(Comparator.comparingInt(CurrentPlayerStats::getTd3Rank).reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
 
     public List<CommonPlayerInfo> searchPlayersByName(String name) {
         return commonPlayerInfoRepository.findAll().stream()
@@ -247,6 +240,6 @@ public class PlayerService {
 
     public PlayerFantasyStats findTopByOrderByNbaFantasyPtsSeasonDesc() {
         List<PlayerFantasyStats> topPlayers = playerFantasyStatsRepository.findTopByOrderByNbaFantasyPtsSeasonDesc();
-        return topPlayers.isEmpty() ? null : topPlayers.get(0);
+        return topPlayers.isEmpty() ? null : topPlayers.getFirst();
     }
 }
