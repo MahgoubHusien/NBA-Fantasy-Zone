@@ -147,7 +147,155 @@ public class PlayerController {
     }
 
 
-    // Search players by name
+
+    // Retrieve top ranked players for each category
+    @GetMapping("/top-gp-rank")
+    public List<CurrentPlayerStats> getTopGpRank() {
+        return playerService.getTopGpRank();
+    }
+
+    @GetMapping("/top-w-rank")
+    public List<CurrentPlayerStats> getTopWRank() {
+        return playerService.getTopWRank();
+    }
+
+    @GetMapping("/top-l-rank")
+    public List<CurrentPlayerStats> getTopLRank() {
+        return playerService.getTopLRank();
+    }
+
+    @GetMapping("/top-wpct-rank")
+    public List<CurrentPlayerStats> getTopWPctRank() {
+        return playerService.getTopWPctRank();
+    }
+
+    @GetMapping("/top-min-rank")
+    public List<CurrentPlayerStats> getTopMinRank() {
+        return playerService.getTopMinRank();
+    }
+
+    @GetMapping("/top-fgm-rank")
+    public List<CurrentPlayerStats> getTopFgmRank() {
+        return playerService.getTopFgmRank();
+    }
+
+    @GetMapping("/top-fga-rank")
+    public List<CurrentPlayerStats> getTopFgaRank() {
+        return playerService.getTopFgaRank();
+    }
+
+    @GetMapping("/top-fgpct-rank")
+    public List<CurrentPlayerStats> getTopFgPctRank() {
+        return playerService.getTopFgPctRank();
+    }
+
+    @GetMapping("/top-fg3m-rank")
+    public List<CurrentPlayerStats> getTopFg3mRank() {
+        return playerService.getTopFg3mRank();
+    }
+
+    @GetMapping("/top-fg3a-rank")
+    public List<CurrentPlayerStats> getTopFg3aRank() {
+        return playerService.getTopFg3aRank();
+    }
+
+    @GetMapping("/top-fg3pct-rank")
+    public List<CurrentPlayerStats> getTopFg3PctRank() {
+        return playerService.getTopFg3PctRank();
+    }
+
+    @GetMapping("/top-ftm-rank")
+    public List<CurrentPlayerStats> getTopFtmRank() {
+        return playerService.getTopFtmRank();
+    }
+
+    @GetMapping("/top-fta-rank")
+    public List<CurrentPlayerStats> getTopFtaRank() {
+        return playerService.getTopFtaRank();
+    }
+
+    @GetMapping("/top-ftpct-rank")
+    public List<CurrentPlayerStats> getTopFtPctRank() {
+        return playerService.getTopFtPctRank();
+    }
+
+    @GetMapping("/top-oreb-rank")
+    public List<CurrentPlayerStats> getTopOrebRank() {
+        return playerService.getTopOrebRank();
+    }
+
+    @GetMapping("/top-dreb-rank")
+    public List<CurrentPlayerStats> getTopDrebRank() {
+        return playerService.getTopDrebRank();
+    }
+
+    @GetMapping("/top-reb-rank")
+    public List<CurrentPlayerStats> getTopRebRank() {
+        return playerService.getTopRebRank();
+    }
+
+    @GetMapping("/top-ast-rank")
+    public List<CurrentPlayerStats> getTopAstRank() {
+        return playerService.getTopAstRank();
+    }
+
+    @GetMapping("/top-tov-rank")
+    public List<CurrentPlayerStats> getTopTovRank() {
+        return playerService.getTopTovRank();
+    }
+
+    @GetMapping("/top-stl-rank")
+    public List<CurrentPlayerStats> getTopStlRank() {
+        return playerService.getTopStlRank();
+    }
+
+    @GetMapping("/top-blk-rank")
+    public List<CurrentPlayerStats> getTopBlkRank() {
+        return playerService.getTopBlkRank();
+    }
+
+    @GetMapping("/top-blka-rank")
+    public List<CurrentPlayerStats> getTopBlkaRank() {
+        return playerService.getTopBlkaRank();
+    }
+
+    @GetMapping("/top-pf-rank")
+    public List<CurrentPlayerStats> getTopPfRank() {
+        return playerService.getTopPfRank();
+    }
+
+    @GetMapping("/top-pfd-rank")
+    public List<CurrentPlayerStats> getTopPfdRank() {
+        return playerService.getTopPfdRank();
+    }
+
+    @GetMapping("/top-pts-rank")
+    public List<CurrentPlayerStats> getTopPtsRank() {
+        return playerService.getTopPtsRank();
+    }
+
+    @GetMapping("/top-plus-minus-rank")
+    public List<CurrentPlayerStats> getTopPlusMinusRank() {
+        return playerService.getTopPlusMinusRank();
+    }
+
+    @GetMapping("/top-nba-fantasy-points-rank")
+    public List<CurrentPlayerStats> getTopNbaFantasyPtsRank() {
+        return playerService.getTopNbaFantasyPtsRank();
+    }
+
+    @GetMapping("/top-dd2-rank")
+    public List<CurrentPlayerStats> getTopDd2Rank() {
+        return playerService.getTopDd2Rank();
+    }
+
+    @GetMapping("/top-td3-rank")
+    public List<CurrentPlayerStats> getTopTd3Rank() {
+        return playerService.getTopTd3Rank();
+    }
+
+
+// Search players by name
     @GetMapping("/search-players")
     public List<CommonPlayerInfo> searchPlayersByName(@RequestParam String query) {
         return playerService.searchPlayersByName(query);

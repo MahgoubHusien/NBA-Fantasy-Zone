@@ -7,6 +7,7 @@ import com.nba.nba_zone.repository.CommonPlayerInfoRepository;
 import com.nba.nba_zone.repository.CurrentPlayerStatsRepository;
 import com.nba.nba_zone.repository.PlayerFantasyStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -161,6 +162,130 @@ public class PlayerService {
     }
 
 
+
+    // Method to get the top 5 players based on rank attributes
+    private List<CurrentPlayerStats> getTopRankedPlayers(String rankField, int limit) {
+        return currentPlayerStatsRepository.findAll(Sort.by(Sort.Direction.ASC, rankField))
+                .stream()
+                .limit(limit)
+                .collect(Collectors.toList());
+    }
+
+    public List<CurrentPlayerStats> getTopGpRank() {
+        return getTopRankedPlayers("gpRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopWRank() {
+        return getTopRankedPlayers("wRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopLRank() {
+        return getTopRankedPlayers("lRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopWPctRank() {
+        return getTopRankedPlayers("wPctRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopMinRank() {
+        return getTopRankedPlayers("minRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopFgmRank() {
+        return getTopRankedPlayers("fgmRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopFgaRank() {
+        return getTopRankedPlayers("fgaRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopFgPctRank() {
+        return getTopRankedPlayers("fgPctRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopFg3mRank() {
+        return getTopRankedPlayers("fg3mRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopFg3aRank() {
+        return getTopRankedPlayers("fg3aRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopFg3PctRank() {
+        return getTopRankedPlayers("fg3PctRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopFtmRank() {
+        return getTopRankedPlayers("ftmRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopFtaRank() {
+        return getTopRankedPlayers("ftaRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopFtPctRank() {
+        return getTopRankedPlayers("ftPctRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopOrebRank() {
+        return getTopRankedPlayers("orebRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopDrebRank() {
+        return getTopRankedPlayers("drebRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopRebRank() {
+        return getTopRankedPlayers("rebRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopAstRank() {
+        return getTopRankedPlayers("astRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopTovRank() {
+        return getTopRankedPlayers("tovRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopStlRank() {
+        return getTopRankedPlayers("stlRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopBlkRank() {
+        return getTopRankedPlayers("blkRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopBlkaRank() {
+        return getTopRankedPlayers("blkaRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopPfRank() {
+        return getTopRankedPlayers("pfRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopPfdRank() {
+        return getTopRankedPlayers("pfdRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopPtsRank() {
+        return getTopRankedPlayers("ptsRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopPlusMinusRank() {
+        return getTopRankedPlayers("plusMinusRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopNbaFantasyPtsRank() {
+        return getTopRankedPlayers("nbaFantasyPtsRank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopDd2Rank() {
+        return getTopRankedPlayers("dd2Rank", 5);
+    }
+
+    public List<CurrentPlayerStats> getTopTd3Rank() {
+        return getTopRankedPlayers("td3Rank", 5);
+    }
 
     public List<CommonPlayerInfo> searchPlayersByName(String name) {
         return commonPlayerInfoRepository.findAll().stream()
