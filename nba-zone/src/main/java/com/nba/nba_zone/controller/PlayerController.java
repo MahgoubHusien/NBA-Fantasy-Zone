@@ -146,8 +146,6 @@ public class PlayerController {
         return playerService.getTopFantasyPoints();
     }
 
-
-
     // Retrieve top ranked players for each category
     @GetMapping("/top-gp-rank")
     public List<CurrentPlayerStats> getTopGpRank() {
@@ -294,8 +292,7 @@ public class PlayerController {
         return playerService.getTopTd3Rank();
     }
 
-
-// Search players by name
+    // Search players by name
     @GetMapping("/search-players")
     public List<CommonPlayerInfo> searchPlayersByName(@RequestParam String query) {
         return playerService.searchPlayersByName(query);
@@ -318,6 +315,7 @@ public class PlayerController {
     public List<CommonPlayerInfo> findPlayersByTeamAndPosition(@RequestParam String teamAbbreviation, @RequestParam String position) {
         return playerService.findPlayersByTeamAndPosition(teamAbbreviation, position);
     }
+
     // Retrieve players with fantasy points greater than a specified value
     @GetMapping("/fantasy-points-greater-than")
     public ResponseEntity<List<PlayerFantasyStats>> findByNbaFantasyPtsSeasonGreaterThan(@RequestParam Double nbaFantasyPtsSeason) {

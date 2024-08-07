@@ -6,13 +6,11 @@ import Link from 'next/link';
 interface Player {
   id: number;
   playerId: number;
+  playerName: string;
   teamAbbreviation: string;
-  firstName: string;
-  lastName: string;
   gp: number;
   w: number;
   l: number;
-  wPct: number;
   min: number;
   fgm: number;
   fga: number;
@@ -46,7 +44,6 @@ const categories = [
   { name: 'gp-rank', label: 'Games Played', stat: 'gp', unit: 'games' },
   { name: 'w-rank', label: 'Wins', stat: 'w', unit: 'wins' },
   { name: 'l-rank', label: 'Losses', stat: 'l', unit: 'losses' },
-  { name: 'wpct-rank', label: 'Win Percentage', stat: 'wPct', unit: '%' },
   { name: 'min-rank', label: 'Minutes Played', stat: 'min', unit: 'minutes' },
   { name: 'fgm-rank', label: 'Field Goals Made', stat: 'fgm', unit: 'FGM' },
   { name: 'fga-rank', label: 'Field Goals Attempted', stat: 'fga', unit: 'FGA' },
@@ -74,7 +71,7 @@ const categories = [
   { name: 'td3-rank', label: 'Triple-Doubles', stat: 'td3', unit: 'TD3' },
 ];
 
-const LeagueLeadersPage = () => {
+const LeagueLeadersPage: React.FC = () => {
   const [playersByCategory, setPlayersByCategory] = useState<{ [key: string]: Player[] }>({});
 
   const fetchTopPlayers = async (category: string) => {
@@ -97,35 +94,34 @@ const LeagueLeadersPage = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="title-container">
-        <h1 className="text-3xl font-bold mb-4">League Leaders</h1>
+        <h1 className="text-3xl font-bold text-center text-black">League Leaders</h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {categories.map((category) => (
           <div key={category.name} className="category-card">
-            <h2 className="text-xl font-semibold mb-2 text-center rounded-full bg-gray-100 p-2 shadow-md">{category.label}</h2>
-            <div className="text-sm text-gray-500 mb-2 flex justify-between">
+            <h2 className="text-2xl font-semibold mb-2 gradient-title text-center">{category.label}</h2>
+            <div className="flex justify-between mb-2 text-gray-500 text-sm text-center">
               <span>Rank</span>
               <span>Name</span>
               <span>{category.unit}</span>
             </div>
             <ul>
               {playersByCategory[category.name]?.slice(0, 5).map((player, index) => (
-                <li key={index} className="flex justify-between items-center py-2 border-b last:border-b-0">
-                  <span>{index + 1}.</span>
-                  <div className="flex items-center space-x-2">
-                    <img
-                      src={player.photoUrl || '/placeholder.png'}
-                      alt={`${player.firstName} ${player.lastName}`}
-                      className="w-8 h-8 rounded-full"
-                    />
-                    <Link href={`/players/${player.id}`} legacyBehavior>
-                      <a className="flex items-center space-x-2 hover:underline">
-                        <span>{player.firstName} {player.lastName}</span>
-                        <span>({player.teamAbbreviation})</span>
-                      </a>
-                    </Link>
-                  </div>
-                  <span>{category.stat === 'min' ? (player[category.stat] as number).toFixed(2) : player[category.stat]}</span>
+                <li key={index} className="flex justify-between py-2 border-b last:border-b-0">
+                  <span>{index + 1}</span>
+                  <Link href={`/players/${player.playerId}`} className="flex items-center space-x-2 no-underline">
+                    <img src={player.photoUrl || '/placeholder.png'} alt={player.playerName} className="w-8 h-8 object-cover rounded-full" />
+                    <span>{player.playerName} ({player.teamAbbreviation})</span>
+                  </Link>
+                  <span>
+                    {category.stat === 'min'
+                      ? (player[category.stat] as number).toFixed(2)
+                      : category.name === 'fg3pct-rank'
+                      ? ((player.fg3m / player.fg3a) * 100).toFixed(2)
+                      : ['fgPct', 'fg3Pct', 'ftPct', 'wPct'].includes(category.stat)
+                      ? (player[category.stat] * 100).toFixed(2)
+                      : player[category.stat]}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -135,22 +131,22 @@ const LeagueLeadersPage = () => {
       <style jsx>{`
         .container {
           padding: 2rem;
+          background-color: #f9f9f9;
         }
         .title-container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: white;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          border-radius: 0.5rem;
-          padding: 1rem;
+          text-align: center;
           margin-bottom: 2rem;
+          background-color: white;
+          padding: 1rem;
+          border-radius: 1rem;
+          display: inline-block;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .category-card {
           background-color: white;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          border-radius: 0.5rem;
-          padding: 1rem;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 1rem;
+          padding: 1.5rem;
         }
         .category-card ul {
           list-style: none;
@@ -159,7 +155,6 @@ const LeagueLeadersPage = () => {
         .category-card li {
           display: flex;
           justify-content: space-between;
-          align-items: center;
           padding-top: 0.5rem;
           padding-bottom: 0.5rem;
           border-bottom: 1px solid #e2e8f0;
@@ -167,8 +162,16 @@ const LeagueLeadersPage = () => {
         .category-card li:last-child {
           border-bottom: 0;
         }
-        .category-card h2 {
-          margin-bottom: 0.5rem;
+        .gradient-title {
+          background: linear-gradient(to right, #4f46e5, #9333ea);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .no-underline:hover {
+          text-decoration: none;
+        }
+        .no-underline img {
+          border-radius: 50%;
         }
       `}</style>
     </div>

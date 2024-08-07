@@ -67,6 +67,33 @@ type PlayerProfile = {
   fg3mSeason: number;
   fgPctSeason: number;
   tovSeason: number;
+  gpRank: number;
+  wRank: number;
+  lRank: number;
+  minRank: number;
+  fgmRank: number;
+  fgaRank: number;
+  fgPctRank: number;
+  fg3mRank: number;
+  fg3aRank: number;
+  ftmRank: number;
+  ftaRank: number;
+  ftPctRank: number;
+  orebRank: number;
+  drebRank: number;
+  rebRank: number;
+  astRank: number;
+  tovRank: number;
+  stlRank: number;
+  blkRank: number;
+  blkaRank: number;
+  pfRank: number;
+  pfdRank: number;
+  ptsRank: number;
+  plusMinusRank: number;
+  nbaFantasyPtsRank: number;
+  dd2Rank: number;
+  td3Rank: number;
   photoUrl?: string;
 };
 
@@ -162,7 +189,7 @@ const PlayerProfilePage = () => {
                   <p><span className="font-semibold">FG%:</span> {player.fgPct}</p>
                   <p><span className="font-semibold">3PM:</span> {player.fg3m}</p>
                   <p><span className="font-semibold">3PA:</span> {player.fg3a}</p>
-                  <p><span className="font-semibold">3P%:</span> {player.fg3Pct}</p>
+                  <p><span className="font-semibold">3P%:</span> {((player.fg3m / player.fg3a) * 100).toFixed(2)}</p>
                   <p><span className="font-semibold">FTM:</span> {player.ftm}</p>
                   <p><span className="font-semibold">FTA:</span> {player.fta}</p>
                   <p><span className="font-semibold">FT%:</span> {player.ftPct}</p>
@@ -208,6 +235,42 @@ const PlayerProfilePage = () => {
                   <p><span className="font-semibold">3PM (Season):</span> {player.fg3mSeason}</p>
                   <p><span className="font-semibold">FG% (Season):</span> {player.fgPctSeason}</p>
                   <p><span className="font-semibold">TOV (Season):</span> {player.tovSeason}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-1 rounded-lg shadow-lg mt-4">
+              <div className="bg-white p-4 rounded-lg">
+                <h3 className="text-xl font-bold mb-2">Ranks</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  <p><span className="font-semibold">GP Rank:</span> {player.gpRank}</p>
+                  <p><span className="font-semibold">Wins Rank:</span> {player.wRank}</p>
+                  <p><span className="font-semibold">Losses Rank:</span> {player.lRank}</p>
+                  <p><span className="font-semibold">Minutes Rank:</span> {player.minRank}</p>
+                  <p><span className="font-semibold">FGM Rank:</span> {player.fgmRank}</p>
+                  <p><span className="font-semibold">FGA Rank:</span> {player.fgaRank}</p>
+                  <p><span className="font-semibold">FG% Rank:</span> {player.fgPctRank}</p>
+                  <p><span className="font-semibold">3PM Rank:</span> {player.fg3mRank}</p>
+                  <p><span className="font-semibold">3PA Rank:</span> {player.fg3aRank}</p>
+                  <p><span className="font-semibold">3P% Rank:</span> {((player.fg3mRank / player.fg3aRank) * 100).toFixed(2)}</p>
+                  <p><span className="font-semibold">FTM Rank:</span> {player.ftmRank}</p>
+                  <p><span className="font-semibold">FTA Rank:</span> {player.ftaRank}</p>
+                  <p><span className="font-semibold">FT% Rank:</span> {player.ftPctRank}</p>
+                  <p><span className="font-semibold">OREB Rank:</span> {player.orebRank}</p>
+                  <p><span className="font-semibold">DREB Rank:</span> {player.drebRank}</p>
+                  <p><span className="font-semibold">REB Rank:</span> {player.rebRank}</p>
+                  <p><span className="font-semibold">AST Rank:</span> {player.astRank}</p>
+                  <p><span className="font-semibold">TOV Rank:</span> {player.tovRank}</p>
+                  <p><span className="font-semibold">STL Rank:</span> {player.stlRank}</p>
+                  <p><span className="font-semibold">BLK Rank:</span> {player.blkRank}</p>
+                  <p><span className="font-semibold">BLKA Rank:</span> {player.blkaRank}</p>
+                  <p><span className="font-semibold">PF Rank:</span> {player.pfRank}</p>
+                  <p><span className="font-semibold">PFD Rank:</span> {player.pfdRank}</p>
+                  <p><span className="font-semibold">PTS Rank:</span> {player.ptsRank}</p>
+                  <p><span className="font-semibold">Plus/Minus Rank:</span> {player.plusMinusRank}</p>
+                  <p><span className="font-semibold">NBA Fantasy Pts Rank:</span> {player.nbaFantasyPtsRank}</p>
+                  <p><span className="font-semibold">Double-Doubles Rank:</span> {player.dd2Rank}</p>
+                  <p><span className="font-semibold">Triple-Doubles Rank:</span> {player.td3Rank}</p>
                 </div>
               </div>
             </div>

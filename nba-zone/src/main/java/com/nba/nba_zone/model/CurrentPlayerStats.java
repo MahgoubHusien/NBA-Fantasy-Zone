@@ -68,6 +68,7 @@ public class CurrentPlayerStats extends PlayerBase {
     private Integer td3Rank;
     private Integer cfid;
     private String cfparams;
+    private String playerName;
 
     // Getters and Setters
     public Integer getAge() { return age; }
@@ -252,4 +253,7 @@ public class CurrentPlayerStats extends PlayerBase {
 
     public String getCfparams() { return cfparams; }
     public void setCfparams(String cfparams) { this.cfparams = cfparams; }
+
+    public String getPlayerName() { return playerName; }
+    public void setPlayerName(String playerName) { this.playerName = playerName; }
 }

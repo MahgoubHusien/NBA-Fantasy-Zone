@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import PlayerCard from '@/components/player-card';
 
-type Player = {
+interface Player {
   id: number;
   firstName: string;
   lastName: string;
@@ -24,7 +25,6 @@ type Player = {
   gp: number;
   w: number;
   l: number;
-  wPct: number;
   min: number;
   fgm: number;
   fga: number;
@@ -49,9 +49,10 @@ type Player = {
   plusMinus: number;
   nbaFantasyPts: number;
   photoUrl?: string;
-};
+}
 
 const sortOptions = [
+  { label: 'Default', value: 'commonPlayerInfo' },
   { label: 'Top Fantasy Points', value: 'top-fantasy-points' },
   { label: 'Top PPG', value: 'top-ppg' },
   { label: 'Top APG', value: 'top-apg' },
@@ -73,17 +74,23 @@ const sortOptions = [
   { label: 'Most Triple-Doubles', value: 'most-triple-doubles' },
 ];
 
-const PlayersPage = () => {
+const PlayersPage: React.FC = () => {
   const [players, setPlayers] = useState<Player[]>([]);
-  const [sortCriteria, setSortCriteria] = useState<string>('Player');
+  const [sortCriteria, setSortCriteria] = useState<string>('commonPlayerInfo');
 
   const fetchPlayers = async (sortCriteria: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${sortCriteria}`);
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/${sortCriteria}`;
+      console.log('Fetching from URL:', url);
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Error fetching players: ${response.statusText}`);
+      }
       const data = await response.json();
-      setPlayers(data);
+      setPlayers(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Failed to fetch players:', error);
+      setPlayers([]); // Ensure players is always an array even on error
     }
   };
 
