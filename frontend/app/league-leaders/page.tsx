@@ -109,7 +109,7 @@ const LeagueLeadersPage: React.FC = () => {
               {playersByCategory[category.name]?.slice(0, 5).map((player, index) => (
                 <li key={index} className="flex justify-between py-2 border-b last:border-b-0">
                   <span>{index + 1}</span>
-                  <Link href={`/players/${player.playerId}`} className="flex items-center space-x-2 no-underline">
+                  <Link href={`/players/${player.id}`} className="flex items-center space-x-2 no-underline">
                     <img src={player.photoUrl || '/placeholder.png'} alt={player.playerName} className="w-8 h-8 object-cover rounded-full" />
                     <span>{player.playerName} ({player.teamAbbreviation})</span>
                   </Link>

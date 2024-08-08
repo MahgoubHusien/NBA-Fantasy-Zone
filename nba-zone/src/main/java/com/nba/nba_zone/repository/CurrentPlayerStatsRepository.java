@@ -64,90 +64,93 @@ public interface CurrentPlayerStatsRepository extends JpaRepository<CurrentPlaye
 
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.gp DESC")
-    List<CurrentPlayerStats> findTop5ByGpRank();
+    List<CurrentPlayerStats> findTopGpRank();
 
-    @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.w DESC")
-    List<CurrentPlayerStats> findTop5ByWRank();
+    @Query("SELECT p FROM CurrentPlayerStats p ORDER BY p.w DESC")
+    List<CurrentPlayerStats> findTopWinsRank();
 
-    @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.l DESC")
-    List<CurrentPlayerStats> findTop5ByLRank();
+    @Query("SELECT p FROM CurrentPlayerStats p ORDER BY p.l DESC")
+    List<CurrentPlayerStats> findTopLossesRank();
 
-    @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.wPct DESC")
-    List<CurrentPlayerStats> findTop5ByWPctRank();
+    @Query("SELECT p FROM CurrentPlayerStats p WHERE p.gp > 0 ORDER BY (p.w / p.gp) DESC")
+    List<CurrentPlayerStats> findTopWinPctRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.min DESC")
-    List<CurrentPlayerStats> findTop5ByMinRank();
+    List<CurrentPlayerStats> findTopMinRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.fgm DESC")
-    List<CurrentPlayerStats> findTop5ByFgmRank();
+    List<CurrentPlayerStats> findTopFgmRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.fga DESC")
-    List<CurrentPlayerStats> findTop5ByFgaRank();
+    List<CurrentPlayerStats> findTopFgaRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.fgPct DESC")
-    List<CurrentPlayerStats> findTop5ByFgPctRank();
+    List<CurrentPlayerStats> findTopFgPctRank();
+
+    @Query("SELECT p FROM CurrentPlayerStats p WHERE p.gp > 0 ORDER BY p.wPct DESC")
+    List<CurrentPlayerStats> findTopWPct();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.fg3m DESC")
-    List<CurrentPlayerStats> findTop5ByFg3mRank();
+    List<CurrentPlayerStats> findTopFg3mRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.fg3a DESC")
-    List<CurrentPlayerStats> findTop5ByFg3aRank();
+    List<CurrentPlayerStats> findTopFg3aRank();
 
     @Query("SELECT p FROM CurrentPlayerStats p WHERE p.fg3a > 0 ORDER BY (p.fg3m / p.fg3a) DESC")
-    List<CurrentPlayerStats> findTop5ByFg3PctRank(Pageable pageable);
+    List<CurrentPlayerStats> findTopFg3PctRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.ftm DESC")
-    List<CurrentPlayerStats> findTop5ByFtmRank();
+    List<CurrentPlayerStats> findTopFtmRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.fta DESC")
-    List<CurrentPlayerStats> findTop5ByFtaRank();
+    List<CurrentPlayerStats> findTopFtaRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.ftPct DESC")
-    List<CurrentPlayerStats> findTop5ByFtPctRank();
+    List<CurrentPlayerStats> findTopFtPctRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.oreb DESC")
-    List<CurrentPlayerStats> findTop5ByOrebRank();
+    List<CurrentPlayerStats> findTopOrebRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.dreb DESC")
-    List<CurrentPlayerStats> findTop5ByDrebRank();
+    List<CurrentPlayerStats> findTopDrebRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.reb DESC")
-    List<CurrentPlayerStats> findTop5ByRebRank();
+    List<CurrentPlayerStats> findTopRebRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.ast DESC")
-    List<CurrentPlayerStats> findTop5ByAstRank();
+    List<CurrentPlayerStats> findTopAstRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.tov DESC")
-    List<CurrentPlayerStats> findTop5ByTovRank();
+    List<CurrentPlayerStats> findTopTovRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.stl DESC")
-    List<CurrentPlayerStats> findTop5ByStlRank();
+    List<CurrentPlayerStats> findTopStlRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.blk DESC")
-    List<CurrentPlayerStats> findTop5ByBlkRank();
+    List<CurrentPlayerStats> findTopBlkRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.blka DESC")
-    List<CurrentPlayerStats> findTop5ByBlkaRank();
+    List<CurrentPlayerStats> findTopBlkaRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.pf DESC")
-    List<CurrentPlayerStats> findTop5ByPfRank();
+    List<CurrentPlayerStats> findTopPfRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.pfd DESC")
-    List<CurrentPlayerStats> findTop5ByPfdRank();
+    List<CurrentPlayerStats> findTopPfdRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.pts DESC")
-    List<CurrentPlayerStats> findTop5ByPtsRank();
+    List<CurrentPlayerStats> findTopPtsRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.plusMinus DESC")
-    List<CurrentPlayerStats> findTop5ByPlusMinusRank();
+    List<CurrentPlayerStats> findTopPlusMinusRank();
 
     @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.nbaFantasyPts DESC")
-    List<CurrentPlayerStats> findTop5ByNbaFantasyPtsRank();
+    List<CurrentPlayerStats> findTopNbaFantasyPtsRank();
 
-    @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.dd2 DESC")
-    List<CurrentPlayerStats> findTop5ByDd2Rank();
+    @Query("SELECT p FROM CurrentPlayerStats p ORDER BY p.dd2 DESC")
+    List<CurrentPlayerStats> findTopDd2Rank();
 
-    @Query("SELECT c FROM CurrentPlayerStats c ORDER BY c.td3 DESC")
-    List<CurrentPlayerStats> findTop5ByTd3Rank();
+    @Query("SELECT p FROM CurrentPlayerStats p ORDER BY p.td3 DESC")
+    List<CurrentPlayerStats> findTopTd3Rank();
 }
 

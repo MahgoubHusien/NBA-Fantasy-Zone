@@ -94,8 +94,12 @@ type PlayerProfile = {
   nbaFantasyPtsRank: number;
   dd2Rank: number;
   td3Rank: number;
+  wPctRank: number;
   photoUrl?: string;
 };
+
+const formatPercentage = (value: number) => (value * 100).toFixed(2);
+const formatDecimal = (value: number) => value.toFixed(2);
 
 const PlayerProfilePage = () => {
   const { id } = useParams();
@@ -122,7 +126,50 @@ const PlayerProfilePage = () => {
       }
     };
 
+    const fetchPlayerRanks = async () => {
+      if (!id) return;
+
+      try {
+        const fg3PctRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-fg3pct-rank`);
+        const fg3PctRankData = await fg3PctRankResponse.json();
+        const fg3PctRank = fg3PctRankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
+
+        const dd2RankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-dd2-rank`);
+        const dd2RankData = await dd2RankResponse.json();
+        const dd2Rank = dd2RankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
+
+        const td3RankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-td3-rank`);
+        const td3RankData = await td3RankResponse.json();
+        const td3Rank = td3RankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
+
+        const wPctRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-wpct-rank`);
+        const wPctRankData = await wPctRankResponse.json();
+        const wPctRank = wPctRankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
+
+        const wRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-w-rank`);
+        const wRankData = await wRankResponse.json();
+        const wRank = wRankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
+
+        const lRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-l-rank`);
+        const lRankData = await lRankResponse.json();
+        const lRank = lRankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
+
+        setPlayer(prevPlayer => prevPlayer ? {
+          ...prevPlayer,
+          fg3PctRank,
+          dd2Rank,
+          td3Rank,
+          wPctRank,
+          wRank,
+          lRank
+        } : null);
+      } catch (error) {
+        console.error('Error fetching player ranks:', error);
+      }
+    };
+
     fetchPlayer();
+    fetchPlayerRanks();
   }, [id]);
 
   if (!player) {
@@ -169,8 +216,8 @@ const PlayerProfilePage = () => {
                   <p><span className="font-semibold">GP:</span> {player.gp}</p>
                   <p><span className="font-semibold">W:</span> {player.w}</p>
                   <p><span className="font-semibold">L:</span> {player.l}</p>
-                  <p><span className="font-semibold">Win %:</span> {player.wPct}</p>
-                  <p><span className="font-semibold">MIN:</span> {player.min}</p>
+                  <p><span className="font-semibold">Win %:</span> {formatPercentage(player.wPct)}</p>
+                  <p><span className="font-semibold">MIN:</span> {formatDecimal(player.min)}</p>
                 </div>
               </div>
             </div>
@@ -186,13 +233,13 @@ const PlayerProfilePage = () => {
                   <p><span className="font-semibold">AST:</span> {player.ast}</p>
                   <p><span className="font-semibold">FGM:</span> {player.fgm}</p>
                   <p><span className="font-semibold">FGA:</span> {player.fga}</p>
-                  <p><span className="font-semibold">FG%:</span> {player.fgPct}</p>
+                  <p><span className="font-semibold">FG%:</span> {formatPercentage(player.fgPct)}</p>
                   <p><span className="font-semibold">3PM:</span> {player.fg3m}</p>
                   <p><span className="font-semibold">3PA:</span> {player.fg3a}</p>
-                  <p><span className="font-semibold">3P%:</span> {((player.fg3m / player.fg3a) * 100).toFixed(2)}</p>
+                  <p><span className="font-semibold">3P%:</span> {formatPercentage(player.fg3Pct)}</p>
                   <p><span className="font-semibold">FTM:</span> {player.ftm}</p>
                   <p><span className="font-semibold">FTA:</span> {player.fta}</p>
-                  <p><span className="font-semibold">FT%:</span> {player.ftPct}</p>
+                  <p><span className="font-semibold">FT%:</span> {formatPercentage(player.ftPct)}</p>
                 </div>
               </div>
             </div>
@@ -222,18 +269,18 @@ const PlayerProfilePage = () => {
                   <p><span className="font-semibold">Reb (Last 5):</span> {player.rebLast5}</p>
                   <p><span className="font-semibold">Ast (Last 5):</span> {player.astLast5}</p>
                   <p><span className="font-semibold">3PM (Last 5):</span> {player.fg3mLast5}</p>
-                  <p><span className="font-semibold">FT% (Last 5):</span> {player.ftPctLast5}</p>
+                  <p><span className="font-semibold">FT% (Last 5):</span> {formatPercentage(player.ftPctLast5)}</p>
                   <p><span className="font-semibold">Stl (Last 5):</span> {player.stlLast5}</p>
                   <p><span className="font-semibold">Blk (Last 5):</span> {player.blkLast5}</p>
                   <p><span className="font-semibold">TOV (Last 5):</span> {player.tovLast5}</p>
-                  <p><span className="font-semibold">FG% (Last 5):</span> {player.fgPctLast5}</p>
+                  <p><span className="font-semibold">FG% (Last 5):</span> {formatPercentage(player.fgPctLast5)}</p>
                   <p><span className="font-semibold">FanDuel Pts (Season):</span> {player.fanDuelPtsSeason}</p>
                   <p><span className="font-semibold">NBA Fantasy Pts (Season):</span> {player.nbaFantasyPtsSeason}</p>
                   <p><span className="font-semibold">Pts (Season):</span> {player.ptsSeason}</p>
                   <p><span className="font-semibold">Reb (Season):</span> {player.rebSeason}</p>
                   <p><span className="font-semibold">Ast (Season):</span> {player.astSeason}</p>
                   <p><span className="font-semibold">3PM (Season):</span> {player.fg3mSeason}</p>
-                  <p><span className="font-semibold">FG% (Season):</span> {player.fgPctSeason}</p>
+                  <p><span className="font-semibold">FG% (Season):</span> {formatPercentage(player.fgPctSeason)}</p>
                   <p><span className="font-semibold">TOV (Season):</span> {player.tovSeason}</p>
                 </div>
               </div>
@@ -252,7 +299,7 @@ const PlayerProfilePage = () => {
                   <p><span className="font-semibold">FG% Rank:</span> {player.fgPctRank}</p>
                   <p><span className="font-semibold">3PM Rank:</span> {player.fg3mRank}</p>
                   <p><span className="font-semibold">3PA Rank:</span> {player.fg3aRank}</p>
-                  <p><span className="font-semibold">3P% Rank:</span> {((player.fg3mRank / player.fg3aRank) * 100).toFixed(2)}</p>
+                  <p><span className="font-semibold">3P% Rank:</span> {player.fg3PctRank}</p>
                   <p><span className="font-semibold">FTM Rank:</span> {player.ftmRank}</p>
                   <p><span className="font-semibold">FTA Rank:</span> {player.ftaRank}</p>
                   <p><span className="font-semibold">FT% Rank:</span> {player.ftPctRank}</p>
@@ -271,6 +318,7 @@ const PlayerProfilePage = () => {
                   <p><span className="font-semibold">NBA Fantasy Pts Rank:</span> {player.nbaFantasyPtsRank}</p>
                   <p><span className="font-semibold">Double-Doubles Rank:</span> {player.dd2Rank}</p>
                   <p><span className="font-semibold">Triple-Doubles Rank:</span> {player.td3Rank}</p>
+                  <p><span className="font-semibold">Win % Rank:</span> {player.wPctRank}</p>
                 </div>
               </div>
             </div>

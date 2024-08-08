@@ -5,6 +5,7 @@ import com.nba.nba_zone.model.CurrentPlayerStats;
 import com.nba.nba_zone.model.PlayerFantasyStats;
 import com.nba.nba_zone.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -146,6 +147,28 @@ public class PlayerController {
         return playerService.getTopFantasyPoints();
     }
 
+    @GetMapping("/top-wpct")
+    public ResponseEntity<List<CurrentPlayerStats>> getTopWPct() {
+        List<CurrentPlayerStats> players = playerService.getTopWPct();
+        return new ResponseEntity<>(players, HttpStatus.OK);
+    }
+
+    @GetMapping("/top-wpct-rank")
+    public List<CurrentPlayerStats> getTopWinPctRank() {
+        return playerService.getTopWinPctRank();
+    }
+
+    @GetMapping("/top-dd2-rank")
+    public List<CurrentPlayerStats> getTopDd2Rank() {
+        return playerService.getTopDd2Rank();
+    }
+
+    @GetMapping("/top-td3-rank")
+    public List<CurrentPlayerStats> getTopTd3Rank() {
+        return playerService.getTopTd3Rank();
+    }
+
+
     // Retrieve top ranked players for each category
     @GetMapping("/top-gp-rank")
     public List<CurrentPlayerStats> getTopGpRank() {
@@ -153,19 +176,19 @@ public class PlayerController {
     }
 
     @GetMapping("/top-w-rank")
-    public List<CurrentPlayerStats> getTopWRank() {
-        return playerService.getTopWRank();
+    public List<CurrentPlayerStats> getTopWinsRank() {
+        return playerService.getTopWinsRank();
     }
 
     @GetMapping("/top-l-rank")
-    public List<CurrentPlayerStats> getTopLRank() {
-        return playerService.getTopLRank();
+    public List<CurrentPlayerStats> getTopLossesRank() {
+        return playerService.getTopLossesRank();
     }
 
-    @GetMapping("/top-wpct-rank")
-    public List<CurrentPlayerStats> getTopWPctRank() {
-        return playerService.getTopWPctRank();
-    }
+//    @GetMapping("/top-wpct-rank")
+//    public List<CurrentPlayerStats> getTopWPctRank() {
+//        return playerService.getTopWPctRank();
+//    }
 
     @GetMapping("/top-min-rank")
     public List<CurrentPlayerStats> getTopMinRank() {
@@ -198,8 +221,9 @@ public class PlayerController {
     }
 
     @GetMapping("/top-fg3pct-rank")
-    public List<CurrentPlayerStats> getTopFg3PctRank() {
-        return playerService.getTopFg3PctRank();
+    public ResponseEntity<List<CurrentPlayerStats>> getTopFg3PctRank() {
+        List<CurrentPlayerStats> players = playerService.getTopFg3PctRank();
+        return new ResponseEntity<>(players, HttpStatus.OK);
     }
 
     @GetMapping("/top-ftm-rank")
@@ -282,15 +306,15 @@ public class PlayerController {
         return playerService.getTopNbaFantasyPtsRank();
     }
 
-    @GetMapping("/top-dd2-rank")
-    public List<CurrentPlayerStats> getTopDd2Rank() {
-        return playerService.getTopDd2Rank();
-    }
-
-    @GetMapping("/top-td3-rank")
-    public List<CurrentPlayerStats> getTopTd3Rank() {
-        return playerService.getTopTd3Rank();
-    }
+//    @GetMapping("/top-dd2-rank")
+//    public List<CurrentPlayerStats> getTopDd2Rank() {
+//        return playerService.getTopDd2Rank();
+//    }
+//
+//    @GetMapping("/top-td3-rank")
+//    public List<CurrentPlayerStats> getTopTd3Rank() {
+//        return playerService.getTopTd3Rank();
+//    }
 
     // Search players by name
     @GetMapping("/search-players")
