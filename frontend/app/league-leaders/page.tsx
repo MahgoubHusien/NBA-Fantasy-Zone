@@ -41,10 +41,14 @@ interface Player {
 }
 
 const categories = [
-  { name: 'gp-rank', label: 'Games Played', stat: 'gp', unit: 'games' },
-  { name: 'w-rank', label: 'Wins', stat: 'w', unit: 'wins' },
-  { name: 'l-rank', label: 'Losses', stat: 'l', unit: 'losses' },
-  { name: 'min-rank', label: 'Minutes Played', stat: 'min', unit: 'minutes' },
+  { name: 'pts-rank', label: 'Points', stat: 'pts', unit: 'PTS' },
+  { name: 'nba-fantasy-points-rank', label: 'NBA Fantasy Points', stat: 'nbaFantasyPts', unit: 'FP' },
+  { name: 'gp-rank', label: 'Games Played', stat: 'gp', unit: 'Games' },
+  { name: 'w-rank', label: 'Wins', stat: 'w', unit: 'Wins' },
+  { name: 'l-rank', label: 'Losses', stat: 'l', unit: 'Losses' },
+  { name: 'wpct-rank', label: 'Win Percentage', stat: 'wpct', unit: '%' },
+  { name: 'min-rank', label: 'Minutes Played', stat: 'min', unit: 'Minutes' },
+  { name: 'plus-minus-rank', label: 'Plus Minus', stat: 'plusMinus', unit: 'PM' },
   { name: 'fgm-rank', label: 'Field Goals Made', stat: 'fgm', unit: 'FGM' },
   { name: 'fga-rank', label: 'Field Goals Attempted', stat: 'fga', unit: 'FGA' },
   { name: 'fgpct-rank', label: 'Field Goal Percentage', stat: 'fgPct', unit: '%' },
@@ -64,19 +68,17 @@ const categories = [
   { name: 'blka-rank', label: 'Blocked Attempts', stat: 'blka', unit: 'BLKA' },
   { name: 'pf-rank', label: 'Personal Fouls', stat: 'pf', unit: 'PF' },
   { name: 'pfd-rank', label: 'Personal Fouls Drawn', stat: 'pfd', unit: 'PFD' },
-  { name: 'pts-rank', label: 'Points', stat: 'pts', unit: 'PTS' },
-  { name: 'plus-minus-rank', label: 'Plus Minus', stat: 'plusMinus', unit: 'PM' },
-  { name: 'nba-fantasy-points-rank', label: 'NBA Fantasy Points', stat: 'nbaFantasyPts', unit: 'FP' },
   { name: 'dd2-rank', label: 'Double-Doubles', stat: 'dd2', unit: 'DD2' },
   { name: 'td3-rank', label: 'Triple-Doubles', stat: 'td3', unit: 'TD3' },
 ];
 
 const LeagueLeadersPage: React.FC = () => {
   const [playersByCategory, setPlayersByCategory] = useState<{ [key: string]: Player[] }>({});
+  const [topPlayers, setTopPlayers] = useState<Player[]>([]);
 
   const fetchTopPlayers = async (category: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-${category}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-${category}`);
       const data = await response.json();
       setPlayersByCategory((prev) => ({ ...prev, [category]: Array.isArray(data) ? data : [] }));
     } catch (error) {
@@ -85,22 +87,77 @@ const LeagueLeadersPage: React.FC = () => {
     }
   };
 
+  const fetchTopOverallPlayers = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/leagueLeaders`);
+      const data = await response.json();
+      setTopPlayers(data.slice(0, 5));
+    } catch (error) {
+      console.error('Failed to fetch top overall players:', error);
+    }
+  };
+
   useEffect(() => {
     categories.forEach((category) => {
       fetchTopPlayers(category.name);
     });
+    fetchTopOverallPlayers();
   }, []);
 
   return (
     <div className="container mx-auto p-4">
       <div className="title-container">
-        <h1 className="text-3xl font-bold text-center text-black">League Leaders</h1>
+        <h1 className="text-4xl font-extrabold text-center text-gray-800">League Leaders</h1>
       </div>
+
+      {/* Top Players Section */}
+      <div className="top-players-section bg-white p-6 rounded-lg shadow-lg mb-8">
+        <h2 className="text-3xl font-semibold mb-4 text-center">Top Players</h2>
+        <table className="min-w-full text-gray-900 rounded-lg overflow-hidden shadow-md border-collapse">
+          <thead className="bg-black text-white">
+            <tr>
+              <th className="py-3 px-4 text-left">Rank</th>
+              <th className="py-3 px-4 text-left">Player</th>
+              <th className="py-3 px-4 text-center">Points</th>
+              <th className="py-3 px-4 text-center">Assists</th>
+              <th className="py-3 px-4 text-center">Rebounds</th>
+            </tr>
+          </thead>
+          <tbody>
+            {topPlayers.map((player, index) => (
+              <tr key={player.id} className="hover:bg-gray-100 transition border-b last:border-b-0">
+                <td className="py-3 px-4">{index + 1}</td>
+                <td className="py-3 px-4 flex items-center">
+                  <img
+                    src={player.photoUrl || '/placeholder.png'}
+                    alt={player.playerName}
+                    className="w-10 h-10 object-cover rounded-full mr-4"
+                  />
+                  <Link href={`/players/${player.id}`} className="text-black hover:underline flex items-center space-x-2">
+                    <span>{player.playerName}</span>
+                  </Link>
+                </td>
+                <td className="py-3 px-4 text-center">{player.pts}</td>
+                <td className="py-3 px-4 text-center">{player.ast}</td>
+                <td className="py-3 px-4 text-center">{player.reb}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="flex justify-center mt-4">
+          <Link href="/top-players">
+            <button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-1.5 px-3 rounded-lg transition">
+              See More
+            </button>
+          </Link>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {categories.map((category) => (
-          <div key={category.name} className="category-card">
+          <div key={category.name} className="category-card p-4 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold mb-2 gradient-title text-center">{category.label}</h2>
-            <div className="flex justify-between mb-2 text-gray-500 text-sm text-center">
+            <div className="flex justify-between mb-2 text-black text-sm text-center">
               <span>Rank</span>
               <span>Name</span>
               <span>{category.unit}</span>
@@ -109,12 +166,18 @@ const LeagueLeadersPage: React.FC = () => {
               {playersByCategory[category.name]?.slice(0, 5).map((player, index) => (
                 <li key={index} className="flex justify-between py-2 border-b last:border-b-0">
                   <span>{index + 1}</span>
-                  <Link href={`/players/${player.id}`} className="flex items-center space-x-2 no-underline">
-                    <img src={player.photoUrl || '/placeholder.png'} alt={player.playerName} className="w-8 h-8 object-cover rounded-full" />
+                  <Link href={`/players/${player.id}`} className="text-black hover:underline flex items-center space-x-2">
+                    <img
+                      src={player.photoUrl || '/placeholder.png'}
+                      alt={player.playerName}
+                      className="w-8 h-8 object-cover rounded-full mr-2"
+                    />
                     <span>{player.playerName} ({player.teamAbbreviation})</span>
                   </Link>
                   <span>
-                    {category.stat === 'min'
+                    {category.name === 'wpct-rank'
+                      ? ((player.w / player.gp) * 100).toFixed(2)
+                      : category.stat === 'min'
                       ? (player[category.stat] as number).toFixed(2)
                       : category.name === 'fg3pct-rank'
                       ? ((player.fg3m / player.fg3a) * 100).toFixed(2)
@@ -128,6 +191,7 @@ const LeagueLeadersPage: React.FC = () => {
           </div>
         ))}
       </div>
+
       <style jsx>{`
         .container {
           padding: 2rem;
@@ -139,14 +203,35 @@ const LeagueLeadersPage: React.FC = () => {
           background-color: white;
           padding: 1rem;
           border-radius: 1rem;
-          display: inline-block;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .category-card {
+        .top-players-section {
+          border-radius: 1rem;
+          border: 4px solid gold;
           background-color: white;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table {
+          width: 100%;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border-collapse: collapse;
+        }
+        th, td {
+          padding: 0.75rem;
+        }
+        th {
+          background-color: black;
+          color: white;
+        }
+        tbody tr {
+          border-bottom: 1px solid #e2e8f0;
+        }
+        .category-card {
           border-radius: 1rem;
-          padding: 1.5rem;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .category-card ul {
           list-style: none;
@@ -167,11 +252,18 @@ const LeagueLeadersPage: React.FC = () => {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
-        .no-underline:hover {
-          text-decoration: none;
+        button {
+          padding: 0.5rem 1rem;
+          font-size: 1rem;
+          border-radius: 1rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          background: linear-gradient(to right, #4f46e5, #9333ea);
+          color: white;
         }
-        .no-underline img {
-          border-radius: 50%;
+        button:hover {
+          background: linear-gradient(to right, #4f46e5, #9333ea);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
       `}</style>
     </div>

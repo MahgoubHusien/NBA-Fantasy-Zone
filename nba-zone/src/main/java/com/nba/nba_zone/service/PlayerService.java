@@ -2,9 +2,11 @@ package com.nba.nba_zone.service;
 
 import com.nba.nba_zone.model.CommonPlayerInfo;
 import com.nba.nba_zone.model.CurrentPlayerStats;
+import com.nba.nba_zone.model.LeagueLeaders;
 import com.nba.nba_zone.model.PlayerFantasyStats;
 import com.nba.nba_zone.repository.CommonPlayerInfoRepository;
 import com.nba.nba_zone.repository.CurrentPlayerStatsRepository;
+import com.nba.nba_zone.repository.LeagueLeadersRepository;
 import com.nba.nba_zone.repository.PlayerFantasyStatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -22,12 +24,14 @@ public class PlayerService {
     private final CommonPlayerInfoRepository commonPlayerInfoRepository;
     private final CurrentPlayerStatsRepository currentPlayerStatsRepository;
     private final PlayerFantasyStatsRepository playerFantasyStatsRepository;
+    private final LeagueLeadersRepository leagueLeadersRepository;
 
     @Autowired
-    public PlayerService(CommonPlayerInfoRepository commonPlayerInfoRepository, CurrentPlayerStatsRepository currentPlayerStatsRepository, PlayerFantasyStatsRepository playerFantasyStatsRepository) {
+    public PlayerService(CommonPlayerInfoRepository commonPlayerInfoRepository, CurrentPlayerStatsRepository currentPlayerStatsRepository, PlayerFantasyStatsRepository playerFantasyStatsRepository, LeagueLeadersRepository leagueLeadersRepository) {
         this.commonPlayerInfoRepository = commonPlayerInfoRepository;
         this.currentPlayerStatsRepository = currentPlayerStatsRepository;
         this.playerFantasyStatsRepository = playerFantasyStatsRepository;
+        this.leagueLeadersRepository = leagueLeadersRepository;
     }
 
     // Common Player Info Methods
@@ -57,6 +61,20 @@ public class PlayerService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
+
+    // League Leaders Methods
+    public List<LeagueLeaders> getAllLeagueLeaders() {
+        return leagueLeadersRepository.findAll(Sort.by(Sort.Direction.ASC, "rank"));
+    }
+
+    public LeagueLeaders getLeagueLeaderByPlayerId(Integer playerId) {
+        return leagueLeadersRepository.findByPlayerId(playerId);
+    }
+
+    public List<LeagueLeaders> getLeagueLeadersByTeam(String teamAbbreviation) {
+        return leagueLeadersRepository.findByTeamAbbreviationOrderByRankAsc(teamAbbreviation);
+    }
+
 
     // Sort Methods
     public List<CommonPlayerInfo> getTopTotalPoints() {

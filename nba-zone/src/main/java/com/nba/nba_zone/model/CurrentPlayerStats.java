@@ -70,6 +70,76 @@ public class CurrentPlayerStats extends PlayerBase {
     private String cfparams;
     private String playerName;
 
+    // No-argument constructor
+    public CurrentPlayerStats() {}
+
+    // All-argument constructor
+    public CurrentPlayerStats(Long id, Integer playerId, String teamAbbreviation, Integer age, Integer gp, Integer w, Integer l, Double wPct, Double min, Double fgm, Double fga, Double fgPct, Double fg3m, Double fg3a, Double fg3Pct, Double ftm, Double fta, Double ftPct, Double oreb, Double dreb, Double reb, Double ast, Double tov, Double stl, Double blk, Double blka, Double pf, Double pfd, Double pts, Double plusMinus, Double nbaFantasyPts, Integer dd2, Integer td3, Integer gpRank, Integer wRank, Integer lRank, Integer wPctRank, Integer minRank, Integer fgmRank, Integer fgaRank, Integer fgPctRank, Integer fg3mRank, Integer fg3aRank, Integer fg3PctRank, Integer ftmRank, Integer ftaRank, Integer ftPctRank, Integer orebRank, Integer drebRank, Integer rebRank, Integer astRank, Integer tovRank, Integer stlRank, Integer blkRank, Integer blkaRank, Integer pfRank, Integer pfdRank, Integer ptsRank, Integer plusMinusRank, Integer nbaFantasyPtsRank, Integer dd2Rank, Integer td3Rank, Integer cfid, String cfparams, String playerName) {
+        super(id, playerId, teamAbbreviation); // Calls the superclass constructor
+        this.age = age;
+        this.gp = gp;
+        this.w = w;
+        this.l = l;
+        this.wPct = wPct;
+        this.min = min;
+        this.fgm = fgm;
+        this.fga = fga;
+        this.fgPct = fgPct;
+        this.fg3m = fg3m;
+        this.fg3a = fg3a;
+        this.fg3Pct = fg3Pct;
+        this.ftm = ftm;
+        this.fta = fta;
+        this.ftPct = ftPct;
+        this.oreb = oreb;
+        this.dreb = dreb;
+        this.reb = reb;
+        this.ast = ast;
+        this.tov = tov;
+        this.stl = stl;
+        this.blk = blk;
+        this.blka = blka;
+        this.pf = pf;
+        this.pfd = pfd;
+        this.pts = pts;
+        this.plusMinus = plusMinus;
+        this.nbaFantasyPts = nbaFantasyPts;
+        this.dd2 = dd2;
+        this.td3 = td3;
+        this.gpRank = gpRank;
+        this.wRank = wRank;
+        this.lRank = lRank;
+        this.wPctRank = wPctRank;
+        this.minRank = minRank;
+        this.fgmRank = fgmRank;
+        this.fgaRank = fgaRank;
+        this.fgPctRank = fgPctRank;
+        this.fg3mRank = fg3mRank;
+        this.fg3aRank = fg3aRank;
+        this.fg3PctRank = fg3PctRank;
+        this.ftmRank = ftmRank;
+        this.ftaRank = ftaRank;
+        this.ftPctRank = ftPctRank;
+        this.orebRank = orebRank;
+        this.drebRank = drebRank;
+        this.rebRank = rebRank;
+        this.astRank = astRank;
+        this.tovRank = tovRank;
+        this.stlRank = stlRank;
+        this.blkRank = blkRank;
+        this.blkaRank = blkaRank;
+        this.pfRank = pfRank;
+        this.pfdRank = pfdRank;
+        this.ptsRank = ptsRank;
+        this.plusMinusRank = plusMinusRank;
+        this.nbaFantasyPtsRank = nbaFantasyPtsRank;
+        this.dd2Rank = dd2Rank;
+        this.td3Rank = td3Rank;
+        this.cfid = cfid;
+        this.cfparams = cfparams;
+        this.playerName = playerName;
+    }
+
     // Getters and Setters
     public Integer getAge() { return age; }
     public void setAge(Integer age) { this.age = age; }

@@ -2,10 +2,10 @@ package com.nba.nba_zone.controller;
 
 import com.nba.nba_zone.model.CommonPlayerInfo;
 import com.nba.nba_zone.model.CurrentPlayerStats;
+import com.nba.nba_zone.model.LeagueLeaders;
 import com.nba.nba_zone.model.PlayerFantasyStats;
 import com.nba.nba_zone.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/players")
 public class PlayerController {
 
     private final PlayerService playerService;
@@ -48,6 +48,27 @@ public class PlayerController {
     public ResponseEntity<PlayerFantasyStats> getPlayerFantasyStatsById(@PathVariable Long id) {
         PlayerFantasyStats playerFantasyStats = playerService.getPlayerFantasyStatsById(id);
         return new ResponseEntity<>(playerFantasyStats, HttpStatus.OK);
+    }
+
+    // League Leaders Endpoints
+
+    // Retrieve all league leaders sorted by rank
+    @GetMapping("/leagueLeaders")
+    public List<LeagueLeaders> getAllLeagueLeaders() {
+        return playerService.getAllLeagueLeaders();
+    }
+
+    // Retrieve a league leader by player ID
+    @GetMapping("/leagueLeader/{playerId}")
+    public ResponseEntity<LeagueLeaders> getLeagueLeaderByPlayerId(@PathVariable Integer playerId) {
+        LeagueLeaders leagueLeader = playerService.getLeagueLeaderByPlayerId(playerId);
+        return new ResponseEntity<>(leagueLeader, HttpStatus.OK);
+    }
+
+    // Retrieve league leaders by team abbreviation
+    @GetMapping("/leagueLeaders/team/{teamAbbreviation}")
+    public List<LeagueLeaders> getLeagueLeadersByTeam(@PathVariable String teamAbbreviation) {
+        return playerService.getLeagueLeadersByTeam(teamAbbreviation);
     }
 
     // Sort methods returning CommonPlayerInfo
@@ -168,7 +189,6 @@ public class PlayerController {
         return playerService.getTopTd3Rank();
     }
 
-
     // Retrieve top ranked players for each category
     @GetMapping("/top-gp-rank")
     public List<CurrentPlayerStats> getTopGpRank() {
@@ -184,11 +204,6 @@ public class PlayerController {
     public List<CurrentPlayerStats> getTopLossesRank() {
         return playerService.getTopLossesRank();
     }
-
-//    @GetMapping("/top-wpct-rank")
-//    public List<CurrentPlayerStats> getTopWPctRank() {
-//        return playerService.getTopWPctRank();
-//    }
 
     @GetMapping("/top-min-rank")
     public List<CurrentPlayerStats> getTopMinRank() {
@@ -305,16 +320,6 @@ public class PlayerController {
     public List<CurrentPlayerStats> getTopNbaFantasyPtsRank() {
         return playerService.getTopNbaFantasyPtsRank();
     }
-
-//    @GetMapping("/top-dd2-rank")
-//    public List<CurrentPlayerStats> getTopDd2Rank() {
-//        return playerService.getTopDd2Rank();
-//    }
-//
-//    @GetMapping("/top-td3-rank")
-//    public List<CurrentPlayerStats> getTopTd3Rank() {
-//        return playerService.getTopTd3Rank();
-//    }
 
     // Search players by name
     @GetMapping("/search-players")

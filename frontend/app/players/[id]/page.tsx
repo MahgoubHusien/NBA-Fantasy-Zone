@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 
 type PlayerProfile = {
   id: number;
+  playerId: number;
   firstName: string;
   lastName: string;
   teamName: string;
@@ -98,14 +99,14 @@ type PlayerProfile = {
   dd2Rank: number;
   td3Rank: number;
   wPctRank: number;
+  rank: number;
   photoUrl?: string;
 };
 
 const formatPercentage = (value: number) => (value * 100).toFixed(2);
 const formatDecimal = (value: number) => value.toFixed(2);
 const formatHeight = (height: string) => {
-  const feet = Math.floor(parseInt(height) / 12);
-  const inches = parseInt(height) % 12;
+  const [feet, inches] = height.split('-');
   return `${feet}' ${inches}"`;
 };
 const formatWeight = (weight: string) => `${weight} lbs`;
@@ -130,73 +131,69 @@ const PlayerProfilePage = () => {
   useEffect(() => {
     const fetchPlayer = async () => {
       if (!id) return;
-
+  
       try {
-        const response1 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/commonPlayerInfo/${id}`);
+        // Fetch common player info
+        const response1 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/commonPlayerInfo/${id}`);
         const commonPlayerInfo = await response1.json();
-
-        const response2 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/currentPlayerStats/${id}`);
+  
+        // Fetch current player stats
+        const response2 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/currentPlayerStats/${id}`);
         const currentPlayerStats = await response2.json();
-
-        const response3 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/playerFantasyStats/${id}`);
+  
+        // Fetch player fantasy stats
+        const response3 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/playerFantasyStats/${id}`);
         const playerFantasyStats = await response3.json();
-
+  
+        // Merge the fetched player data
         const playerData = { ...commonPlayerInfo, ...currentPlayerStats, ...playerFantasyStats };
         setPlayer(playerData);
+  
+        // Fetch player rank using the playerId from the merged player object
+        const playerId = playerData.playerId; // Extract playerId from the merged player object
+        const rankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/leagueLeader/${playerId}`);
+        const rankData = await rankResponse.json();
+        const rank = rankData.rank || null;
+  
+        // Fetch additional rankings
+        const fg3PctRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-fg3pct-rank`);
+        const fg3PctRankData = await fg3PctRankResponse.json();
+        const fg3PctRank = fg3PctRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+  
+        const dd2RankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-dd2-rank`);
+        const dd2RankData = await dd2RankResponse.json();
+        const dd2Rank = dd2RankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+  
+        const td3RankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-td3-rank`);
+        const td3RankData = await td3RankResponse.json();
+        const td3Rank = td3RankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+  
+        const wPctRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-wpct-rank`);
+        const wPctRankData = await wPctRankResponse.json();
+        const wPctRank = wPctRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+  
+        const wRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-w-rank`);
+        const wRankData = await wRankResponse.json();
+        const wRank = wRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+  
+        const lRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-l-rank`);
+        const lRankData = await lRankResponse.json();
+        const lRank = lRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+  
+        // Set the state with the full player data, including all ranks
+        setPlayer({ ...playerData, rank, fg3PctRank, dd2Rank, td3Rank, wPctRank, wRank, lRank });
       } catch (error) {
         console.error('Error fetching player:', error);
       }
     };
-
-    const fetchPlayerRanks = async () => {
-      if (!id) return;
-
-      try {
-        const fg3PctRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-fg3pct-rank`);
-        const fg3PctRankData = await fg3PctRankResponse.json();
-        const fg3PctRank = fg3PctRankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
-
-        const dd2RankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-dd2-rank`);
-        const dd2RankData = await dd2RankResponse.json();
-        const dd2Rank = dd2RankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
-
-        const td3RankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-td3-rank`);
-        const td3RankData = await td3RankResponse.json();
-        const td3Rank = td3RankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
-
-        const wPctRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-wpct-rank`);
-        const wPctRankData = await wPctRankResponse.json();
-        const wPctRank = wPctRankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
-
-        const wRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-w-rank`);
-        const wRankData = await wRankResponse.json();
-        const wRank = wRankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
-
-        const lRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/top-l-rank`);
-        const lRankData = await lRankResponse.json();
-        const lRank = lRankData.findIndex((p: PlayerProfile) => p.id === Number(id)) + 1;
-
-        setPlayer(prevPlayer => prevPlayer ? {
-          ...prevPlayer,
-          fg3PctRank,
-          dd2Rank,
-          td3Rank,
-          wPctRank,
-          wRank,
-          lRank
-        } : null);
-      } catch (error) {
-        console.error('Error fetching player ranks:', error);
-      }
-    };
-
+  
     fetchPlayer();
-    fetchPlayerRanks();
   }, [id]);
-
+  
   if (!player) {
     return <p>Loading...</p>;
   }
+  
 
   const topFiveStats = getTopFiveStats(player.ppg, player.apg, player.rpg, player.spg, player.topg, player.bpg, player.pfpg);
 
@@ -207,21 +204,22 @@ const PlayerProfilePage = () => {
           <img
             src={player.photoUrl || '/placeholder.png'}
             alt={`${player.firstName} ${player.lastName}`}
-            className="w-48 h-48 object-cover rounded-full"
+            className="w-32 h-32 object-cover rounded-full"
           />
         </div>
         <div className="flex flex-col justify-center flex-grow space-y-2">
-          <h1 className="text-4xl font-bold">{player.firstName} {player.lastName}</h1>
-          <div className="text-lg text-gray-600">
+          <h1 className="text-3xl font-bold">{player.firstName} {player.lastName}</h1>
+          <div className="text-m text-gray-600">
             <p>{player.position} | {player.teamName}</p>
             <p>Jersey: {player.jersey}</p>
             <p>Height: {formatHeight(player.height)}</p>
             <p>Weight: {formatWeight(player.weight)}</p>
             <p>Age: {player.age}</p>
+            <p>NBA Rank: {player.rank}</p>
           </div>
         </div>
-        <div className="flex flex-wrap space-x-4 w-full sm:w-auto">
-          <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-1 rounded-lg shadow-lg max-w-xs">
+        <div className="flex flex-wrap space-x-4 w-full sm:w-auto flex-col sm:flex-row">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-1 rounded-lg shadow-lg max-w-xs flex-1">
             <div className="bg-white p-4 rounded-lg h-full">
               <h2 className="text-2xl font-bold mb-4 text-center">Top 5 Stats</h2>
               <div className="overflow-x-auto">
@@ -244,7 +242,7 @@ const PlayerProfilePage = () => {
               </div>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-1 rounded-lg shadow-lg max-w-xs mt-4 sm:mt-0">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-1 rounded-lg shadow-lg max-w-sm flex-1 mt-4 sm:mt-0 sm:ml-4">
             <div className="bg-white p-4 rounded-lg h-full">
               <h2 className="text-2xl font-bold mb-4 text-center">Fantasy Stats</h2>
               <div className="overflow-hidden">

@@ -80,7 +80,7 @@ const PlayersPage: React.FC = () => {
 
   const fetchPlayers = async (sortCriteria: string) => {
     try {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/${sortCriteria}`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/players/${sortCriteria}`;
       console.log('Fetching from URL:', url);
       const response = await fetch(url);
       if (!response.ok) {
