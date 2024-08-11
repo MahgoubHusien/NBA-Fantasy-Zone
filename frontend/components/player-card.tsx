@@ -25,7 +25,7 @@ const PlayerCard = ({ player }: { player: Player }) => {
           <p>RPG: {player.rpg}</p>
         </div>
         <Link href={`/players/${player.id}`}>
-        <button className="mt-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 px-4 rounded shadow-lg transition transform hover:scale-105">
+        <button className="mt-4 bg-[#00BFA6] text-white py-2 px-4 rounded shadow-lg transition transform hover:scale-105">
           View Stats
         </button>
         </Link>

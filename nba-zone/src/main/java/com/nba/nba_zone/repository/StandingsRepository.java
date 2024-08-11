@@ -17,5 +17,5 @@ public interface StandingsRepository extends JpaRepository<Standings, Integer> {
 
     List<Standings> findAllByOrderByWinPctDesc();
 
-    List<Standings> findByClinchedPlayoffBirth(int clinchedPlayoffBirth);
+    List<Standings> findByClinchedPlayoffBirth(Integer clinchedPlayoffBirth);
 }

@@ -90,7 +90,7 @@ const PlayersPage: React.FC = () => {
       setPlayers(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Failed to fetch players:', error);
-      setPlayers([]); // Ensure players is always an array even on error
+      setPlayers([]); 
     }
   };
 

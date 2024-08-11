@@ -14,7 +14,7 @@ public interface TeamStatsRepository extends JpaRepository<TeamStats, Integer> {
 
     List<TeamStats> findByTeamName(String teamName);
 
-    List<TeamStats> findByWinPctGreaterThan(float winPct);
+    List<TeamStats> findByWinPctGreaterThan(Double winPct);
 
     List<TeamStats> findAllByOrderByPointsDesc();
 }

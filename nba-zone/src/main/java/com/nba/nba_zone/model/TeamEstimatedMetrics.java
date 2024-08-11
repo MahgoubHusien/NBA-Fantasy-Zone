@@ -11,108 +11,108 @@ public class TeamEstimatedMetrics {
 
     @Id
     @Column(name = "team_id")
-    private int teamId;
+    private Integer teamId;
 
     @Column(name = "team_name")
     private String teamName;
 
     @Column(name = "gp")
-    private int gp;
+    private Integer gp;
 
     @Column(name = "w")
-    private int wins;
+    private Integer wins;
 
     @Column(name = "l")
-    private int losses;
+    private Integer losses;
 
     @Column(name = "w_pct")
-    private float winPct;
+    private Double winPct;
 
     @Column(name = "min")
-    private float minutes;
+    private Double minutes;
 
     @Column(name = "e_off_rating")
-    private float estimatedOffensiveRating;
+    private Double estimatedOffensiveRating;
 
     @Column(name = "e_def_rating")
-    private float estimatedDefensiveRating;
+    private Double estimatedDefensiveRating;
 
     @Column(name = "e_net_rating")
-    private float estimatedNetRating;
+    private Double estimatedNetRating;
 
     @Column(name = "e_pace")
-    private float estimatedPace;
+    private Double estimatedPace;
 
     @Column(name = "e_ast_ratio")
-    private float estimatedAssistRatio;
+    private Double estimatedAssistRatio;
 
     @Column(name = "e_oreb_pct")
-    private float estimatedOffensiveReboundPct;
+    private Double estimatedOffensiveReboundPct;
 
     @Column(name = "e_dreb_pct")
-    private float estimatedDefensiveReboundPct;
+    private Double estimatedDefensiveReboundPct;
 
     @Column(name = "e_reb_pct")
-    private float estimatedReboundPct;
+    private Double estimatedReboundPct;
 
     @Column(name = "e_tm_tov_pct")
-    private float estimatedTurnoverPct;
+    private Double estimatedTurnoverPct;
 
     @Column(name = "gp_rank")
-    private int gpRank;
+    private Integer gpRank;
 
     @Column(name = "w_rank")
-    private int winRank;
+    private Integer winRank;
 
     @Column(name = "l_rank")
-    private int lossRank;
+    private Integer lossRank;
 
     @Column(name = "w_pct_rank")
-    private int winPctRank;
+    private Integer winPctRank;
 
     @Column(name = "min_rank")
-    private int minRank;
+    private Integer minRank;
 
     @Column(name = "e_off_rating_rank")
-    private int estimatedOffensiveRatingRank;
+    private Integer estimatedOffensiveRatingRank;
 
     @Column(name = "e_def_rating_rank")
-    private int estimatedDefensiveRatingRank;
+    private Integer estimatedDefensiveRatingRank;
 
     @Column(name = "e_net_rating_rank")
-    private int estimatedNetRatingRank;
+    private Integer estimatedNetRatingRank;
 
     @Column(name = "e_ast_ratio_rank")
-    private int estimatedAssistRatioRank;
+    private Integer estimatedAssistRatioRank;
 
     @Column(name = "e_oreb_pct_rank")
-    private int estimatedOffensiveReboundPctRank;
+    private Integer estimatedOffensiveReboundPctRank;
 
     @Column(name = "e_dreb_pct_rank")
-    private int estimatedDefensiveReboundPctRank;
+    private Integer estimatedDefensiveReboundPctRank;
 
     @Column(name = "e_reb_pct_rank")
-    private int estimatedReboundPctRank;
+    private Integer estimatedReboundPctRank;
 
     @Column(name = "e_tm_tov_pct_rank")
-    private int estimatedTurnoverPctRank;
+    private Integer estimatedTurnoverPctRank;
 
     @Column(name = "e_pace_rank")
-    private int estimatedPaceRank;
+    private Integer estimatedPaceRank;
 
     // No-argument constructor
     public TeamEstimatedMetrics() {
     }
 
     // Constructor with all fields
-    public TeamEstimatedMetrics(int teamId, String teamName, int gp, int wins, int losses, float winPct, float minutes,
-                                float estimatedOffensiveRating, float estimatedDefensiveRating, float estimatedNetRating,
-                                float estimatedPace, float estimatedAssistRatio, float estimatedOffensiveReboundPct,
-                                float estimatedDefensiveReboundPct, float estimatedReboundPct, float estimatedTurnoverPct,
-                                int gpRank, int winRank, int lossRank, int winPctRank, int minRank, int estimatedOffensiveRatingRank,
-                                int estimatedDefensiveRatingRank, int estimatedNetRatingRank, int estimatedAssistRatioRank,
-                                int estimatedOffensiveReboundPctRank, int estimatedDefensiveReboundPctRank, int estimatedReboundPctRank,
-                                int estimatedTurnoverPctRank, int estimatedPaceRank) {
+    public TeamEstimatedMetrics(Integer teamId, String teamName, Integer gp, Integer wins, Integer losses, Double winPct, Double minutes,
+                                Double estimatedOffensiveRating, Double estimatedDefensiveRating, Double estimatedNetRating,
+                                Double estimatedPace, Double estimatedAssistRatio, Double estimatedOffensiveReboundPct,
+                                Double estimatedDefensiveReboundPct, Double estimatedReboundPct, Double estimatedTurnoverPct,
+                                Integer gpRank, Integer winRank, Integer lossRank, Integer winPctRank, Integer minRank, Integer estimatedOffensiveRatingRank,
+                                Integer estimatedDefensiveRatingRank, Integer estimatedNetRatingRank, Integer estimatedAssistRatioRank,
+                                Integer estimatedOffensiveReboundPctRank, Integer estimatedDefensiveReboundPctRank, Integer estimatedReboundPctRank,
+                                Integer estimatedTurnoverPctRank, Integer estimatedPaceRank) {
         this.teamId = teamId;
         this.teamName = teamName;
         this.gp = gp;
@@ -148,11 +148,11 @@ public class TeamEstimatedMetrics {
 
     // Getters and Setters
 
-    public int getTeamId() {
+    public Integer getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(Integer teamId) {
         this.teamId = teamId;
     }
 
@@ -164,227 +164,227 @@ public class TeamEstimatedMetrics {
         this.teamName = teamName;
     }
 
-    public int getGp() {
+    public Integer getGp() {
         return gp;
     }
 
-    public void setGp(int gp) {
+    public void setGp(Integer gp) {
         this.gp = gp;
     }
 
-    public int getWins() {
+    public Integer getWins() {
         return wins;
     }
 
-    public void setWins(int wins) {
+    public void setWins(Integer wins) {
         this.wins = wins;
     }
 
-    public int getLosses() {
+    public Integer getLosses() {
         return losses;
     }
 
-    public void setLosses(int losses) {
+    public void setLosses(Integer losses) {
         this.losses = losses;
     }
 
-    public float getWinPct() {
+    public Double getWinPct() {
         return winPct;
     }
 
-    public void setWinPct(float winPct) {
+    public void setWinPct(Double winPct) {
         this.winPct = winPct;
     }
 
-    public float getMinutes() {
+    public Double getMinutes() {
         return minutes;
     }
 
-    public void setMinutes(float minutes) {
+    public void setMinutes(Double minutes) {
         this.minutes = minutes;
     }
 
-    public float getEstimatedOffensiveRating() {
+    public Double getEstimatedOffensiveRating() {
         return estimatedOffensiveRating;
     }
 
-    public void setEstimatedOffensiveRating(float estimatedOffensiveRating) {
+    public void setEstimatedOffensiveRating(Double estimatedOffensiveRating) {
         this.estimatedOffensiveRating = estimatedOffensiveRating;
     }
 
-    public float getEstimatedDefensiveRating() {
+    public Double getEstimatedDefensiveRating() {
         return estimatedDefensiveRating;
     }
 
-    public void setEstimatedDefensiveRating(float estimatedDefensiveRating) {
+    public void setEstimatedDefensiveRating(Double estimatedDefensiveRating) {
         this.estimatedDefensiveRating = estimatedDefensiveRating;
     }
 
-    public float getEstimatedNetRating() {
+    public Double getEstimatedNetRating() {
         return estimatedNetRating;
     }
 
-    public void setEstimatedNetRating(float estimatedNetRating) {
+    public void setEstimatedNetRating(Double estimatedNetRating) {
         this.estimatedNetRating = estimatedNetRating;
     }
 
-    public float getEstimatedPace() {
+    public Double getEstimatedPace() {
         return estimatedPace;
     }
 
-    public void setEstimatedPace(float estimatedPace) {
+    public void setEstimatedPace(Double estimatedPace) {
         this.estimatedPace = estimatedPace;
     }
 
-    public float getEstimatedAssistRatio() {
+    public Double getEstimatedAssistRatio() {
         return estimatedAssistRatio;
     }
 
-    public void setEstimatedAssistRatio(float estimatedAssistRatio) {
+    public void setEstimatedAssistRatio(Double estimatedAssistRatio) {
         this.estimatedAssistRatio = estimatedAssistRatio;
     }
 
-    public float getEstimatedOffensiveReboundPct() {
+    public Double getEstimatedOffensiveReboundPct() {
         return estimatedOffensiveReboundPct;
     }
 
-    public void setEstimatedOffensiveReboundPct(float estimatedOffensiveReboundPct) {
+    public void setEstimatedOffensiveReboundPct(Double estimatedOffensiveReboundPct) {
         this.estimatedOffensiveReboundPct = estimatedOffensiveReboundPct;
     }
 
-    public float getEstimatedDefensiveReboundPct() {
+    public Double getEstimatedDefensiveReboundPct() {
         return estimatedDefensiveReboundPct;
     }
 
-    public void setEstimatedDefensiveReboundPct(float estimatedDefensiveReboundPct) {
+    public void setEstimatedDefensiveReboundPct(Double estimatedDefensiveReboundPct) {
         this.estimatedDefensiveReboundPct = estimatedDefensiveReboundPct;
     }
 
-    public float getEstimatedReboundPct() {
+    public Double getEstimatedReboundPct() {
         return estimatedReboundPct;
     }
 
-    public void setEstimatedReboundPct(float estimatedReboundPct) {
+    public void setEstimatedReboundPct(Double estimatedReboundPct) {
         this.estimatedReboundPct = estimatedReboundPct;
     }
 
-    public float getEstimatedTurnoverPct() {
+    public Double getEstimatedTurnoverPct() {
         return estimatedTurnoverPct;
     }
 
-    public void setEstimatedTurnoverPct(float estimatedTurnoverPct) {
+    public void setEstimatedTurnoverPct(Double estimatedTurnoverPct) {
         this.estimatedTurnoverPct = estimatedTurnoverPct;
     }
 
-    public int getGpRank() {
+    public Integer getGpRank() {
         return gpRank;
     }
 
-    public void setGpRank(int gpRank) {
+    public void setGpRank(Integer gpRank) {
         this.gpRank = gpRank;
     }
 
-    public int getWinRank() {
+    public Integer getWinRank() {
         return winRank;
     }
 
-    public void setWinRank(int winRank) {
+    public void setWinRank(Integer winRank) {
         this.winRank = winRank;
     }
 
-    public int getLossRank() {
+    public Integer getLossRank() {
         return lossRank;
     }
 
-    public void setLossRank(int lossRank) {
+    public void setLossRank(Integer lossRank) {
         this.lossRank = lossRank;
     }
 
-    public int getWinPctRank() {
+    public Integer getWinPctRank() {
         return winPctRank;
     }
 
-    public void setWinPctRank(int winPctRank) {
+    public void setWinPctRank(Integer winPctRank) {
         this.winPctRank = winPctRank;
     }
 
-    public int getMinRank() {
+    public Integer getMinRank() {
         return minRank;
     }
 
-    public void setMinRank(int minRank) {
+    public void setMinRank(Integer minRank) {
         this.minRank = minRank;
     }
 
-    public int getEstimatedOffensiveRatingRank() {
+    public Integer getEstimatedOffensiveRatingRank() {
         return estimatedOffensiveRatingRank;
     }
 
-    public void setEstimatedOffensiveRatingRank(int estimatedOffensiveRatingRank) {
+    public void setEstimatedOffensiveRatingRank(Integer estimatedOffensiveRatingRank) {
         this.estimatedOffensiveRatingRank = estimatedOffensiveRatingRank;
     }
 
-    public int getEstimatedDefensiveRatingRank() {
+    public Integer getEstimatedDefensiveRatingRank() {
         return estimatedDefensiveRatingRank;
     }
 
-    public void setEstimatedDefensiveRatingRank(int estimatedDefensiveRatingRank) {
+    public void setEstimatedDefensiveRatingRank(Integer estimatedDefensiveRatingRank) {
         this.estimatedDefensiveRatingRank = estimatedDefensiveRatingRank;
     }
 
-    public int getEstimatedNetRatingRank() {
+    public Integer getEstimatedNetRatingRank() {
         return estimatedNetRatingRank;
     }
 
-    public void setEstimatedNetRatingRank(int estimatedNetRatingRank) {
+    public void setEstimatedNetRatingRank(Integer estimatedNetRatingRank) {
         this.estimatedNetRatingRank = estimatedNetRatingRank;
     }
 
-    public int getEstimatedAssistRatioRank() {
+    public Integer getEstimatedAssistRatioRank() {
         return estimatedAssistRatioRank;
     }
 
-    public void setEstimatedAssistRatioRank(int estimatedAssistRatioRank) {
+    public void setEstimatedAssistRatioRank(Integer estimatedAssistRatioRank) {
         this.estimatedAssistRatioRank = estimatedAssistRatioRank;
     }
 
-    public int getEstimatedOffensiveReboundPctRank() {
+    public Integer getEstimatedOffensiveReboundPctRank() {
         return estimatedOffensiveReboundPctRank;
     }
 
-    public void setEstimatedOffensiveReboundPctRank(int estimatedOffensiveReboundPctRank) {
+    public void setEstimatedOffensiveReboundPctRank(Integer estimatedOffensiveReboundPctRank) {
         this.estimatedOffensiveReboundPctRank = estimatedOffensiveReboundPctRank;
     }
 
-    public int getEstimatedDefensiveReboundPctRank() {
+    public Integer getEstimatedDefensiveReboundPctRank() {
         return estimatedDefensiveReboundPctRank;
     }
 
-    public void setEstimatedDefensiveReboundPctRank(int estimatedDefensiveReboundPctRank) {
+    public void setEstimatedDefensiveReboundPctRank(Integer estimatedDefensiveReboundPctRank) {
         this.estimatedDefensiveReboundPctRank = estimatedDefensiveReboundPctRank;
     }
 
-    public int getEstimatedReboundPctRank() {
+    public Integer getEstimatedReboundPctRank() {
         return estimatedReboundPctRank;
     }
 
-    public void setEstimatedReboundPctRank(int estimatedReboundPctRank) {
+    public void setEstimatedReboundPctRank(Integer estimatedReboundPctRank) {
         this.estimatedReboundPctRank = estimatedReboundPctRank;
     }
 
-    public int getEstimatedTurnoverPctRank() {
+    public Integer getEstimatedTurnoverPctRank() {
         return estimatedTurnoverPctRank;
     }
 
-    public void setEstimatedTurnoverPctRank(int estimatedTurnoverPctRank) {
+    public void setEstimatedTurnoverPctRank(Integer estimatedTurnoverPctRank) {
         this.estimatedTurnoverPctRank = estimatedTurnoverPctRank;
     }
 
-    public int getEstimatedPaceRank() {
+    public Integer getEstimatedPaceRank() {
         return estimatedPaceRank;
     }
 
-    public void setEstimatedPaceRank(int estimatedPaceRank) {
+    public void setEstimatedPaceRank(Integer estimatedPaceRank) {
         this.estimatedPaceRank = estimatedPaceRank;
     }
 }

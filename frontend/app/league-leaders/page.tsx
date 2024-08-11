@@ -107,14 +107,13 @@ const LeagueLeadersPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="title-container">
-        <h1 className="text-4xl font-extrabold text-center text-gray-800">League Leaders</h1>
+        <h1 className="text-4xl font-extrabold text-center text-#333333-800">League Leaders</h1>
       </div>
 
-      {/* Top Players Section */}
       <div className="top-players-section bg-white p-6 rounded-lg shadow-lg mb-8">
         <h2 className="text-3xl font-semibold mb-4 text-center">Top Players</h2>
         <table className="min-w-full text-gray-900 rounded-lg overflow-hidden shadow-md border-collapse">
-          <thead className="bg-black text-white">
+          <thead className="bg-gray text-white">
             <tr>
               <th className="py-3 px-4 text-left">Rank</th>
               <th className="py-3 px-4 text-left">Player</th>
@@ -133,7 +132,7 @@ const LeagueLeadersPage: React.FC = () => {
                     alt={player.playerName}
                     className="w-10 h-10 object-cover rounded-full mr-4"
                   />
-                  <Link href={`/players/${player.id}`} className="text-black hover:underline flex items-center space-x-2">
+                  <Link href={`/players/${player.id}`} className="text-#333333 hover:underline flex items-center space-x-2">
                     <span>{player.playerName}</span>
                   </Link>
                 </td>
@@ -146,7 +145,7 @@ const LeagueLeadersPage: React.FC = () => {
         </table>
         <div className="flex justify-center mt-4">
           <Link href="/top-players">
-            <button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-1.5 px-3 rounded-lg transition">
+          <button className="bg-[#333333] hover:bg-[#1a1a1a] text-white font-semibold py-1.5 px-3 rounded-lg transition">
               See More
             </button>
           </Link>
@@ -157,7 +156,7 @@ const LeagueLeadersPage: React.FC = () => {
         {categories.map((category) => (
           <div key={category.name} className="category-card p-4 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold mb-2 gradient-title text-center">{category.label}</h2>
-            <div className="flex justify-between mb-2 text-black text-sm text-center">
+            <div className="flex justify-between mb-2 text-#333333 text-sm text-center">
               <span>Rank</span>
               <span>Name</span>
               <span>{category.unit}</span>
@@ -166,7 +165,7 @@ const LeagueLeadersPage: React.FC = () => {
               {playersByCategory[category.name]?.slice(0, 5).map((player, index) => (
                 <li key={index} className="flex justify-between py-2 border-b last:border-b-0">
                   <span>{index + 1}</span>
-                  <Link href={`/players/${player.id}`} className="text-black hover:underline flex items-center space-x-2">
+                  <Link href={`/players/${player.id}`} className="text-#333333 hover:underline flex items-center space-x-2">
                     <img
                       src={player.photoUrl || '/placeholder.png'}
                       alt={player.playerName}
@@ -210,7 +209,7 @@ const LeagueLeadersPage: React.FC = () => {
         }
         .top-players-section {
           border-radius: 1rem;
-          border: 4px solid gold;
+          border: 4px solid #00BFA6;
           background-color: white;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -223,7 +222,7 @@ const LeagueLeadersPage: React.FC = () => {
           padding: 0.75rem;
         }
         th {
-          background-color: black;
+          background-color: #333333;
           color: white;
         }
         tbody tr {
@@ -248,23 +247,26 @@ const LeagueLeadersPage: React.FC = () => {
           border-bottom: 0;
         }
         .gradient-title {
-          background: linear-gradient(to right, #4f46e5, #9333ea);
+          background: linear-gradient(to right, #00BFA6, #00796b);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
+        
         button {
           padding: 0.5rem 1rem;
           font-size: 1rem;
           border-radius: 1rem;
           font-weight: 600;
           transition: all 0.3s ease;
-          background: linear-gradient(to right, #4f46e5, #9333ea);
+          background: #33333; 
           color: white;
         }
+        
         button:hover {
-          background: linear-gradient(to right, #4f46e5, #9333ea);
+          background: linear-gradient(to right, #00997f, #005b4f); 
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
+        
       `}</style>
     </div>
   );

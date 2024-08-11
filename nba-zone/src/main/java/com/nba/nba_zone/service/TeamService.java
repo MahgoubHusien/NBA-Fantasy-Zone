@@ -29,7 +29,7 @@ public class TeamService {
         return teamStatsRepository.findAll();
     }
 
-    public TeamStats getTeamStatsById(int teamId) {
+    public TeamStats getTeamStatsById(Integer teamId) {
         return teamStatsRepository.findById(teamId).orElse(null);
     }
 
@@ -37,7 +37,7 @@ public class TeamService {
         return teamStatsRepository.findByTeamName(teamName);
     }
 
-    public List<TeamStats> getTeamStatsByWinPctGreaterThan(float winPct) {
+    public List<TeamStats> getTeamStatsByWinPctGreaterThan(Double winPct) {
         return teamStatsRepository.findByWinPctGreaterThan(winPct);
     }
 
@@ -45,7 +45,7 @@ public class TeamService {
         return teamStatsRepository.save(teamStats);
     }
 
-    public void deleteTeamStats(int teamId) {
+    public void deleteTeamStats(Integer teamId) {
         teamStatsRepository.deleteById(teamId);
     }
 
@@ -55,7 +55,7 @@ public class TeamService {
         return teamEstimatedMetricsRepository.findAll();
     }
 
-    public TeamEstimatedMetrics getTeamEstimatedMetricsById(int teamId) {
+    public TeamEstimatedMetrics getTeamEstimatedMetricsById(Integer teamId) {
         return teamEstimatedMetricsRepository.findById(teamId).orElse(null);
     }
 
@@ -63,7 +63,7 @@ public class TeamService {
         return teamEstimatedMetricsRepository.findByTeamName(teamName);
     }
 
-    public List<TeamEstimatedMetrics> getTeamEstimatedMetricsByOffensiveRatingGreaterThan(float estimatedOffensiveRating) {
+    public List<TeamEstimatedMetrics> getTeamEstimatedMetricsByOffensiveRatingGreaterThan(Double estimatedOffensiveRating) {
         return teamEstimatedMetricsRepository.findByEstimatedOffensiveRatingGreaterThan(estimatedOffensiveRating);
     }
 
@@ -71,7 +71,7 @@ public class TeamService {
         return teamEstimatedMetricsRepository.save(teamEstimatedMetrics);
     }
 
-    public void deleteTeamEstimatedMetrics(int teamId) {
+    public void deleteTeamEstimatedMetrics(Integer teamId) {
         teamEstimatedMetricsRepository.deleteById(teamId);
     }
 
@@ -81,7 +81,7 @@ public class TeamService {
         return standingsRepository.findAll();
     }
 
-    public Standings getStandingsById(int teamId) {
+    public Standings getStandingsById(Integer teamId) {
         return standingsRepository.findById(teamId).orElse(null);
     }
 
@@ -97,7 +97,7 @@ public class TeamService {
         return standingsRepository.findAllByOrderByWinPctDesc();
     }
 
-    public List<Standings> getStandingsByClinchedPlayoffBirth(int clinchedPlayoffBirth) {
+    public List<Standings> getStandingsByClinchedPlayoffBirth(Integer clinchedPlayoffBirth) {
         return standingsRepository.findByClinchedPlayoffBirth(clinchedPlayoffBirth);
     }
 
@@ -105,7 +105,7 @@ public class TeamService {
         return standingsRepository.save(standings);
     }
 
-    public void deleteStandings(int teamId) {
+    public void deleteStandings(Integer teamId) {
         standingsRepository.deleteById(teamId);
     }
 }

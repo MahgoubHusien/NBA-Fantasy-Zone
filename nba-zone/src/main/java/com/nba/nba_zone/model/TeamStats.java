@@ -11,166 +11,166 @@ public class TeamStats {
 
     @Id
     @Column(name = "team_id")
-    private int teamId;
+    private Integer teamId;
 
     @Column(name = "team_name")
     private String teamName;
 
     @Column(name = "gp")
-    private int gp;
+    private Integer gp;
 
     @Column(name = "w")
-    private int wins;
+    private Integer wins;
 
     @Column(name = "l")
-    private int losses;
+    private Integer losses;
 
     @Column(name = "w_pct")
-    private float winPct;
+    private Double winPct;
 
     @Column(name = "min")
-    private float minutes;
+    private Double minutes;
 
     @Column(name = "fgm")
-    private float fieldGoalsMade;
+    private Double fieldGoalsMade;
 
     @Column(name = "fga")
-    private float fieldGoalsAttempted;
+    private Double fieldGoalsAttempted;
 
     @Column(name = "fg_pct")
-    private float fieldGoalPct;
+    private Double fieldGoalPct;
 
     @Column(name = "fg3m")
-    private float threePointersMade;
+    private Double threePointersMade;
 
     @Column(name = "fg3a")
-    private float threePointersAttempted;
+    private Double threePointersAttempted;
 
     @Column(name = "fg3_pct")
-    private float threePointPct;
+    private Double threePointPct;
 
     @Column(name = "ftm")
-    private float freeThrowsMade;
+    private Double freeThrowsMade;
 
     @Column(name = "fta")
-    private float freeThrowsAttempted;
+    private Double freeThrowsAttempted;
 
     @Column(name = "ft_pct")
-    private float freeThrowPct;
+    private Double freeThrowPct;
 
     @Column(name = "oreb")
-    private float offensiveRebounds;
+    private Double offensiveRebounds;
 
     @Column(name = "dreb")
-    private float defensiveRebounds;
+    private Double defensiveRebounds;
 
     @Column(name = "reb")
-    private float totalRebounds;
+    private Double totalRebounds;
 
     @Column(name = "ast")
-    private float assists;
+    private Double assists;
 
     @Column(name = "tov")
-    private float turnovers;
+    private Double turnovers;
 
     @Column(name = "stl")
-    private float steals;
+    private Double steals;
 
     @Column(name = "blk")
-    private float blocks;
+    private Double blocks;
 
     @Column(name = "blka")
-    private float blocksAgainst;
+    private Double blocksAgainst;
 
     @Column(name = "pf")
-    private float personalFouls;
+    private Double personalFouls;
 
     @Column(name = "pfd")
-    private float personalFoulsDrawn;
+    private Double personalFoulsDrawn;
 
     @Column(name = "pts")
-    private float points;
+    private Double points;
 
     @Column(name = "plus_minus")
-    private float plusMinus;
+    private Double plusMinus;
 
     @Column(name = "gp_rank")
-    private int gpRank;
+    private Integer gpRank;
 
     @Column(name = "w_rank")
-    private int winRank;
+    private Integer winRank;
 
     @Column(name = "l_rank")
-    private int lossRank;
+    private Integer lossRank;
 
     @Column(name = "w_pct_rank")
-    private float winPctRank;
+    private Double winPctRank;
 
     @Column(name = "min_rank")
-    private int minRank;
+    private Integer minRank;
 
     @Column(name = "fgm_rank")
-    private int fieldGoalsMadeRank;
+    private Integer fieldGoalsMadeRank;
 
     @Column(name = "fga_rank")
-    private int fieldGoalsAttemptedRank;
+    private Integer fieldGoalsAttemptedRank;
 
     @Column(name = "fg_pct_rank")
-    private float fieldGoalPctRank;
+    private Double fieldGoalPctRank;
 
     @Column(name = "fg3m_rank")
-    private int threePointersMadeRank;
+    private Integer threePointersMadeRank;
 
     @Column(name = "fg3a_rank")
-    private int threePointersAttemptedRank;
+    private Integer threePointersAttemptedRank;
 
     @Column(name = "fg3_pct_rank")
-    private float threePointPctRank;
+    private Double threePointPctRank;
 
     @Column(name = "ftm_rank")
-    private int freeThrowsMadeRank;
+    private Integer freeThrowsMadeRank;
 
     @Column(name = "fta_rank")
-    private int freeThrowsAttemptedRank;
+    private Integer freeThrowsAttemptedRank;
 
     @Column(name = "ft_pct_rank")
-    private float freeThrowPctRank;
+    private Double freeThrowPctRank;
 
     @Column(name = "oreb_rank")
-    private int offensiveReboundsRank;
+    private Integer offensiveReboundsRank;
 
     @Column(name = "dreb_rank")
-    private int defensiveReboundsRank;
+    private Integer defensiveReboundsRank;
 
     @Column(name = "reb_rank")
-    private int totalReboundsRank;
+    private Integer totalReboundsRank;
 
     @Column(name = "ast_rank")
-    private int assistsRank;
+    private Integer assistsRank;
 
     @Column(name = "tov_rank")
-    private int turnoversRank;
+    private Integer turnoversRank;
 
     @Column(name = "stl_rank")
-    private int stealsRank;
+    private Integer stealsRank;
 
     @Column(name = "blk_rank")
-    private int blocksRank;
+    private Integer blocksRank;
 
     @Column(name = "blka_rank")
-    private int blocksAgainstRank;
+    private Integer blocksAgainstRank;
 
     @Column(name = "pf_rank")
-    private int personalFoulsRank;
+    private Integer personalFoulsRank;
 
     @Column(name = "pfd_rank")
-    private int personalFoulsDrawnRank;
+    private Integer personalFoulsDrawnRank;
 
     @Column(name = "pts_rank")
-    private int pointsRank;
+    private Integer pointsRank;
 
     @Column(name = "plus_minus_rank")
-    private int plusMinusRank;
+    private Integer plusMinusRank;
 
     @Column(name = "cfid")
     private Integer cfid;
@@ -178,23 +178,26 @@ public class TeamStats {
     @Column(name = "cfparams")
     private String cfparams;
 
+    @Column(name = "logo_url")
+    private String logoUrl;
+
     // No-argument constructor
     public TeamStats() {
     }
 
     // Constructor with all fields
-    public TeamStats(int teamId, String teamName, int gp, int wins, int losses, float winPct, float minutes,
-                     float fieldGoalsMade, float fieldGoalsAttempted, float fieldGoalPct, float threePointersMade,
-                     float threePointersAttempted, float threePointPct, float freeThrowsMade, float freeThrowsAttempted,
-                     float freeThrowPct, float offensiveRebounds, float defensiveRebounds, float totalRebounds,
-                     float assists, float turnovers, float steals, float blocks, float blocksAgainst, float personalFouls,
-                     float personalFoulsDrawn, float points, float plusMinus, int gpRank, int winRank, int lossRank,
-                     float winPctRank, int minRank, int fieldGoalsMadeRank, int fieldGoalsAttemptedRank,
-                     float fieldGoalPctRank, int threePointersMadeRank, int threePointersAttemptedRank,
-                     float threePointPctRank, int freeThrowsMadeRank, int freeThrowsAttemptedRank, float freeThrowPctRank,
-                     int offensiveReboundsRank, int defensiveReboundsRank, int totalReboundsRank, int assistsRank,
-                     int turnoversRank, int stealsRank, int blocksRank, int blocksAgainstRank, int personalFoulsRank,
-                     int personalFoulsDrawnRank, int pointsRank, int plusMinusRank, Integer cfid, String cfparams) {
+    public TeamStats(Integer teamId, String teamName, Integer gp, Integer wins, Integer losses, Double winPct, Double minutes,
+                     Double fieldGoalsMade, Double fieldGoalsAttempted, Double fieldGoalPct, Double threePointersMade,
+                     Double threePointersAttempted, Double threePointPct, Double freeThrowsMade, Double freeThrowsAttempted,
+                     Double freeThrowPct, Double offensiveRebounds, Double defensiveRebounds, Double totalRebounds,
+                     Double assists, Double turnovers, Double steals, Double blocks, Double blocksAgainst, Double personalFouls,
+                     Double personalFoulsDrawn, Double points, Double plusMinus, Integer gpRank, Integer winRank, Integer lossRank,
+                     Double winPctRank, Integer minRank, Integer fieldGoalsMadeRank, Integer fieldGoalsAttemptedRank,
+                     Double fieldGoalPctRank, Integer threePointersMadeRank, Integer threePointersAttemptedRank,
+                     Double threePointPctRank, Integer freeThrowsMadeRank, Integer freeThrowsAttemptedRank, Double freeThrowPctRank,
+                     Integer offensiveReboundsRank, Integer defensiveReboundsRank, Integer totalReboundsRank, Integer assistsRank,
+                     Integer turnoversRank, Integer stealsRank, Integer blocksRank, Integer blocksAgainstRank, Integer personalFoulsRank,
+                     Integer personalFoulsDrawnRank, Integer pointsRank, Integer plusMinusRank, Integer cfid, String cfparams, String logoUrl) {
         this.teamId = teamId;
         this.teamName = teamName;
         this.gp = gp;
@@ -251,15 +254,16 @@ public class TeamStats {
         this.plusMinusRank = plusMinusRank;
         this.cfid = cfid;
         this.cfparams = cfparams;
+        this.logoUrl = logoUrl;
     }
 
     // Getters and Setters
 
-    public int getTeamId() {
+    public Integer getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(Integer teamId) {
         this.teamId = teamId;
     }
 
@@ -271,419 +275,419 @@ public class TeamStats {
         this.teamName = teamName;
     }
 
-    public int getGp() {
+    public Integer getGp() {
         return gp;
     }
 
-    public void setGp(int gp) {
+    public void setGp(Integer gp) {
         this.gp = gp;
     }
 
-    public int getWins() {
+    public Integer getWins() {
         return wins;
     }
 
-    public void setWins(int wins) {
+    public void setWins(Integer wins) {
         this.wins = wins;
     }
 
-    public int getLosses() {
+    public Integer getLosses() {
         return losses;
     }
 
-    public void setLosses(int losses) {
+    public void setLosses(Integer losses) {
         this.losses = losses;
     }
 
-    public float getWinPct() {
+    public Double getWinPct() {
         return winPct;
     }
 
-    public void setWinPct(float winPct) {
+    public void setWinPct(Double winPct) {
         this.winPct = winPct;
     }
 
-    public float getMinutes() {
+    public Double getMinutes() {
         return minutes;
     }
 
-    public void setMinutes(float minutes) {
+    public void setMinutes(Double minutes) {
         this.minutes = minutes;
     }
 
-    public float getFieldGoalsMade() {
+    public Double getFieldGoalsMade() {
         return fieldGoalsMade;
     }
 
-    public void setFieldGoalsMade(float fieldGoalsMade) {
+    public void setFieldGoalsMade(Double fieldGoalsMade) {
         this.fieldGoalsMade = fieldGoalsMade;
     }
 
-    public float getFieldGoalsAttempted() {
+    public Double getFieldGoalsAttempted() {
         return fieldGoalsAttempted;
     }
 
-    public void setFieldGoalsAttempted(float fieldGoalsAttempted) {
+    public void setFieldGoalsAttempted(Double fieldGoalsAttempted) {
         this.fieldGoalsAttempted = fieldGoalsAttempted;
     }
 
-    public float getFieldGoalPct() {
+    public Double getFieldGoalPct() {
         return fieldGoalPct;
     }
 
-    public void setFieldGoalPct(float fieldGoalPct) {
+    public void setFieldGoalPct(Double fieldGoalPct) {
         this.fieldGoalPct = fieldGoalPct;
     }
 
-    public float getThreePointersMade() {
+    public Double getThreePointersMade() {
         return threePointersMade;
     }
 
-    public void setThreePointersMade(float threePointersMade) {
+    public void setThreePointersMade(Double threePointersMade) {
         this.threePointersMade = threePointersMade;
     }
 
-    public float getThreePointersAttempted() {
+    public Double getThreePointersAttempted() {
         return threePointersAttempted;
     }
 
-    public void setThreePointersAttempted(float threePointersAttempted) {
+    public void setThreePointersAttempted(Double threePointersAttempted) {
         this.threePointersAttempted = threePointersAttempted;
     }
 
-    public float getThreePointPct() {
+    public Double getThreePointPct() {
         return threePointPct;
     }
 
-    public void setThreePointPct(float threePointPct) {
+    public void setThreePointPct(Double threePointPct) {
         this.threePointPct = threePointPct;
     }
 
-    public float getFreeThrowsMade() {
+    public Double getFreeThrowsMade() {
         return freeThrowsMade;
     }
 
-    public void setFreeThrowsMade(float freeThrowsMade) {
+    public void setFreeThrowsMade(Double freeThrowsMade) {
         this.freeThrowsMade = freeThrowsMade;
     }
 
-    public float getFreeThrowsAttempted() {
+    public Double getFreeThrowsAttempted() {
         return freeThrowsAttempted;
     }
 
-    public void setFreeThrowsAttempted(float freeThrowsAttempted) {
+    public void setFreeThrowsAttempted(Double freeThrowsAttempted) {
         this.freeThrowsAttempted = freeThrowsAttempted;
     }
 
-    public float getFreeThrowPct() {
+    public Double getFreeThrowPct() {
         return freeThrowPct;
     }
 
-    public void setFreeThrowPct(float freeThrowPct) {
+    public void setFreeThrowPct(Double freeThrowPct) {
         this.freeThrowPct = freeThrowPct;
     }
 
-    public float getOffensiveRebounds() {
+    public Double getOffensiveRebounds() {
         return offensiveRebounds;
     }
 
-    public void setOffensiveRebounds(float offensiveRebounds) {
+    public void setOffensiveRebounds(Double offensiveRebounds) {
         this.offensiveRebounds = offensiveRebounds;
     }
 
-    public float getDefensiveRebounds() {
+    public Double getDefensiveRebounds() {
         return defensiveRebounds;
     }
 
-    public void setDefensiveRebounds(float defensiveRebounds) {
+    public void setDefensiveRebounds(Double defensiveRebounds) {
         this.defensiveRebounds = defensiveRebounds;
     }
 
-    public float getTotalRebounds() {
+    public Double getTotalRebounds() {
         return totalRebounds;
     }
 
-    public void setTotalRebounds(float totalRebounds) {
+    public void setTotalRebounds(Double totalRebounds) {
         this.totalRebounds = totalRebounds;
     }
 
-    public float getAssists() {
+    public Double getAssists() {
         return assists;
     }
 
-    public void setAssists(float assists) {
+    public void setAssists(Double assists) {
         this.assists = assists;
     }
 
-    public float getTurnovers() {
+    public Double getTurnovers() {
         return turnovers;
     }
 
-    public void setTurnovers(float turnovers) {
+    public void setTurnovers(Double turnovers) {
         this.turnovers = turnovers;
     }
 
-    public float getSteals() {
+    public Double getSteals() {
         return steals;
     }
 
-    public void setSteals(float steals) {
+    public void setSteals(Double steals) {
         this.steals = steals;
     }
 
-    public float getBlocks() {
+    public Double getBlocks() {
         return blocks;
     }
 
-    public void setBlocks(float blocks) {
+    public void setBlocks(Double blocks) {
         this.blocks = blocks;
     }
 
-    public float getBlocksAgainst() {
+    public Double getBlocksAgainst() {
         return blocksAgainst;
     }
 
-    public void setBlocksAgainst(float blocksAgainst) {
+    public void setBlocksAgainst(Double blocksAgainst) {
         this.blocksAgainst = blocksAgainst;
     }
 
-    public float getPersonalFouls() {
+    public Double getPersonalFouls() {
         return personalFouls;
     }
 
-    public void setPersonalFouls(float personalFouls) {
+    public void setPersonalFouls(Double personalFouls) {
         this.personalFouls = personalFouls;
     }
 
-    public float getPersonalFoulsDrawn() {
+    public Double getPersonalFoulsDrawn() {
         return personalFoulsDrawn;
     }
 
-    public void setPersonalFoulsDrawn(float personalFoulsDrawn) {
+    public void setPersonalFoulsDrawn(Double personalFoulsDrawn) {
         this.personalFoulsDrawn = personalFoulsDrawn;
     }
 
-    public float getPoints() {
+    public Double getPoints() {
         return points;
     }
 
-    public void setPoints(float points) {
+    public void setPoints(Double points) {
         this.points = points;
     }
 
-    public float getPlusMinus() {
+    public Double getPlusMinus() {
         return plusMinus;
     }
 
-    public void setPlusMinus(float plusMinus) {
+    public void setPlusMinus(Double plusMinus) {
         this.plusMinus = plusMinus;
     }
 
-    public int getGpRank() {
+    public Integer getGpRank() {
         return gpRank;
     }
 
-    public void setGpRank(int gpRank) {
+    public void setGpRank(Integer gpRank) {
         this.gpRank = gpRank;
     }
 
-    public int getWinRank() {
+    public Integer getWinRank() {
         return winRank;
     }
 
-    public void setWinRank(int winRank) {
+    public void setWinRank(Integer winRank) {
         this.winRank = winRank;
     }
 
-    public int getLossRank() {
+    public Integer getLossRank() {
         return lossRank;
     }
 
-    public void setLossRank(int lossRank) {
+    public void setLossRank(Integer lossRank) {
         this.lossRank = lossRank;
     }
 
-    public float getWinPctRank() {
+    public Double getWinPctRank() {
         return winPctRank;
     }
 
-    public void setWinPctRank(float winPctRank) {
+    public void setWinPctRank(Double winPctRank) {
         this.winPctRank = winPctRank;
     }
 
-    public int getMinRank() {
+    public Integer getMinRank() {
         return minRank;
     }
 
-    public void setMinRank(int minRank) {
+    public void setMinRank(Integer minRank) {
         this.minRank = minRank;
     }
 
-    public int getFieldGoalsMadeRank() {
+    public Integer getFieldGoalsMadeRank() {
         return fieldGoalsMadeRank;
     }
 
-    public void setFieldGoalsMadeRank(int fieldGoalsMadeRank) {
+    public void setFieldGoalsMadeRank(Integer fieldGoalsMadeRank) {
         this.fieldGoalsMadeRank = fieldGoalsMadeRank;
     }
 
-    public int getFieldGoalsAttemptedRank() {
+    public Integer getFieldGoalsAttemptedRank() {
         return fieldGoalsAttemptedRank;
     }
 
-    public void setFieldGoalsAttemptedRank(int fieldGoalsAttemptedRank) {
+    public void setFieldGoalsAttemptedRank(Integer fieldGoalsAttemptedRank) {
         this.fieldGoalsAttemptedRank = fieldGoalsAttemptedRank;
     }
 
-    public float getFieldGoalPctRank() {
+    public Double getFieldGoalPctRank() {
         return fieldGoalPctRank;
     }
 
-    public void setFieldGoalPctRank(float fieldGoalPctRank) {
+    public void setFieldGoalPctRank(Double fieldGoalPctRank) {
         this.fieldGoalPctRank = fieldGoalPctRank;
     }
 
-    public int getThreePointersMadeRank() {
+    public Integer getThreePointersMadeRank() {
         return threePointersMadeRank;
     }
 
-    public void setThreePointersMadeRank(int threePointersMadeRank) {
+    public void setThreePointersMadeRank(Integer threePointersMadeRank) {
         this.threePointersMadeRank = threePointersMadeRank;
     }
 
-    public int getThreePointersAttemptedRank() {
+    public Integer getThreePointersAttemptedRank() {
         return threePointersAttemptedRank;
     }
 
-    public void setThreePointersAttemptedRank(int threePointersAttemptedRank) {
+    public void setThreePointersAttemptedRank(Integer threePointersAttemptedRank) {
         this.threePointersAttemptedRank = threePointersAttemptedRank;
     }
 
-    public float getThreePointPctRank() {
+    public Double getThreePointPctRank() {
         return threePointPctRank;
     }
 
-    public void setThreePointPctRank(float threePointPctRank) {
+    public void setThreePointPctRank(Double threePointPctRank) {
         this.threePointPctRank = threePointPctRank;
     }
 
-    public int getFreeThrowsMadeRank() {
+    public Integer getFreeThrowsMadeRank() {
         return freeThrowsMadeRank;
     }
 
-    public void setFreeThrowsMadeRank(int freeThrowsMadeRank) {
+    public void setFreeThrowsMadeRank(Integer freeThrowsMadeRank) {
         this.freeThrowsMadeRank = freeThrowsMadeRank;
     }
 
-    public int getFreeThrowsAttemptedRank() {
+    public Integer getFreeThrowsAttemptedRank() {
         return freeThrowsAttemptedRank;
     }
 
-    public void setFreeThrowsAttemptedRank(int freeThrowsAttemptedRank) {
+    public void setFreeThrowsAttemptedRank(Integer freeThrowsAttemptedRank) {
         this.freeThrowsAttemptedRank = freeThrowsAttemptedRank;
     }
 
-    public float getFreeThrowPctRank() {
+    public Double getFreeThrowPctRank() {
         return freeThrowPctRank;
     }
 
-    public void setFreeThrowPctRank(float freeThrowPctRank) {
+    public void setFreeThrowPctRank(Double freeThrowPctRank) {
         this.freeThrowPctRank = freeThrowPctRank;
     }
 
-    public int getOffensiveReboundsRank() {
+    public Integer getOffensiveReboundsRank() {
         return offensiveReboundsRank;
     }
 
-    public void setOffensiveReboundsRank(int offensiveReboundsRank) {
+    public void setOffensiveReboundsRank(Integer offensiveReboundsRank) {
         this.offensiveReboundsRank = offensiveReboundsRank;
     }
 
-    public int getDefensiveReboundsRank() {
+    public Integer getDefensiveReboundsRank() {
         return defensiveReboundsRank;
     }
 
-    public void setDefensiveReboundsRank(int defensiveReboundsRank) {
+    public void setDefensiveReboundsRank(Integer defensiveReboundsRank) {
         this.defensiveReboundsRank = defensiveReboundsRank;
     }
 
-    public int getTotalReboundsRank() {
+    public Integer getTotalReboundsRank() {
         return totalReboundsRank;
     }
 
-    public void setTotalReboundsRank(int totalReboundsRank) {
+    public void setTotalReboundsRank(Integer totalReboundsRank) {
         this.totalReboundsRank = totalReboundsRank;
     }
 
-    public int getAssistsRank() {
+    public Integer getAssistsRank() {
         return assistsRank;
     }
 
-    public void setAssistsRank(int assistsRank) {
+    public void setAssistsRank(Integer assistsRank) {
         this.assistsRank = assistsRank;
     }
 
-    public int getTurnoversRank() {
+    public Integer getTurnoversRank() {
         return turnoversRank;
     }
 
-    public void setTurnoversRank(int turnoversRank) {
+    public void setTurnoversRank(Integer turnoversRank) {
         this.turnoversRank = turnoversRank;
     }
 
-    public int getStealsRank() {
+    public Integer getStealsRank() {
         return stealsRank;
     }
 
-    public void setStealsRank(int stealsRank) {
+    public void setStealsRank(Integer stealsRank) {
         this.stealsRank = stealsRank;
     }
 
-    public int getBlocksRank() {
+    public Integer getBlocksRank() {
         return blocksRank;
     }
 
-    public void setBlocksRank(int blocksRank) {
+    public void setBlocksRank(Integer blocksRank) {
         this.blocksRank = blocksRank;
     }
 
-    public int getBlocksAgainstRank() {
+    public Integer getBlocksAgainstRank() {
         return blocksAgainstRank;
     }
 
-    public void setBlocksAgainstRank(int blocksAgainstRank) {
+    public void setBlocksAgainstRank(Integer blocksAgainstRank) {
         this.blocksAgainstRank = blocksAgainstRank;
     }
 
-    public int getPersonalFoulsRank() {
+    public Integer getPersonalFoulsRank() {
         return personalFoulsRank;
     }
 
-    public void setPersonalFoulsRank(int personalFoulsRank) {
+    public void setPersonalFoulsRank(Integer personalFoulsRank) {
         this.personalFoulsRank = personalFoulsRank;
     }
 
-    public int getPersonalFoulsDrawnRank() {
+    public Integer getPersonalFoulsDrawnRank() {
         return personalFoulsDrawnRank;
     }
 
-    public void setPersonalFoulsDrawnRank(int personalFoulsDrawnRank) {
+    public void setPersonalFoulsDrawnRank(Integer personalFoulsDrawnRank) {
         this.personalFoulsDrawnRank = personalFoulsDrawnRank;
     }
 
-    public int getPointsRank() {
+    public Integer getPointsRank() {
         return pointsRank;
     }
 
-    public void setPointsRank(int pointsRank) {
+    public void setPointsRank(Integer pointsRank) {
         this.pointsRank = pointsRank;
     }
 
-    public int getPlusMinusRank() {
+    public Integer getPlusMinusRank() {
         return plusMinusRank;
     }
 
-    public void setPlusMinusRank(int plusMinusRank) {
+    public void setPlusMinusRank(Integer plusMinusRank) {
         this.plusMinusRank = plusMinusRank;
     }
 
@@ -702,4 +706,9 @@ public class TeamStats {
     public void setCfparams(String cfparams) {
         this.cfparams = cfparams;
     }
+
+    public String getLogoUrl() { return logoUrl;}
+
+    public void setLogoUrl(String logoUrl) { this.logoUrl = logoUrl;}
 }
+

@@ -11,7 +11,7 @@ public class Standings {
 
     @Id
     @Column(name = "team_id")
-    private int teamId;
+    private Integer teamId;
 
     @Column(name = "league_id")
     private String leagueId;
@@ -35,7 +35,7 @@ public class Standings {
     private String conferenceRecord;
 
     @Column(name = "playoff_rank")
-    private int playoffRank;
+    private Integer playoffRank;
 
     @Column(name = "clinch_indicator")
     private String clinchIndicator;
@@ -47,16 +47,16 @@ public class Standings {
     private String divisionRecord;
 
     @Column(name = "division_rank")
-    private int divisionRank;
+    private Integer divisionRank;
 
     @Column(name = "wins")
-    private int wins;
+    private Integer wins;
 
     @Column(name = "losses")
-    private int losses;
+    private Integer losses;
 
     @Column(name = "win_pct")
-    private float winPct;
+    private Double winPct;
 
     @Column(name = "league_rank")
     private Integer leagueRank;
@@ -74,50 +74,53 @@ public class Standings {
     private String lastTen;
 
     @Column(name = "long_win_streak")
-    private int longWinStreak;
+    private Integer longWinStreak;
 
     @Column(name = "long_loss_streak")
-    private int longLossStreak;
+    private Integer longLossStreak;
 
     @Column(name = "current_streak")
     private String currentStreak;
 
     @Column(name = "conference_games_back")
-    private float conferenceGamesBack;
+    private Double conferenceGamesBack;
 
     @Column(name = "clinched_conference_title")
-    private int clinchedConferenceTitle;
+    private Integer clinchedConferenceTitle;
 
     @Column(name = "clinched_playoff_birth")
-    private int clinchedPlayoffBirth;
+    private Integer clinchedPlayoffBirth;
 
     @Column(name = "clinched_playin")
-    private int clinchedPlayin;
+    private Integer clinchedPlayin;
 
     @Column(name = "eliminated_conference")
-    private int eliminatedConference;
+    private Integer eliminatedConference;
 
     @Column(name = "points_pg")
-    private float pointsPerGame;
+    private Double pointsPerGame;
 
     @Column(name = "opp_points_pg")
-    private float opponentPointsPerGame;
+    private Double opponentPointsPerGame;
 
     @Column(name = "diff_points_pg")
-    private float differencePointsPerGame;
+    private Double differencePointsPerGame;
+
+    @Column(name = "logo_url")
+    private String logoUrl;
 
     // No-argument constructor
     public Standings() {
     }
 
     // Constructor with all fields
-    public Standings(int teamId, String leagueId, String seasonId, String teamCity, String teamName, String teamSlug,
-                     String conference, String conferenceRecord, int playoffRank, String clinchIndicator, String division,
-                     String divisionRecord, int divisionRank, int wins, int losses, float winPct, Integer leagueRank,
-                     String record, String home, String road, String lastTen, int longWinStreak, int longLossStreak,
-                     String currentStreak, float conferenceGamesBack, int clinchedConferenceTitle, int clinchedPlayoffBirth,
-                     int clinchedPlayin, int eliminatedConference, float pointsPerGame, float opponentPointsPerGame,
-                     float differencePointsPerGame) {
+    public Standings(Integer teamId, String leagueId, String seasonId, String teamCity, String teamName, String teamSlug,
+                     String conference, String conferenceRecord, Integer playoffRank, String clinchIndicator, String division,
+                     String divisionRecord, Integer divisionRank, Integer wins, Integer losses, Double winPct, Integer leagueRank,
+                     String record, String home, String road, String lastTen, Integer longWinStreak, Integer longLossStreak,
+                     String currentStreak, Double conferenceGamesBack, Integer clinchedConferenceTitle, Integer clinchedPlayoffBirth,
+                     Integer clinchedPlayin, Integer eliminatedConference, Double pointsPerGame, Double opponentPointsPerGame,
+                     Double differencePointsPerGame, String logoUrl) {
         this.teamId = teamId;
         this.leagueId = leagueId;
         this.seasonId = seasonId;
@@ -150,16 +153,17 @@ public class Standings {
         this.pointsPerGame = pointsPerGame;
         this.opponentPointsPerGame = opponentPointsPerGame;
         this.differencePointsPerGame = differencePointsPerGame;
+        this.logoUrl = logoUrl;
     }
 
 
     // Getters and Setters
 
-    public int getTeamId() {
+    public Integer getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(Integer teamId) {
         this.teamId = teamId;
     }
 
@@ -219,11 +223,11 @@ public class Standings {
         this.conferenceRecord = conferenceRecord;
     }
 
-    public int getPlayoffRank() {
+    public Integer getPlayoffRank() {
         return playoffRank;
     }
 
-    public void setPlayoffRank(int playoffRank) {
+    public void setPlayoffRank(Integer playoffRank) {
         this.playoffRank = playoffRank;
     }
 
@@ -251,35 +255,35 @@ public class Standings {
         this.divisionRecord = divisionRecord;
     }
 
-    public int getDivisionRank() {
+    public Integer getDivisionRank() {
         return divisionRank;
     }
 
-    public void setDivisionRank(int divisionRank) {
+    public void setDivisionRank(Integer divisionRank) {
         this.divisionRank = divisionRank;
     }
 
-    public int getWins() {
+    public Integer getWins() {
         return wins;
     }
 
-    public void setWins(int wins) {
+    public void setWins(Integer wins) {
         this.wins = wins;
     }
 
-    public int getLosses() {
+    public Integer getLosses() {
         return losses;
     }
 
-    public void setLosses(int losses) {
+    public void setLosses(Integer losses) {
         this.losses = losses;
     }
 
-    public float getWinPct() {
+    public Double getWinPct() {
         return winPct;
     }
 
-    public void setWinPct(float winPct) {
+    public void setWinPct(Double winPct) {
         this.winPct = winPct;
     }
 
@@ -323,19 +327,19 @@ public class Standings {
         this.lastTen = lastTen;
     }
 
-    public int getLongWinStreak() {
+    public Integer getLongWinStreak() {
         return longWinStreak;
     }
 
-    public void setLongWinStreak(int longWinStreak) {
+    public void setLongWinStreak(Integer longWinStreak) {
         this.longWinStreak = longWinStreak;
     }
 
-    public int getLongLossStreak() {
+    public Integer getLongLossStreak() {
         return longLossStreak;
     }
 
-    public void setLongLossStreak(int longLossStreak) {
+    public void setLongLossStreak(Integer longLossStreak) {
         this.longLossStreak = longLossStreak;
     }
 
@@ -347,67 +351,70 @@ public class Standings {
         this.currentStreak = currentStreak;
     }
 
-    public float getConferenceGamesBack() {
+    public Double getConferenceGamesBack() {
         return conferenceGamesBack;
     }
 
-    public void setConferenceGamesBack(float conferenceGamesBack) {
+    public void setConferenceGamesBack(Double conferenceGamesBack) {
         this.conferenceGamesBack = conferenceGamesBack;
     }
 
-    public int getClinchedConferenceTitle() {
+    public Integer getClinchedConferenceTitle() {
         return clinchedConferenceTitle;
     }
 
-    public void setClinchedConferenceTitle(int clinchedConferenceTitle) {
+    public void setClinchedConferenceTitle(Integer clinchedConferenceTitle) {
         this.clinchedConferenceTitle = clinchedConferenceTitle;
     }
 
-    public int getClinchedPlayoffBirth() {
+    public Integer getClinchedPlayoffBirth() {
         return clinchedPlayoffBirth;
     }
 
-    public void setClinchedPlayoffBirth(int clinchedPlayoffBirth) {
+    public void setClinchedPlayoffBirth(Integer clinchedPlayoffBirth) {
         this.clinchedPlayoffBirth = clinchedPlayoffBirth;
     }
 
-    public int getClinchedPlayin() {
+    public Integer getClinchedPlayin() {
         return clinchedPlayin;
     }
 
-    public void setClinchedPlayin(int clinchedPlayin) {
+    public void setClinchedPlayin(Integer clinchedPlayin) {
         this.clinchedPlayin = clinchedPlayin;
     }
 
-    public int getEliminatedConference() {
+    public Integer getEliminatedConference() {
         return eliminatedConference;
     }
 
-    public void setEliminatedConference(int eliminatedConference) {
+    public void setEliminatedConference(Integer eliminatedConference) {
         this.eliminatedConference = eliminatedConference;
     }
 
-    public float getPointsPerGame() {
+    public Double getPointsPerGame() {
         return pointsPerGame;
     }
 
-    public void setPointsPerGame(float pointsPerGame) {
+    public void setPointsPerGame(Double pointsPerGame) {
         this.pointsPerGame = pointsPerGame;
     }
 
-    public float getOpponentPointsPerGame() {
+    public Double getOpponentPointsPerGame() {
         return opponentPointsPerGame;
     }
 
-    public void setOpponentPointsPerGame(float opponentPointsPerGame) {
+    public void setOpponentPointsPerGame(Double opponentPointsPerGame) {
         this.opponentPointsPerGame = opponentPointsPerGame;
     }
 
-    public float getDifferencePointsPerGame() {
+    public Double getDifferencePointsPerGame() {
         return differencePointsPerGame;
     }
 
-    public void setDifferencePointsPerGame(float differencePointsPerGame) {
+    public void setDifferencePointsPerGame(Double differencePointsPerGame) {
         this.differencePointsPerGame = differencePointsPerGame;
     }
+
+    public String getLogoUrl(){ return logoUrl; }
+    public void setLogoUrl(String logoUrl){ this.logoUrl = logoUrl; }
 }

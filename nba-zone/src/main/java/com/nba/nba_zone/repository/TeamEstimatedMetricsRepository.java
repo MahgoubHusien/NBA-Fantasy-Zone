@@ -14,7 +14,7 @@ public interface TeamEstimatedMetricsRepository extends JpaRepository<TeamEstima
 
     List<TeamEstimatedMetrics> findByTeamName(String teamName);
 
-    List<TeamEstimatedMetrics> findByEstimatedOffensiveRatingGreaterThan(float estimatedOffensiveRating);
+    List<TeamEstimatedMetrics> findByEstimatedOffensiveRatingGreaterThan(Double estimatedOffensiveRating);
 
     List<TeamEstimatedMetrics> findAllByOrderByEstimatedNetRatingDesc();
 }

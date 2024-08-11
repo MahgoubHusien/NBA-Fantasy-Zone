@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/nba")
+@RequestMapping("/api/teams")
 public class TeamController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class TeamController {
     }
 
     @GetMapping("/team-stats/{teamId}")
-    public ResponseEntity<TeamStats> getTeamStatsById(@PathVariable int teamId) {
+    public ResponseEntity<TeamStats> getTeamStatsById(@PathVariable Integer teamId) {
         TeamStats teamStats = nbaService.getTeamStatsById(teamId);
         if (teamStats != null) {
             return ResponseEntity.ok(teamStats);
@@ -43,7 +43,7 @@ public class TeamController {
     }
 
     @PutMapping("/team-stats/{teamId}")
-    public ResponseEntity<TeamStats> updateTeamStats(@PathVariable int teamId, @RequestBody TeamStats teamStats) {
+    public ResponseEntity<TeamStats> updateTeamStats(@PathVariable Integer teamId, @RequestBody TeamStats teamStats) {
         TeamStats existingTeamStats = nbaService.getTeamStatsById(teamId);
         if (existingTeamStats != null) {
             teamStats.setTeamId(teamId); // Ensure the ID remains the same
@@ -55,7 +55,7 @@ public class TeamController {
     }
 
     @DeleteMapping("/team-stats/{teamId}")
-    public ResponseEntity<Void> deleteTeamStats(@PathVariable int teamId) {
+    public ResponseEntity<Void> deleteTeamStats(@PathVariable Integer teamId) {
         nbaService.deleteTeamStats(teamId);
         return ResponseEntity.noContent().build();
     }
@@ -69,7 +69,7 @@ public class TeamController {
     }
 
     @GetMapping("/team-estimated-metrics/{teamId}")
-    public ResponseEntity<TeamEstimatedMetrics> getTeamEstimatedMetricsById(@PathVariable int teamId) {
+    public ResponseEntity<TeamEstimatedMetrics> getTeamEstimatedMetricsById(@PathVariable Integer teamId) {
         TeamEstimatedMetrics teamEstimatedMetrics = nbaService.getTeamEstimatedMetricsById(teamId);
         if (teamEstimatedMetrics != null) {
             return ResponseEntity.ok(teamEstimatedMetrics);
@@ -85,7 +85,7 @@ public class TeamController {
     }
 
     @PutMapping("/team-estimated-metrics/{teamId}")
-    public ResponseEntity<TeamEstimatedMetrics> updateTeamEstimatedMetrics(@PathVariable int teamId, @RequestBody TeamEstimatedMetrics teamEstimatedMetrics) {
+    public ResponseEntity<TeamEstimatedMetrics> updateTeamEstimatedMetrics(@PathVariable Integer teamId, @RequestBody TeamEstimatedMetrics teamEstimatedMetrics) {
         TeamEstimatedMetrics existingTeamEstimatedMetrics = nbaService.getTeamEstimatedMetricsById(teamId);
         if (existingTeamEstimatedMetrics != null) {
             teamEstimatedMetrics.setTeamId(teamId); // Ensure the ID remains the same
@@ -97,7 +97,7 @@ public class TeamController {
     }
 
     @DeleteMapping("/team-estimated-metrics/{teamId}")
-    public ResponseEntity<Void> deleteTeamEstimatedMetrics(@PathVariable int teamId) {
+    public ResponseEntity<Void> deleteTeamEstimatedMetrics(@PathVariable Integer teamId) {
         nbaService.deleteTeamEstimatedMetrics(teamId);
         return ResponseEntity.noContent().build();
     }
@@ -111,7 +111,7 @@ public class TeamController {
     }
 
     @GetMapping("/standings/{teamId}")
-    public ResponseEntity<Standings> getStandingsById(@PathVariable int teamId) {
+    public ResponseEntity<Standings> getStandingsById(@PathVariable Integer teamId) {
         Standings standings = nbaService.getStandingsById(teamId);
         if (standings != null) {
             return ResponseEntity.ok(standings);
@@ -127,7 +127,7 @@ public class TeamController {
     }
 
     @PutMapping("/standings/{teamId}")
-    public ResponseEntity<Standings> updateStandings(@PathVariable int teamId, @RequestBody Standings standings) {
+    public ResponseEntity<Standings> updateStandings(@PathVariable Integer teamId, @RequestBody Standings standings) {
         Standings existingStandings = nbaService.getStandingsById(teamId);
         if (existingStandings != null) {
             standings.setTeamId(teamId); // Ensure the ID remains the same
@@ -139,7 +139,7 @@ public class TeamController {
     }
 
     @DeleteMapping("/standings/{teamId}")
-    public ResponseEntity<Void> deleteStandings(@PathVariable int teamId) {
+    public ResponseEntity<Void> deleteStandings(@PathVariable Integer teamId) {
         nbaService.deleteStandings(teamId);
         return ResponseEntity.noContent().build();
     }
