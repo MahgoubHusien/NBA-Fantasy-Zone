@@ -44,6 +44,10 @@ public class PlayerService {
                 .orElseThrow(() -> new RuntimeException("Player not found"));
     }
 
+    public List<CommonPlayerInfo> getPlayersByTeamId(Integer teamId) {
+        return commonPlayerInfoRepository.findByTeamId(teamId);
+    }
+
     // Current Player Stats Methods
     public List<CurrentPlayerStats> getAllCurrentPlayerStats() {
         return currentPlayerStatsRepository.findAll();

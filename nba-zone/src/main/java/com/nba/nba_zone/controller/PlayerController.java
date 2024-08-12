@@ -29,6 +29,11 @@ public class PlayerController {
         return playerService.getAllCommonPlayerInfo();
     }
 
+    @GetMapping("/team/{teamId}")
+    public List<CommonPlayerInfo> getPlayersByTeamId(@PathVariable Integer teamId) {
+        return playerService.getPlayersByTeamId(teamId);
+    }
+
     // Retrieve common player info by player ID
     @GetMapping("/commonPlayerInfo/{id}")
     public ResponseEntity<CommonPlayerInfo> getCommonPlayerInfoById(@PathVariable Long id) {
