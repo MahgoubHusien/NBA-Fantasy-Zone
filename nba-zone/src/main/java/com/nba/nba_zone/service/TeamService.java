@@ -101,6 +101,19 @@ public class TeamService {
         return standingsRepository.findByClinchedPlayoffBirth(clinchedPlayoffBirth);
     }
 
+    public List<Standings> getLeagueRankings() {
+        return standingsRepository.findAllOrderByWinPctDescAndTeamNameAsc();
+    }
+
+    public List<Standings> getEasternConferenceStandings() {
+        return standingsRepository.findByConferenceOrderByWinPctDesc("East");
+    }
+
+    public List<Standings> getWesternConferenceStandings() {
+        return standingsRepository.findByConferenceOrderByWinPctDesc("West");
+    }
+
+
     public Standings saveStandings(Standings standings) {
         return standingsRepository.save(standings);
     }
