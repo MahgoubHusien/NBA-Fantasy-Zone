@@ -209,7 +209,7 @@ const LeagueLeadersPage: React.FC = () => {
         }
         .top-players-section {
           border-radius: 1rem;
-          border: 4px solid #00BFA6;
+          border: 2px solid #00BFA6;
           background-color: white;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }

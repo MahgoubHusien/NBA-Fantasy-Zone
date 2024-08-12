@@ -54,10 +54,10 @@ const TopPlayersPage: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">
-      <div className="bg-white p-6 rounded-lg shadow-lg mb-6 ">
+      <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
         <h1 className="text-3xl font-bold text-center">Top Players</h1>
       </div>
-      <div className="bg-white p-6 rounded-lg shadow-lg border border-gold">
+      <div className="bg-white p-6 rounded-lg shadow-lg border-2 border-[#00BFA6]">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200" style={{ minWidth: '900px' }}>
             <thead>

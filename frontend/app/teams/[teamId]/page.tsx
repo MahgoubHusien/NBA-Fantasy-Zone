@@ -687,10 +687,10 @@ const TeamStatsPage: React.FC = () => {
           margin-bottom: 1.5rem;
         }
         .border-solid{
-          border: 4px solid #00BFA6;
+          border: 2px solid #00BFA6;
         }
         .border-solid2{
-          border: 4px solid #333333
+          border: 2px solid #333333
         }
         .overflow-x-auto {
           overflow-x: auto;
