@@ -59,6 +59,7 @@ interface TeamStats {
   winPctRank: number;
   winRank: number;
   wins: number;
+  coachName: string;
 }
 
 
@@ -199,6 +200,7 @@ const TeamStatsPage: React.FC = () => {
             <p className="text-xl">Record: {standing.wins} - {standing.losses}</p>
             <p className="text-xl">Conference Record: {standing.conferenceRecord}</p>
             <p className="text-xl">Division: {standing.division} ( {standing.divisionRecord})</p>
+            <p className="text-xl">Coach: {teamStats.coachName}</p>
             <p className="text-xl">
               Current Streak: {standing.currentStreak.startsWith('-') 
                 ? `${standing.currentStreak.substring(1)} Losing Streak` 
