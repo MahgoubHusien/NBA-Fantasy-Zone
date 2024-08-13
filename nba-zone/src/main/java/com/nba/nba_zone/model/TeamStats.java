@@ -181,6 +181,9 @@ public class TeamStats {
     @Column(name = "logo_url")
     private String logoUrl;
 
+    @Column(name = "coach_name")
+    private String coachName;
+
     // No-argument constructor
     public TeamStats() {
     }
@@ -197,7 +200,7 @@ public class TeamStats {
                      Double threePointPctRank, Integer freeThrowsMadeRank, Integer freeThrowsAttemptedRank, Double freeThrowPctRank,
                      Integer offensiveReboundsRank, Integer defensiveReboundsRank, Integer totalReboundsRank, Integer assistsRank,
                      Integer turnoversRank, Integer stealsRank, Integer blocksRank, Integer blocksAgainstRank, Integer personalFoulsRank,
-                     Integer personalFoulsDrawnRank, Integer pointsRank, Integer plusMinusRank, Integer cfid, String cfparams, String logoUrl) {
+                     Integer personalFoulsDrawnRank, Integer pointsRank, Integer plusMinusRank, Integer cfid, String cfparams, String logoUrl, String coachName) {
         this.teamId = teamId;
         this.teamName = teamName;
         this.gp = gp;
@@ -255,6 +258,7 @@ public class TeamStats {
         this.cfid = cfid;
         this.cfparams = cfparams;
         this.logoUrl = logoUrl;
+        this.coachName = coachName;
     }
 
     // Getters and Setters
@@ -710,5 +714,9 @@ public class TeamStats {
     public String getLogoUrl() { return logoUrl;}
 
     public void setLogoUrl(String logoUrl) { this.logoUrl = logoUrl;}
+
+    public String getCoachName(){ return coachName; }
+
+    public void setCoachName(String coachName){ this.coachName = coachName; }
 }
 
