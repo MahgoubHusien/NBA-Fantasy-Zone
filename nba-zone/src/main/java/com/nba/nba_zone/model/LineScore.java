@@ -1,5 +1,6 @@
 package com.nba.nba_zone.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -33,7 +34,10 @@ public class LineScore extends GameBase {
     private Integer pts;
     private Double fgPct;
     private Double ftPct;
+
+    @Column(name = "fg3_pct")
     private Double fg3Pct;
+
     private Integer ast;
     private Integer reb;
     private Integer tov;

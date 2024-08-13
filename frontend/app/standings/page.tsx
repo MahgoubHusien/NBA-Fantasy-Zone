@@ -100,51 +100,48 @@ const StandingsPage: React.FC = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-  {standings.map((team, index) => (
-    <React.Fragment key={team.teamId}>
-      {activeTab !== 'league' && index === 6 && (
-        <tr>
-          <td colSpan={15} className="relative">
-            <div className="absolute top-0 w-full border-t-2 border-dashed border-gray-400"></div>
-          </td>
-        </tr>
-      )}
-      {activeTab !== 'league' && index === 10 && (
-        <tr>
-          <td colSpan={15} className="relative">
-            <div className="absolute top-0 w-full border-t-4 border-gray-700"></div>
-          </td>
-        </tr>
-      )}
-      <tr>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">
-          <Link href={`/teams/${team.teamId}`} className="text-[#333333]-600 hover:text-[#333333]-800 flex items-center justify-center">
-            <img src={team.logoUrl} alt={`${team.teamName} Logo`} className="w-6 h-6 mr-2" />
-            <span>{team.teamName}</span>
-          </Link>
-        </td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.wins}-{team.losses}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.clinchIndicator}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.conferenceGamesBack}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.winPct.toFixed(3)}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.conferenceRecord}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.division}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.divisionRecord}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.home}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.road}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.lastTen}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.currentStreak}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.pointsPerGame.toFixed(1)}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.opponentPointsPerGame.toFixed(1)}</td>
-        <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.differencePointsPerGame.toFixed(1)}</td>
-      </tr>
-    </React.Fragment>
-  ))}
-</tbody>
-
-
-
+          {standings.map((team, index) => (
+            <React.Fragment key={team.teamId}>
+              {activeTab !== 'league' && index === 6 && (
+                <tr>
+                  <td colSpan={15} className="relative">
+                    <div className="absolute top-0 w-full border-t-2 border-dashed border-gray-400"></div>
+                  </td>
+                </tr>
+              )}
+              {activeTab !== 'league' && index === 10 && (
+                <tr>
+                  <td colSpan={15} className="relative">
+                    <div className="absolute top-0 w-full border-t-4 border-gray-700"></div>
+                  </td>
+                </tr>
+              )}
+              <tr>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">
+                  <Link href={`/teams/${team.teamId}`} className="text-[#333333]-600 hover:text-[#333333]-800 flex items-center justify-center">
+                    <img src={team.logoUrl} alt={`${team.teamName} Logo`} className="w-6 h-6 mr-2" />
+                    <span>{team.teamName}</span>
+                  </Link>
+                </td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.wins}-{team.losses}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.clinchIndicator}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.conferenceGamesBack}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.winPct.toFixed(3)}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.conferenceRecord}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.division}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.divisionRecord}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.home}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.road}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.lastTen}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.currentStreak}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.pointsPerGame.toFixed(1)}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.opponentPointsPerGame.toFixed(1)}</td>
+                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.differencePointsPerGame.toFixed(1)}</td>
+              </tr>
+            </React.Fragment>
+          ))}
+        </tbody>
         </table>
         
         <div className="mt-6 text-sm text-gray-600">

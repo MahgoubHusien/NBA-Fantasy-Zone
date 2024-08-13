@@ -198,16 +198,16 @@ const PlayerProfilePage = () => {
   const topFiveStats = getTopFiveStats(player.ppg, player.apg, player.rpg, player.spg, player.topg, player.bpg, player.pfpg);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-10">
       <div className="bg-white rounded-lg shadow-lg p-6 flex flex-wrap items-center justify-between space-x-6 border-2 border-[#333333]">
         <div className="flex flex-col items-center justify-center flex-shrink-0">
           <img
             src={player.photoUrl || '/placeholder.png'}
             alt={`${player.firstName} ${player.lastName}`}
-            className="w-32 h-32 object-cover shadow-lg rounded-lg"
+            className="w-40 h-40 object-cover shadow-lg rounded-lg"
           />
         </div>
-        <div className="flex flex-col justify-center flex-grow space-y-2">
+        <div className="flex flex-col justify-center flex-grow space-y-2 relative left-12">
           <h1 className="text-3xl font-bold">{player.firstName} {player.lastName}</h1>
           <div className="text-m text-gray-600">
             <p>{player.position} | {player.teamName}</p>
@@ -218,6 +218,7 @@ const PlayerProfilePage = () => {
             <p>NBA Rank: {player.rank}</p>
           </div>
         </div>
+
         <div className="flex flex-wrap space-x-4 w-full sm:w-auto flex-col sm:flex-row">
           <div className="p-1 rounded-lg shadow-lg max-w-xs flex-1">
             <div className="bg-white p-4 rounded-lg h-full">
