@@ -52,9 +52,9 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
-      <div className="bg-white p-6 rounded-lg shadow-lg mb-6 border-2 border-[#333333]">
-        <h1 className="text-4xl font-bold text-center text-[#00BFA6] mb-6">Contact Us</h1>
+    <div className="container mx-auto p-4 bg-[#f9f9f9]">
+      <div className="title-container bg-white p-6 rounded-lg shadow-lg mb-8">
+        <h1 className="text-4xl font-extrabold text-center text-[#333333]">Contact</h1>
         <p className="text-center text-gray-700 mb-8">
           We value your feedback! Please send us your reviews, requests, criticisms, or any other thoughts you may have. We are always looking to improve and appreciate your input.
         </p>

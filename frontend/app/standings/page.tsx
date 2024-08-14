@@ -164,22 +164,25 @@ const StandingsPage: React.FC = () => {
     
   return (
     <div className="container mx-auto p-4 max-w-4xl">
+      <div className="title-container bg-white p-6 rounded-lg shadow-lg mb-6">
+        <h1 className="text-4xl font-extrabold text-center text-[#333333]">Standings</h1>
+      </div>
       <div className="bg-white p-6 rounded-lg shadow-lg mb-6 border-2 border-[#333333]">
         <div className="flex flex-wrap justify-center mb-4">
           <button
-            className={`px-4 py-2 m-2 font-bold text-lg ${activeTab === 'league' ? 'text-[#00BFA6] border-b-4 border-[#00BFA6]' : 'text-[#333333]-500'}`}
+            className={`px-4 py-2 m-2 font-bold text-lg  ${activeTab === 'league' ? 'text-[#00BFA6] border-b-4 border-[#00BFA6]' : 'text-[#333333]'}`}
             onClick={() => setActiveTab('league')}
           >
             League
           </button>
           <button
-            className={`px-4 py-2 m-2 font-bold text-lg ${activeTab === 'east' ? 'text-[#00BFA6] border-b-4 border-[#00BFA6]' : 'text-[#333333]-500'}`}
+            className={`px-4 py-2 m-2 font-bold text-lg ${activeTab === 'east' ? 'text-[#00BFA6] border-b-4 border-[#00BFA6]' : 'text-[#333333]'}`}
             onClick={() => setActiveTab('east')}
           >
             Eastern Conference
           </button>
           <button
-            className={`px-4 py-2 m-2 font-bold text-lg ${activeTab === 'west' ? 'text-[#00BFA6] border-b-4 border-[#00BFA6]' : 'text-[#333333]-500'}`}
+            className={`px-4 py-2 m-2 font-bold text-lg ${activeTab === 'west' ? 'text-[#00BFA6] border-b-4 border-[#00BFA6]' : 'text-[#333333]'}`}
             onClick={() => setActiveTab('west')}
           >
             Western Conference

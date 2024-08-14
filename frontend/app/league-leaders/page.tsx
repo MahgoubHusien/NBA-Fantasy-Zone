@@ -107,12 +107,12 @@ const LeagueLeadersPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="title-container">
-        <h1 className="text-4xl font-extrabold text-center text-#333333-800">League Leaders</h1>
+        <h1 className="text-4xl font-extrabold text-center text-[#333333]">League Leaders</h1>
       </div>
 
       <div className="top-players-section bg-white p-6 rounded-lg shadow-lg mb-8">
-        <h2 className="text-3xl font-semibold mb-4 text-center">Top Players</h2>
-        <table className="min-w-full text-gray-900 rounded-lg overflow-hidden shadow-md border-collapse">
+        <h2 className="text-3xl font-semibold mb-4 text-center text-[#333333]">Top Players</h2>
+        <table className="min-w-full text-[#333333]rounded-lg overflow-hidden shadow-md border-collapse">
           <thead className="bg-gray text-white">
             <tr>
               <th className="py-3 px-4 text-left">Rank</th>
@@ -124,7 +124,7 @@ const LeagueLeadersPage: React.FC = () => {
           </thead>
           <tbody>
             {topPlayers.map((player, index) => (
-              <tr key={player.id} className="hover:bg-gray-100 transition border-b last:border-b-0">
+              <tr key={player.id} className="hover:bg-[#333333]-100 transition border-b last:border-b-0">
                 <td className="py-3 px-4">{index + 1}</td>
                 <td className="py-3 px-4 flex items-center">
                   <img
@@ -154,7 +154,7 @@ const LeagueLeadersPage: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {categories.map((category) => (
-          <div key={category.name} className="category-card p-4 rounded-lg shadow-lg">
+          <div key={category.name} className="category-card p-4 rounded-lg shadow-lg bg-white">
             <h2 className="text-2xl font-semibold mb-2 gradient-title text-center">{category.label}</h2>
             <div className="flex justify-between mb-2 text-#333333 text-sm text-center">
               <span>Rank</span>

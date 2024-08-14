@@ -11,13 +11,13 @@ public interface PlayerBoxStatsRepository extends JpaRepository<PlayerBoxStats, 
 
     List<PlayerBoxStats> findByGameId(String gameId);
 
-    List<PlayerBoxStats> findByPlayerId(int playerId);
+    List<PlayerBoxStats> findByPlayerId(Integer playerId);
 
-    List<PlayerBoxStats> findByTeamId(int teamId);
+    List<PlayerBoxStats> findByTeamId(Integer teamId);
 
-    List<PlayerBoxStats> findByPtsGreaterThan(int pts);
+    List<PlayerBoxStats> findByPtsGreaterThan(Integer pts);
 
-    List<PlayerBoxStats> findByReb(int reb);
+    List<PlayerBoxStats> findByReb(Integer reb);
 
-    List<PlayerBoxStats> findByFgPctGreaterThan(double fgPct);
+    List<PlayerBoxStats> findByFgPctGreaterThan(Double fgPct);
 }

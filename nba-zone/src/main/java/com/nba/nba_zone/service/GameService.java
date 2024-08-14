@@ -36,8 +36,8 @@ public class GameService {
         return gameHeaderRepository.findAll();
     }
 
-    public Optional<GameHeader> getGameHeaderById(Long id) {
-        return gameHeaderRepository.findById(id);
+    public List<GameHeader> getGameHeaderByGameId(String gameId) {
+        return gameHeaderRepository.findByGameId(gameId);
     }
 
     public List<GameHeader> getGameHeadersByDate(String gameDateEst) {
@@ -73,29 +73,33 @@ public class GameService {
         return lineScoreRepository.findByGameIdAndTeamId(gameId, teamId);
     }
 
+    public List<LineScore> getLineScoreByGameId(String gameId) {
+        return lineScoreRepository.findByGameId(gameId);
+    }
+
     // Games Methods
     public List<Games> getAllGames() {
         return gamesRepository.findAll();
     }
 
-    public Optional<Games> getGameById(Long id) {
-        return gamesRepository.findById(id);
+    public List<Games> getGameById(String gameId) {
+        return gamesRepository.findByGameId(gameId);
     }
 
-    public List<Games> getGamesBySeason(int seasonId) {
+    public List<Games> getGamesBySeason(Integer seasonId) {
         return gamesRepository.findBySeasonId(seasonId);
     }
 
-    public List<Games> getGamesByHomeTeam(int homeTeamId) {
-        return gamesRepository.findByHomeTeamId(homeTeamId);
-    }
-
-    public List<Games> getGamesByVisitorTeam(int visitorTeamId) {
-        return gamesRepository.findByVisitorTeamId(visitorTeamId);
+    public List<Games> getGamesByTeamId(Integer teamId) {
+        return gamesRepository.findByTeamId(teamId);
     }
 
     public List<Games> getGamesByWinLoss(String wl) {
         return gamesRepository.findByWl(wl);
+    }
+
+    public List<Games> getGamesByPointsGreaterThan(Integer pts) {
+        return gamesRepository.findByPtsGreaterThan(pts);
     }
 
     // PlayerBoxStats Methods
@@ -111,23 +115,23 @@ public class GameService {
         return playerBoxStatsRepository.findByGameId(gameId);
     }
 
-    public List<PlayerBoxStats> getPlayerBoxStatsByPlayerId(int playerId) {
+    public List<PlayerBoxStats> getPlayerBoxStatsByPlayerId(Integer playerId) {
         return playerBoxStatsRepository.findByPlayerId(playerId);
     }
 
-    public List<PlayerBoxStats> getPlayerBoxStatsByTeamId(int teamId) {
+    public List<PlayerBoxStats> getPlayerBoxStatsByTeamId(Integer teamId) {
         return playerBoxStatsRepository.findByTeamId(teamId);
     }
 
-    public List<PlayerBoxStats> getPlayerBoxStatsByPointsGreaterThan(int pts) {
+    public List<PlayerBoxStats> getPlayerBoxStatsByPointsGreaterThan(Integer pts) {
         return playerBoxStatsRepository.findByPtsGreaterThan(pts);
     }
 
-    public List<PlayerBoxStats> getPlayerBoxStatsByRebounds(int reb) {
+    public List<PlayerBoxStats> getPlayerBoxStatsByRebounds(Integer reb) {
         return playerBoxStatsRepository.findByReb(reb);
     }
 
-    public List<PlayerBoxStats> getPlayerBoxStatsByFieldGoalPercentageGreaterThan(double fgPct) {
+    public List<PlayerBoxStats> getPlayerBoxStatsByFieldGoalPercentageGreaterThan(Double fgPct) {
         return playerBoxStatsRepository.findByFgPctGreaterThan(fgPct);
     }
 

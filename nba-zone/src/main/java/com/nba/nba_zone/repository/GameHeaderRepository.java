@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface GameHeaderRepository extends JpaRepository<GameHeader, Long> {
 
+    List<GameHeader> findByGameId(String gameId);
+
     List<GameHeader> findByGameDateEst(String gameDateEst);
 
     List<GameHeader> findByHomeTeamId(int homeTeamId);

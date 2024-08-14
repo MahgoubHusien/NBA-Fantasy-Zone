@@ -9,16 +9,12 @@ public class Games extends GameBase {
 
     private Integer seasonId;
     private String gameDate;
-    private Integer homeTeamId;
-    private String homeTeamName;
-    private String homeTeamAbbreviation;
-    private Integer visitorTeamId;
-    private String visitorTeamName;
-    private String visitorTeamAbbreviation;
+    private Integer teamId;  // This should be either homeTeamId or visitorTeamId
+    private String teamAbbreviation;
+    private String teamName;
     private String matchup;
     private String wl;
     private Integer min;
-    private Integer pts;
     private Integer fgm;
     private Integer fga;
     private Double fgPct;
@@ -36,28 +32,24 @@ public class Games extends GameBase {
     private Integer blk;
     private Integer tov;
     private Integer pf;
-    private Integer plusMinus;
+    private Integer pts;
+    private Double plusMinus;
 
     public Games() {}
 
-    public Games(Long id, String gameId, Integer seasonId, String gameDate, Integer homeTeamId, String homeTeamName,
-                 String homeTeamAbbreviation, Integer visitorTeamId, String visitorTeamName, String visitorTeamAbbreviation,
-                 String matchup, String wl, Integer min, Integer pts, Integer fgm, Integer fga, Double fgPct, Integer fg3m, Integer fg3a, Double fg3Pct,
-                 Integer ftm, Integer fta, Double ftPct, Integer oreb, Integer dreb, Integer reb, Integer ast, Integer stl, Integer blk, Integer tov, Integer pf,
-                 Integer plusMinus) {
+    public Games(Long id, String gameId, Integer seasonId, String gameDate, Integer teamId, String teamAbbreviation, String teamName,
+                 String matchup, String wl, Integer min, Integer fgm, Integer fga, Double fgPct, Integer fg3m, Integer fg3a, Double fg3Pct,
+                 Integer ftm, Integer fta, Double ftPct, Integer oreb, Integer dreb, Integer reb, Integer ast, Integer stl, Integer blk,
+                 Integer tov, Integer pf, Integer pts, Double plusMinus) {
         super(id, gameId);
         this.seasonId = seasonId;
         this.gameDate = gameDate;
-        this.homeTeamId = homeTeamId;
-        this.homeTeamName = homeTeamName;
-        this.homeTeamAbbreviation = homeTeamAbbreviation;
-        this.visitorTeamId = visitorTeamId;
-        this.visitorTeamName = visitorTeamName;
-        this.visitorTeamAbbreviation = visitorTeamAbbreviation;
+        this.teamId = teamId;
+        this.teamAbbreviation = teamAbbreviation;
+        this.teamName = teamName;
         this.matchup = matchup;
         this.wl = wl;
         this.min = min;
-        this.pts = pts;
         this.fgm = fgm;
         this.fga = fga;
         this.fgPct = fgPct;
@@ -75,6 +67,7 @@ public class Games extends GameBase {
         this.blk = blk;
         this.tov = tov;
         this.pf = pf;
+        this.pts = pts;
         this.plusMinus = plusMinus;
     }
 
@@ -95,52 +88,28 @@ public class Games extends GameBase {
         this.gameDate = gameDate;
     }
 
-    public Integer getHomeTeamId() {
-        return homeTeamId;
+    public Integer getTeamId() {
+        return teamId;
     }
 
-    public void setHomeTeamId(Integer homeTeamId) {
-        this.homeTeamId = homeTeamId;
+    public void setTeamId(Integer teamId) {
+        this.teamId = teamId;
     }
 
-    public String getHomeTeamName() {
-        return homeTeamName;
+    public String getTeamAbbreviation() {
+        return teamAbbreviation;
     }
 
-    public void setHomeTeamName(String homeTeamName) {
-        this.homeTeamName = homeTeamName;
+    public void setTeamAbbreviation(String teamAbbreviation) {
+        this.teamAbbreviation = teamAbbreviation;
     }
 
-    public String getHomeTeamAbbreviation() {
-        return homeTeamAbbreviation;
+    public String getTeamName() {
+        return teamName;
     }
 
-    public void setHomeTeamAbbreviation(String homeTeamAbbreviation) {
-        this.homeTeamAbbreviation = homeTeamAbbreviation;
-    }
-
-    public Integer getVisitorTeamId() {
-        return visitorTeamId;
-    }
-
-    public void setVisitorTeamId(Integer visitorTeamId) {
-        this.visitorTeamId = visitorTeamId;
-    }
-
-    public String getVisitorTeamName() {
-        return visitorTeamName;
-    }
-
-    public void setVisitorTeamName(String visitorTeamName) {
-        this.visitorTeamName = visitorTeamName;
-    }
-
-    public String getVisitorTeamAbbreviation() {
-        return visitorTeamAbbreviation;
-    }
-
-    public void setVisitorTeamAbbreviation(String visitorTeamAbbreviation) {
-        this.visitorTeamAbbreviation = visitorTeamAbbreviation;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public String getMatchup() {
@@ -165,14 +134,6 @@ public class Games extends GameBase {
 
     public void setMin(Integer min) {
         this.min = min;
-    }
-
-    public Integer getPts() {
-        return pts;
-    }
-
-    public void setPts(Integer pts) {
-        this.pts = pts;
     }
 
     public Integer getFgm() {
@@ -311,10 +272,19 @@ public class Games extends GameBase {
         this.pf = pf;
     }
 
-    public Integer getPlusMinus() {
+    public Integer getPts() {
+        return pts;
+    }
+
+    public void setPts(Integer pts) {
+        this.pts = pts;
+    }
+
+    public Double getPlusMinus() {
         return plusMinus;
     }
 
-    public void setPlusMinus(Integer plusMinus) {
+    public void setPlusMinus(Double plusMinus) {
         this.plusMinus = plusMinus;
-    }}
+    }
+}

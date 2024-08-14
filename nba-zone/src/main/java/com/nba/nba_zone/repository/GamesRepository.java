@@ -9,13 +9,15 @@ import java.util.List;
 @Repository
 public interface GamesRepository extends JpaRepository<Games, Long> {
 
-    List<Games> findBySeasonId(int seasonId);
+    List<Games> findByGameId(String gameId);
 
-    List<Games> findByHomeTeamId(int homeTeamId);
+    List<Games> findBySeasonId(Integer seasonId);
 
-    List<Games> findByVisitorTeamId(int visitorTeamId);
+    List<Games> findByTeamId(Integer teamId);
+
+    List<Games> findByTeamAbbreviation(String teamAbbreviation);
 
     List<Games> findByWl(String wl);
 
-    List<Games> findByPtsGreaterThan(int pts);
+    List<Games> findByPtsGreaterThan(Integer pts);
 }

@@ -103,16 +103,16 @@ const PlayersPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-[#f9f9f9]">
       <div className="flex items-center justify-between mb-4 w-full bg-white p-2 rounded-lg shadow-md">
-        <h1 className="text-xl font-semibold">Players</h1>
+        <h1 className="text-xl font-semibold text-[#333333]">Players</h1>
         <div>
-          <label htmlFor="sort" className="mr-2 text-sm font-semibold">Sort by:</label>
+          <label htmlFor="sort" className="mr-2 text-sm font-semibold text-[#333333]">Sort by:</label>
           <select
             id="sort"
             value={sortCriteria}
             onChange={handleSortChange}
-            className="p-2 border rounded"
+            className="p-2 border rounded text-[#333333]"
           >
             {sortOptions.map((option) => (
               <option key={option.value} value={option.value}>

@@ -15,11 +15,11 @@ type Player = {
 const PlayerCard = ({ player }: { player: Player }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4">
-      <img src={player.photoUrl || '/placeholder.png'} alt={`${player.firstName} ${player.lastName}`} className="w-full h-48 object-cover rounded-lg" />
+      <img src={player.photoUrl || '/placeholder.png'} alt={`${player.firstName} ${player.lastName}`} className="w-full h-48 object-cover rounded-lg text-[#333333]" />
       <div className="mt-4">
-        <h2 className="text-xl font-bold">{player.firstName} {player.lastName}</h2>
-        <p className="text-gray-700">Team: {player.teamAbbreviation}</p>
-        <div className="mt-2">
+        <h2 className="text-xl font-bold text-[#333333]">{player.firstName} {player.lastName}</h2>
+        <p className="text-[#333333]">Team: {player.teamAbbreviation}</p>
+        <div className="mt-2 text-[#333333]">
           <p>PPG: {player.ppg}</p>
           <p>APG: {player.apg}</p>
           <p>RPG: {player.rpg}</p>

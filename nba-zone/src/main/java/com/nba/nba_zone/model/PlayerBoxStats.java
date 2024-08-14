@@ -11,13 +11,8 @@ public class PlayerBoxStats extends GameBase {
     private String playerName;
     private Integer teamId;
     private String teamAbbreviation;
+    private String startPosition;
     private String min;
-    private Integer pts;
-    private Integer reb;
-    private Integer ast;
-    private Integer stl;
-    private Integer blk;
-    private Integer tov;
     private Integer fgm;
     private Integer fga;
     private Double fgPct;
@@ -27,24 +22,30 @@ public class PlayerBoxStats extends GameBase {
     private Integer ftm;
     private Integer fta;
     private Double ftPct;
+    private Integer oreb;
+    private Integer dreb;
+    private Integer reb;
+    private Integer ast;
+    private Integer stl;
+    private Integer blk;
+    private Integer tov;
+    private Integer pf;
+    private Integer pts;
+    private Double plusMinus;
 
     public PlayerBoxStats() {}
 
-    public PlayerBoxStats(Long id, String gameId, Integer playerId, String playerName, Integer teamId, String teamAbbreviation, String min,
-                          Integer pts, Integer reb, Integer ast, Integer stl, Integer blk, Integer tov, Integer fgm, Integer fga, Double fgPct, Integer fg3m,
-                          Integer fg3a, Double fg3Pct, Integer ftm, Integer fta, Double ftPct) {
+    public PlayerBoxStats(Long id, String gameId, Integer playerId, String playerName, Integer teamId, String teamAbbreviation,
+                          String startPosition, String min, Integer fgm, Integer fga, Double fgPct, Integer fg3m, Integer fg3a,
+                          Double fg3Pct, Integer ftm, Integer fta, Double ftPct, Integer oreb, Integer dreb, Integer reb,
+                          Integer ast, Integer stl, Integer blk, Integer tov, Integer pf, Integer pts, Double plusMinus) {
         super(id, gameId);
         this.playerId = playerId;
         this.playerName = playerName;
         this.teamId = teamId;
         this.teamAbbreviation = teamAbbreviation;
+        this.startPosition = startPosition;
         this.min = min;
-        this.pts = pts;
-        this.reb = reb;
-        this.ast = ast;
-        this.stl = stl;
-        this.blk = blk;
-        this.tov = tov;
         this.fgm = fgm;
         this.fga = fga;
         this.fgPct = fgPct;
@@ -54,6 +55,16 @@ public class PlayerBoxStats extends GameBase {
         this.ftm = ftm;
         this.fta = fta;
         this.ftPct = ftPct;
+        this.oreb = oreb;
+        this.dreb = dreb;
+        this.reb = reb;
+        this.ast = ast;
+        this.stl = stl;
+        this.blk = blk;
+        this.tov = tov;
+        this.pf = pf;
+        this.pts = pts;
+        this.plusMinus = plusMinus;
     }
 
     // Getters and Setters
@@ -89,60 +100,20 @@ public class PlayerBoxStats extends GameBase {
         this.teamAbbreviation = teamAbbreviation;
     }
 
+    public String getStartPosition() {
+        return startPosition;
+    }
+
+    public void setStartPosition(String startPosition) {
+        this.startPosition = startPosition;
+    }
+
     public String getMin() {
         return min;
     }
 
     public void setMin(String min) {
         this.min = min;
-    }
-
-    public Integer getPts() {
-        return pts;
-    }
-
-    public void setPts(Integer pts) {
-        this.pts = pts;
-    }
-
-    public Integer getReb() {
-        return reb;
-    }
-
-    public void setReb(Integer reb) {
-        this.reb = reb;
-    }
-
-    public Integer getAst() {
-        return ast;
-    }
-
-    public void setAst(Integer ast) {
-        this.ast = ast;
-    }
-
-    public Integer getStl() {
-        return stl;
-    }
-
-    public void setStl(Integer stl) {
-        this.stl = stl;
-    }
-
-    public Integer getBlk() {
-        return blk;
-    }
-
-    public void setBlk(Integer blk) {
-        this.blk = blk;
-    }
-
-    public Integer getTov() {
-        return tov;
-    }
-
-    public void setTov(Integer tov) {
-        this.tov = tov;
     }
 
     public Integer getFgm() {
@@ -215,5 +186,85 @@ public class PlayerBoxStats extends GameBase {
 
     public void setFtPct(Double ftPct) {
         this.ftPct = ftPct;
+    }
+
+    public Integer getOreb() {
+        return oreb;
+    }
+
+    public void setOreb(Integer oreb) {
+        this.oreb = oreb;
+    }
+
+    public Integer getDreb() {
+        return dreb;
+    }
+
+    public void setDreb(Integer dreb) {
+        this.dreb = dreb;
+    }
+
+    public Integer getReb() {
+        return reb;
+    }
+
+    public void setReb(Integer reb) {
+        this.reb = reb;
+    }
+
+    public Integer getAst() {
+        return ast;
+    }
+
+    public void setAst(Integer ast) {
+        this.ast = ast;
+    }
+
+    public Integer getStl() {
+        return stl;
+    }
+
+    public void setStl(Integer stl) {
+        this.stl = stl;
+    }
+
+    public Integer getBlk() {
+        return blk;
+    }
+
+    public void setBlk(Integer blk) {
+        this.blk = blk;
+    }
+
+    public Integer getTov() {
+        return tov;
+    }
+
+    public void setTov(Integer tov) {
+        this.tov = tov;
+    }
+
+    public Integer getPf() {
+        return pf;
+    }
+
+    public void setPf(Integer pf) {
+        this.pf = pf;
+    }
+
+    public Integer getPts() {
+        return pts;
+    }
+
+    public void setPts(Integer pts) {
+        this.pts = pts;
+    }
+
+    public Double getPlusMinus() {
+        return plusMinus;
+    }
+
+    public void setPlusMinus(Double plusMinus) {
+        this.plusMinus = plusMinus;
     }
 }

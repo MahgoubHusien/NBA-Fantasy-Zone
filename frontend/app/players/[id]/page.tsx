@@ -198,7 +198,7 @@ const PlayerProfilePage = () => {
   const topFiveStats = getTopFiveStats(player.ppg, player.apg, player.rpg, player.spg, player.topg, player.bpg, player.pfpg);
 
   return (
-    <div className="container mx-auto p-10">
+    <div className="container mx-auto p-10 bg-[#f9f9f9]">
       <div className="bg-white rounded-lg shadow-lg p-6 flex flex-wrap items-center justify-between space-x-6 border-2 border-[#333333]">
         <div className="flex flex-col items-center justify-center flex-shrink-0">
           <img
@@ -208,8 +208,8 @@ const PlayerProfilePage = () => {
           />
         </div>
         <div className="flex flex-col justify-center flex-grow space-y-2 relative left-12">
-          <h1 className="text-3xl font-bold">{player.firstName} {player.lastName}</h1>
-          <div className="text-m text-gray-600">
+          <h1 className="text-3xl font-bold text-[#333333]">{player.firstName} {player.lastName}</h1>
+          <div className="text-m text-[#333333]-600">
             <p>{player.position} | {player.teamName}</p>
             <p>Jersey: {player.jersey}</p>
             <p>Height: {formatHeight(player.height)}</p>
@@ -222,20 +222,20 @@ const PlayerProfilePage = () => {
         <div className="flex flex-wrap space-x-4 w-full sm:w-auto flex-col sm:flex-row">
           <div className="p-1 rounded-lg shadow-lg max-w-xs flex-1">
             <div className="bg-white p-4 rounded-lg h-full">
-              <h2 className="text-2xl font-bold mb-4 text-center">Top 5 Stats</h2>
+              <h2 className="text-2xl font-bold mb-4 text-[#333333] text-center text-[#333333]">Top 5 Stats</h2>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 table-auto">
+                <table className="min-w-full divide-y divide-[#333333]-200 table-auto">
                   <thead>
                     <tr>
-                      <th className="px-4 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Stat</th>
-                      <th className="px-4 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Value</th>
+                      <th className="px-4 py-2 text-left text-sm font-medium text-[#333333] uppercase tracking-wider">Stat</th>
+                      <th className="px-4 py-2 text-left text-sm font-medium text-[#333333] uppercase tracking-wider">Value</th>
                     </tr>
                   </thead>
                   <tbody>
                     {topFiveStats.map(stat => (
                       <tr key={stat.name}>
-                        <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-700">{stat.name}</td>
-                        <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{stat.value}</td>
+                        <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">{stat.name}</td>
+                        <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">{stat.value}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -245,35 +245,35 @@ const PlayerProfilePage = () => {
           </div>
           <div className="p-1 rounded-lg shadow-lg max-w-sm flex-1 mt-4 sm:mt-0 sm:ml-4">
             <div className="bg-white p-4 rounded-lg h-full">
-              <h2 className="text-2xl font-bold mb-4 text-center">Fantasy Stats</h2>
+              <h2 className="text-2xl font-bold mb-4 text-[#333333] text-center text-[#333333]">Fantasy Stats</h2>
               <div className="overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200 table-fixed">
+                <table className="min-w-full divide-y divide-[#333333]-200 table-fixed">
                   <thead>
                     <tr>
-                      <th className="px-4 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Stat</th>
-                      <th className="px-4 py-2 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Value</th>
+                      <th className="px-4 py-2 text-left text-sm font-medium text-[#333333] uppercase tracking-wider">Stat</th>
+                      <th className="px-4 py-2 text-left text-sm font-medium text-[#333333] uppercase tracking-wider">Value</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-700">NBA Fantasy Pts:</td>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{player.nbaFantasyPts}</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">NBA Fantasy Pts:</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">{player.nbaFantasyPts}</td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-700">Avg FanDuel Pts (Last 5)</td>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{player.fanDuelPtsLast5}</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">Avg FanDuel Pts (Last 5)</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">{player.fanDuelPtsLast5}</td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-700">Avg NBA Fantasy Pts (Last 5)</td>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{player.nbaFantasyPtsLast5}</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">Avg NBA Fantasy Pts (Last 5)</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">{player.nbaFantasyPtsLast5}</td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-700">Avg FanDuel Pts (Season)</td>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{player.fanDuelPtsSeason}</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">Avg FanDuel Pts (Season)</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">{player.fanDuelPtsSeason}</td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-700">Avg NBA Fantasy Pts (Season)</td>
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{player.nbaFantasyPtsSeason}</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">Avg NBA Fantasy Pts (Season)</td>
+                      <td className="px-4 py-2 whitespace-nowrap text-sm text-[#333333]">{player.nbaFantasyPtsSeason}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -284,122 +284,122 @@ const PlayerProfilePage = () => {
       </div>
       <div className="mt-6 bg-[#00BFA6] border border-[#00BFA6] border-2 rounded-lg shadow-lg">
           <div className="bg-white p-6 rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">Game Stats</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#333333]">Game Stats</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              <p><span className="font-semibold">GP:</span> {player.gp}</p>
-              <p><span className="font-semibold">W:</span> {player.w}</p>
-              <p><span className="font-semibold">L:</span> {player.l}</p>
-              <p><span className="font-semibold">MIN:</span> {formatDecimal(player.min)}</p>
-              <p><span className="font-semibold">Win %:</span> {formatPercentage(player.w / player.gp)}</p>
-              <p><span className="font-semibold">Plus/Minus:</span> {player.plusMinus}</p>
+              <p><span className="font-semibold text-[#333333]">GP:</span> {player.gp}</p>
+              <p><span className="font-semibold text-[#333333]">W:</span> {player.w}</p>
+              <p><span className="font-semibold text-[#333333]">L:</span> {player.l}</p>
+              <p><span className="font-semibold text-[#333333]">MIN:</span> {formatDecimal(player.min)}</p>
+              <p><span className="font-semibold text-[#333333]">Win %:</span> {formatPercentage(player.w / player.gp)}</p>
+              <p><span className="font-semibold text-[#333333]">Plus/Minus:</span> {player.plusMinus}</p>
             </div>
           </div>
         </div>
 
         <div className="mt-6 bg-[#00BFA6] border border-[#00BFA6] border-2 rounded-lg shadow-lg">
           <div className="bg-white p-6 rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">Offensive Stats</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#333333]">Offensive Stats</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              <p><span className="font-semibold">PTS:</span> {player.pts}</p>
-              <p><span className="font-semibold">PPG:</span> {player.ppg}</p>
-              <p><span className="font-semibold">AST:</span> {player.ast}</p>
-              <p><span className="font-semibold">APG:</span> {player.apg}</p>
-              <p><span className="font-semibold">REB:</span> {player.reb}</p>
-              <p><span className="font-semibold">RPG:</span> {player.rpg}</p>
-              <p><span className="font-semibold">OREB:</span> {player.oreb}</p>
-              <p><span className="font-semibold">DREB:</span> {player.dreb}</p>
-              <p><span className="font-semibold">FGM:</span> {player.fgm}</p>
-              <p><span className="font-semibold">FGA:</span> {player.fga}</p>
-              <p><span className="font-semibold">FG%:</span> {formatPercentage(player.fgPct)}</p>
-              <p><span className="font-semibold">3PM:</span> {player.fg3m}</p>
-              <p><span className="font-semibold">3PA:</span> {player.fg3a}</p>
-              <p><span className="font-semibold">3P%:</span> {formatPercentage(player.fg3m / player.fg3a)}</p>
-              <p><span className="font-semibold">FTM:</span> {player.ftm}</p>
-              <p><span className="font-semibold">FTA:</span> {player.fta}</p>
-              <p><span className="font-semibold">FT%:</span> {formatPercentage(player.ftPct)}</p>
-              <p><span className="font-semibold">Double-Doubles:</span> {player.dd2}</p>
-              <p><span className="font-semibold">Triple-Doubles:</span> {player.td3}</p>
+              <p><span className="font-semibold text-[#333333]">PTS:</span> {player.pts}</p>
+              <p><span className="font-semibold text-[#333333]">PPG:</span> {player.ppg}</p>
+              <p><span className="font-semibold text-[#333333]">AST:</span> {player.ast}</p>
+              <p><span className="font-semibold text-[#333333]">APG:</span> {player.apg}</p>
+              <p><span className="font-semibold text-[#333333]">REB:</span> {player.reb}</p>
+              <p><span className="font-semibold text-[#333333]">RPG:</span> {player.rpg}</p>
+              <p><span className="font-semibold text-[#333333]">OREB:</span> {player.oreb}</p>
+              <p><span className="font-semibold text-[#333333]">DREB:</span> {player.dreb}</p>
+              <p><span className="font-semibold text-[#333333]">FGM:</span> {player.fgm}</p>
+              <p><span className="font-semibold text-[#333333]">FGA:</span> {player.fga}</p>
+              <p><span className="font-semibold text-[#333333]">FG%:</span> {formatPercentage(player.fgPct)}</p>
+              <p><span className="font-semibold text-[#333333]">3PM:</span> {player.fg3m}</p>
+              <p><span className="font-semibold text-[#333333]">3PA:</span> {player.fg3a}</p>
+              <p><span className="font-semibold text-[#333333]">3P%:</span> {formatPercentage(player.fg3m / player.fg3a)}</p>
+              <p><span className="font-semibold text-[#333333]">FTM:</span> {player.ftm}</p>
+              <p><span className="font-semibold text-[#333333]">FTA:</span> {player.fta}</p>
+              <p><span className="font-semibold text-[#333333]">FT%:</span> {formatPercentage(player.ftPct)}</p>
+              <p><span className="font-semibold text-[#333333]">Double-Doubles:</span> {player.dd2}</p>
+              <p><span className="font-semibold text-[#333333]">Triple-Doubles:</span> {player.td3}</p>
             </div>
           </div>
         </div>
 
         <div className="mt-6 bg-[#00BFA6] border border-[#00BFA6] border-2 rounded-lg shadow-lg">
           <div className="bg-white p-6 rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">Defensive Stats</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#333333]">Defensive Stats</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              <p><span className="font-semibold">STL:</span> {player.stl}</p>
-              <p><span className="font-semibold">SPG:</span> {player.spg}</p>
-              <p><span className="font-semibold">BLK:</span> {player.blk}</p>
-              <p><span className="font-semibold">BPG:</span> {player.bpg}</p>
-              <p><span className="font-semibold">BLKA:</span> {player.blka}</p>
-              <p><span className="font-semibold">PF:</span> {player.pf}</p>
-              <p><span className="font-semibold">PFPG:</span> {player.pfpg}</p>
-              <p><span className="font-semibold">PFD:</span> {player.pfd}</p>
-              <p><span className="font-semibold">TOV:</span> {player.tov}</p>
-              <p><span className="font-semibold">TOVPG:</span> {player.topg}</p>
+              <p><span className="font-semibold text-[#333333]">STL:</span> {player.stl}</p>
+              <p><span className="font-semibold text-[#333333]">SPG:</span> {player.spg}</p>
+              <p><span className="font-semibold text-[#333333]">BLK:</span> {player.blk}</p>
+              <p><span className="font-semibold text-[#333333]">BPG:</span> {player.bpg}</p>
+              <p><span className="font-semibold text-[#333333]">BLKA:</span> {player.blka}</p>
+              <p><span className="font-semibold text-[#333333]">PF:</span> {player.pf}</p>
+              <p><span className="font-semibold text-[#333333]">PFPG:</span> {player.pfpg}</p>
+              <p><span className="font-semibold text-[#333333]">PFD:</span> {player.pfd}</p>
+              <p><span className="font-semibold text-[#333333]">TOV:</span> {player.tov}</p>
+              <p><span className="font-semibold text-[#333333]">TOVPG:</span> {player.topg}</p>
             </div>
           </div>
         </div>
         <div className="mt-6 bg-[#00BFA6] border border-[#00BFA6] border-2 rounded-lg shadow-lg">
               <div className="bg-white p-4 rounded-lg">
-                <h3 className="text-2xl font-bold mb-4">Fantasy</h3>
+                <h3 className="text-2xl font-bold mb-4 text-[#333333]">Fantasy</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  <p><span className="font-semibold">FanDuel Pts (Last 5):</span> {player.fanDuelPtsLast5}</p>
-                  <p><span className="font-semibold">NBA Fantasy Pts (Last 5):</span> {player.nbaFantasyPtsLast5}</p>
-                  <p><span className="font-semibold">Pts (Last 5):</span> {player.ptsLast5}</p>
-                  <p><span className="font-semibold">Reb (Last 5):</span> {player.rebLast5}</p>
-                  <p><span className="font-semibold">Ast (Last 5):</span> {player.astLast5}</p>
-                  <p><span className="font-semibold">3PM (Last 5):</span> {player.fg3mLast5}</p>
-                  <p><span className="font-semibold">FT% (Last 5):</span> {player.ftPctLast5}</p>
-                  <p><span className="font-semibold">Stl (Last 5):</span> {player.stlLast5}</p>
-                  <p><span className="font-semibold">Blk (Last 5):</span> {player.blkLast5}</p>
-                  <p><span className="font-semibold">TOV (Last 5):</span> {player.tovLast5}</p>
-                  <p><span className="font-semibold">FG% (Last 5):</span> {player.fgPctLast5}</p>
-                  <p><span className="font-semibold">FanDuel Pts (Season):</span> {player.fanDuelPtsSeason}</p>
-                  <p><span className="font-semibold">NBA Fantasy Pts (Season):</span> {player.nbaFantasyPtsSeason}</p>
-                  <p><span className="font-semibold">Pts (Season):</span> {player.ptsSeason}</p>
-                  <p><span className="font-semibold">Reb (Season):</span> {player.rebSeason}</p>
-                  <p><span className="font-semibold">Ast (Season):</span> {player.astSeason}</p>
-                  <p><span className="font-semibold">3PM (Season):</span> {player.fg3mSeason}</p>
-                  <p><span className="font-semibold">FG% (Season):</span> {player.fgPctSeason}</p>
-                  <p><span className="font-semibold">TOV (Season):</span> {player.tovSeason}</p>
+                  <p><span className="font-semibold text-[#333333]">FanDuel Pts (Last 5):</span> {player.fanDuelPtsLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">NBA Fantasy Pts (Last 5):</span> {player.nbaFantasyPtsLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">Pts (Last 5):</span> {player.ptsLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">Reb (Last 5):</span> {player.rebLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">Ast (Last 5):</span> {player.astLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">3PM (Last 5):</span> {player.fg3mLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">FT% (Last 5):</span> {player.ftPctLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">Stl (Last 5):</span> {player.stlLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">Blk (Last 5):</span> {player.blkLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">TOV (Last 5):</span> {player.tovLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">FG% (Last 5):</span> {player.fgPctLast5}</p>
+                  <p><span className="font-semibold text-[#333333]">FanDuel Pts (Season):</span> {player.fanDuelPtsSeason}</p>
+                  <p><span className="font-semibold text-[#333333]">NBA Fantasy Pts (Season):</span> {player.nbaFantasyPtsSeason}</p>
+                  <p><span className="font-semibold text-[#333333]">Pts (Season):</span> {player.ptsSeason}</p>
+                  <p><span className="font-semibold text-[#333333]">Reb (Season):</span> {player.rebSeason}</p>
+                  <p><span className="font-semibold text-[#333333]">Ast (Season):</span> {player.astSeason}</p>
+                  <p><span className="font-semibold text-[#333333]">3PM (Season):</span> {player.fg3mSeason}</p>
+                  <p><span className="font-semibold text-[#333333]">FG% (Season):</span> {player.fgPctSeason}</p>
+                  <p><span className="font-semibold text-[#333333]">TOV (Season):</span> {player.tovSeason}</p>
                 </div>
               </div>
             </div>
 
           <div className="mt-6 bg-[#00BFA6] border border-[#00BFA6] border-2 rounded-lg shadow-lg">
           <div className="bg-white p-6 rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">Ranks</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#333333]">Ranks</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              <p><span className="font-semibold">GP Rank:</span> {player.gpRank}</p>
-              <p><span className="font-semibold">Wins Rank:</span> {player.wRank}</p>
-              <p><span className="font-semibold">Losses Rank:</span> {player.lRank}</p>
-              <p><span className="font-semibold">Win % Rank:</span> {player.wPctRank}</p>
-              <p><span className="font-semibold">Minutes Rank:</span> {player.minRank}</p>
-              <p><span className="font-semibold">Plus/Minus Rank:</span> {player.plusMinusRank}</p>
-              <p><span className="font-semibold">FGM Rank:</span> {player.fgmRank}</p>
-              <p><span className="font-semibold">FGA Rank:</span> {player.fgaRank}</p>
-              <p><span className="font-semibold">FG% Rank:</span> {player.fgPctRank}</p>
-              <p><span className="font-semibold">3PM Rank:</span> {player.fg3mRank}</p>
-              <p><span className="font-semibold">3PA Rank:</span> {player.fg3aRank}</p>
-              <p><span className="font-semibold">3P% Rank:</span> {player.fg3PctRank}</p>
-              <p><span className="font-semibold">FTM Rank:</span> {player.ftmRank}</p>
-              <p><span className="font-semibold">FTA Rank:</span> {player.ftaRank}</p>
-              <p><span className="font-semibold">FT% Rank:</span> {player.ftPctRank}</p>
-              <p><span className="font-semibold">OREB Rank:</span> {player.orebRank}</p>
-              <p><span className="font-semibold">DREB Rank:</span> {player.drebRank}</p>
-              <p><span className="font-semibold">REB Rank:</span> {player.rebRank}</p>
-              <p><span className="font-semibold">AST Rank:</span> {player.astRank}</p>
-              <p><span className="font-semibold">TOV Rank:</span> {player.tovRank}</p>
-              <p><span className="font-semibold">STL Rank:</span> {player.stlRank}</p>
-              <p><span className="font-semibold">BLK Rank:</span> {player.blkRank}</p>
-              <p><span className="font-semibold">BLKA Rank:</span> {player.blkaRank}</p>
-              <p><span className="font-semibold">PF Rank:</span> {player.pfRank}</p>
-              <p><span className="font-semibold">PFD Rank:</span> {player.pfdRank}</p>
-              <p><span className="font-semibold">PTS Rank:</span> {player.ptsRank}</p>
-              <p><span className="font-semibold">Double-Doubles Rank:</span> {player.dd2Rank}</p>
-              <p><span className="font-semibold">Triple-Doubles Rank:</span> {player.td3Rank}</p>
-              <p><span className="font-semibold">NBA Fantasy Pts Rank:</span> {player.nbaFantasyPtsRank}</p>
+              <p><span className="font-semibold text-[#333333]">GP Rank:</span> {player.gpRank}</p>
+              <p><span className="font-semibold text-[#333333]">Wins Rank:</span> {player.wRank}</p>
+              <p><span className="font-semibold text-[#333333]">Losses Rank:</span> {player.lRank}</p>
+              <p><span className="font-semibold text-[#333333]">Win % Rank:</span> {player.wPctRank}</p>
+              <p><span className="font-semibold text-[#333333]">Minutes Rank:</span> {player.minRank}</p>
+              <p><span className="font-semibold text-[#333333]">Plus/Minus Rank:</span> {player.plusMinusRank}</p>
+              <p><span className="font-semibold text-[#333333]">FGM Rank:</span> {player.fgmRank}</p>
+              <p><span className="font-semibold text-[#333333]">FGA Rank:</span> {player.fgaRank}</p>
+              <p><span className="font-semibold text-[#333333]">FG% Rank:</span> {player.fgPctRank}</p>
+              <p><span className="font-semibold text-[#333333]">3PM Rank:</span> {player.fg3mRank}</p>
+              <p><span className="font-semibold text-[#333333]">3PA Rank:</span> {player.fg3aRank}</p>
+              <p><span className="font-semibold text-[#333333]">3P% Rank:</span> {player.fg3PctRank}</p>
+              <p><span className="font-semibold text-[#333333]">FTM Rank:</span> {player.ftmRank}</p>
+              <p><span className="font-semibold text-[#333333]">FTA Rank:</span> {player.ftaRank}</p>
+              <p><span className="font-semibold text-[#333333]">FT% Rank:</span> {player.ftPctRank}</p>
+              <p><span className="font-semibold text-[#333333]">OREB Rank:</span> {player.orebRank}</p>
+              <p><span className="font-semibold text-[#333333]">DREB Rank:</span> {player.drebRank}</p>
+              <p><span className="font-semibold text-[#333333]">REB Rank:</span> {player.rebRank}</p>
+              <p><span className="font-semibold text-[#333333]">AST Rank:</span> {player.astRank}</p>
+              <p><span className="font-semibold text-[#333333]">TOV Rank:</span> {player.tovRank}</p>
+              <p><span className="font-semibold text-[#333333]">STL Rank:</span> {player.stlRank}</p>
+              <p><span className="font-semibold text-[#333333]">BLK Rank:</span> {player.blkRank}</p>
+              <p><span className="font-semibold text-[#333333]">BLKA Rank:</span> {player.blkaRank}</p>
+              <p><span className="font-semibold text-[#333333]">PF Rank:</span> {player.pfRank}</p>
+              <p><span className="font-semibold text-[#333333]">PFD Rank:</span> {player.pfdRank}</p>
+              <p><span className="font-semibold text-[#333333]">PTS Rank:</span> {player.ptsRank}</p>
+              <p><span className="font-semibold text-[#333333]">Double-Doubles Rank:</span> {player.dd2Rank}</p>
+              <p><span className="font-semibold text-[#333333]">Triple-Doubles Rank:</span> {player.td3Rank}</p>
+              <p><span className="font-semibold text-[#333333]">NBA Fantasy Pts Rank:</span> {player.nbaFantasyPtsRank}</p>
             </div>
           </div>
         </div>

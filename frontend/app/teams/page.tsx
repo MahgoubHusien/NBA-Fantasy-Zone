@@ -30,9 +30,9 @@ const TeamsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-[#f9f9f9]">
       <div className="title-container bg-white p-4 rounded-lg shadow-lg mb-8">
-        <h1 className="text-4xl font-extrabold text-center text-gray-800">Teams</h1>
+        <h1 className="text-4xl font-extrabold text-center text-[#333333]">Teams</h1>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
         {teams.map((team) => (

@@ -31,10 +31,10 @@ public class GameController {
         return new ResponseEntity<>(gameService.getAllGameHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping("/headers/{id}")
-    public ResponseEntity<GameHeader> getGameHeaderById(@PathVariable Long id) {
-        Optional<GameHeader> gameHeader = gameService.getGameHeaderById(id);
-        return gameHeader.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("/headers/{gameId}")
+    public ResponseEntity<List<GameHeader>> getGameHeaderByGameId(@PathVariable String gameId) {
+        List<GameHeader> gameHeader = gameService.getGameHeaderByGameId(gameId);
+        return new ResponseEntity<>(gameHeader, HttpStatus.OK);
     }
 
     @GetMapping("/headers/date/{date}")
@@ -59,10 +59,10 @@ public class GameController {
         return new ResponseEntity<>(gameService.getAllLineScores(), HttpStatus.OK);
     }
 
-    @GetMapping("/linescores/{id}")
-    public ResponseEntity<LineScore> getLineScoreById(@PathVariable Long id) {
-        Optional<LineScore> lineScore = gameService.getLineScoreById(id);
-        return lineScore.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("/linescores/{gameId}")
+    public ResponseEntity<List<LineScore>> getLineScoreByGameId(@PathVariable String gameId) {
+        List<LineScore> lineScore = gameService.getLineScoreByGameId(gameId);
+        return new ResponseEntity<>(lineScore, HttpStatus.OK);
     }
 
     @GetMapping("/linescores/game/{gameId}")
@@ -77,41 +77,41 @@ public class GameController {
 
     @GetMapping("/linescores/game/{gameId}/team/{teamId}")
     public ResponseEntity<LineScore> getLineScoreByGameIdAndTeamId(@PathVariable String gameId, @PathVariable int teamId) {
-        LineScore lineScore = gameService.getLineScoreByGameIdAndTeamId(gameId, teamId);
-        return new ResponseEntity<>(lineScore, HttpStatus.OK);
+        Optional<LineScore> lineScore = Optional.ofNullable(gameService.getLineScoreByGameIdAndTeamId(gameId, teamId));
+        return lineScore.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // Games Endpoints
 
-    @GetMapping
+    @GetMapping("/game")
     public ResponseEntity<List<Games>> getAllGames() {
         return new ResponseEntity<>(gameService.getAllGames(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Games> getGameById(@PathVariable Long id) {
-        Optional<Games> game = gameService.getGameById(id);
-        return game.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("/game/{gameId}")
+    public ResponseEntity<List<Games>> getGameById(@PathVariable String gameId) {
+        List<Games> game = gameService.getGameById(gameId);
+        return new ResponseEntity<>(game, HttpStatus.OK);
     }
 
-    @GetMapping("/season/{seasonId}")
-    public ResponseEntity<List<Games>> getGamesBySeason(@PathVariable int seasonId) {
+    @GetMapping("/game/season/{seasonId}")
+    public ResponseEntity<List<Games>> getGamesBySeason(@PathVariable Integer seasonId) {
         return new ResponseEntity<>(gameService.getGamesBySeason(seasonId), HttpStatus.OK);
     }
 
-    @GetMapping("/home/{homeTeamId}")
-    public ResponseEntity<List<Games>> getGamesByHomeTeam(@PathVariable int homeTeamId) {
-        return new ResponseEntity<>(gameService.getGamesByHomeTeam(homeTeamId), HttpStatus.OK);
+    @GetMapping("/game/team/{teamId}")
+    public ResponseEntity<List<Games>> getGamesByTeamId(@PathVariable Integer teamId) {
+        return new ResponseEntity<>(gameService.getGamesByTeamId(teamId), HttpStatus.OK);
     }
 
-    @GetMapping("/visitor/{visitorTeamId}")
-    public ResponseEntity<List<Games>> getGamesByVisitorTeam(@PathVariable int visitorTeamId) {
-        return new ResponseEntity<>(gameService.getGamesByVisitorTeam(visitorTeamId), HttpStatus.OK);
-    }
-
-    @GetMapping("/wl/{wl}")
+    @GetMapping("/game/wl/{wl}")
     public ResponseEntity<List<Games>> getGamesByWinLoss(@PathVariable String wl) {
         return new ResponseEntity<>(gameService.getGamesByWinLoss(wl), HttpStatus.OK);
+    }
+
+    @GetMapping("/game/points/{pts}")
+    public ResponseEntity<List<Games>> getGamesByPointsGreaterThan(@PathVariable Integer pts) {
+        return new ResponseEntity<>(gameService.getGamesByPointsGreaterThan(pts), HttpStatus.OK);
     }
 
     // PlayerBoxStats Endpoints
@@ -121,39 +121,39 @@ public class GameController {
         return new ResponseEntity<>(gameService.getAllPlayerBoxStats(), HttpStatus.OK);
     }
 
-    @GetMapping("/playerboxstats/{id}")
+    @GetMapping("/playerboxstats/id/{id}")
     public ResponseEntity<PlayerBoxStats> getPlayerBoxStatsById(@PathVariable Long id) {
         Optional<PlayerBoxStats> playerBoxStats = gameService.getPlayerBoxStatsById(id);
         return playerBoxStats.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/playerboxstats/game/{gameId}")
+    @GetMapping("/playerboxstats/gameId/{gameId}")
     public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByGameId(@PathVariable String gameId) {
         return new ResponseEntity<>(gameService.getPlayerBoxStatsByGameId(gameId), HttpStatus.OK);
     }
 
     @GetMapping("/playerboxstats/player/{playerId}")
-    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByPlayerId(@PathVariable int playerId) {
+    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByPlayerId(@PathVariable Integer playerId) {
         return new ResponseEntity<>(gameService.getPlayerBoxStatsByPlayerId(playerId), HttpStatus.OK);
     }
 
     @GetMapping("/playerboxstats/team/{teamId}")
-    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByTeamId(@PathVariable int teamId) {
+    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByTeamId(@PathVariable Integer teamId) {
         return new ResponseEntity<>(gameService.getPlayerBoxStatsByTeamId(teamId), HttpStatus.OK);
     }
 
     @GetMapping("/playerboxstats/points/{pts}")
-    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByPointsGreaterThan(@PathVariable int pts) {
+    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByPointsGreaterThan(@PathVariable Integer pts) {
         return new ResponseEntity<>(gameService.getPlayerBoxStatsByPointsGreaterThan(pts), HttpStatus.OK);
     }
 
     @GetMapping("/playerboxstats/rebounds/{reb}")
-    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByRebounds(@PathVariable int reb) {
+    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByRebounds(@PathVariable Integer reb) {
         return new ResponseEntity<>(gameService.getPlayerBoxStatsByRebounds(reb), HttpStatus.OK);
     }
 
     @GetMapping("/playerboxstats/fgpct/{fgPct}")
-    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByFieldGoalPercentageGreaterThan(@PathVariable double fgPct) {
+    public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByFieldGoalPercentageGreaterThan(@PathVariable Double fgPct) {
         return new ResponseEntity<>(gameService.getPlayerBoxStatsByFieldGoalPercentageGreaterThan(fgPct), HttpStatus.OK);
     }
 }
