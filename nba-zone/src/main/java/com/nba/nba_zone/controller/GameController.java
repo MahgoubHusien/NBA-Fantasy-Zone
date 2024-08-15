@@ -83,33 +83,33 @@ public class GameController {
 
     // Games Endpoints
 
-    @GetMapping("/game")
+    @GetMapping("/gamer")
     public ResponseEntity<List<Games>> getAllGames() {
         return new ResponseEntity<>(gameService.getAllGames(), HttpStatus.OK);
     }
 
-    @GetMapping("/game/{gameId}")
+    @GetMapping("/gamer/{gameId}")
     public ResponseEntity<List<Games>> getGameById(@PathVariable String gameId) {
         List<Games> game = gameService.getGameById(gameId);
         return new ResponseEntity<>(game, HttpStatus.OK);
     }
 
-    @GetMapping("/game/season/{seasonId}")
+    @GetMapping("/gamer/season/{seasonId}")
     public ResponseEntity<List<Games>> getGamesBySeason(@PathVariable Integer seasonId) {
         return new ResponseEntity<>(gameService.getGamesBySeason(seasonId), HttpStatus.OK);
     }
 
-    @GetMapping("/game/team/{teamId}")
+    @GetMapping("/gamer/team/{teamId}")
     public ResponseEntity<List<Games>> getGamesByTeamId(@PathVariable Integer teamId) {
         return new ResponseEntity<>(gameService.getGamesByTeamId(teamId), HttpStatus.OK);
     }
 
-    @GetMapping("/game/wl/{wl}")
+    @GetMapping("/gamer/wl/{wl}")
     public ResponseEntity<List<Games>> getGamesByWinLoss(@PathVariable String wl) {
         return new ResponseEntity<>(gameService.getGamesByWinLoss(wl), HttpStatus.OK);
     }
 
-    @GetMapping("/game/points/{pts}")
+    @GetMapping("/gamer/points/{pts}")
     public ResponseEntity<List<Games>> getGamesByPointsGreaterThan(@PathVariable Integer pts) {
         return new ResponseEntity<>(gameService.getGamesByPointsGreaterThan(pts), HttpStatus.OK);
     }
@@ -127,7 +127,7 @@ public class GameController {
         return playerBoxStats.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/playerboxstats/gameId/{gameId}")
+    @GetMapping("/playerboxstats/{gameId}")
     public ResponseEntity<List<PlayerBoxStats>> getPlayerBoxStatsByGameId(@PathVariable String gameId) {
         return new ResponseEntity<>(gameService.getPlayerBoxStatsByGameId(gameId), HttpStatus.OK);
     }

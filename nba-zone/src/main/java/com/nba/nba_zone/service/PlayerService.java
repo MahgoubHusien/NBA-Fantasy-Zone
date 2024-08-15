@@ -39,6 +39,10 @@ public class PlayerService {
         return commonPlayerInfoRepository.findAll();
     }
 
+    public Optional<CommonPlayerInfo> getCommonPlayerInfoByPlayerId(Integer playerId) {
+        return commonPlayerInfoRepository.findByPlayerId(playerId);
+    }
+
     public CommonPlayerInfo getCommonPlayerInfoById(Long id) {
         return commonPlayerInfoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Player not found"));

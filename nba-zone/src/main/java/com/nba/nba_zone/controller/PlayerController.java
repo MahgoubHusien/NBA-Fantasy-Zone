@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/players")
@@ -40,6 +41,13 @@ public class PlayerController {
         CommonPlayerInfo playerInfo = playerService.getCommonPlayerInfoById(id);
         return new ResponseEntity<>(playerInfo, HttpStatus.OK);
     }
+
+    @GetMapping("/commonPlayerInfo/playerId/{playerId}")
+    public ResponseEntity<CommonPlayerInfo> getCommonPlayerInfoByPlayerId(@PathVariable Integer playerId) {
+        Optional<CommonPlayerInfo> playerInfo = playerService.getCommonPlayerInfoByPlayerId(playerId);
+        return playerInfo.map(commonPlayerInfo -> new ResponseEntity<>(commonPlayerInfo, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 
     // Retrieve current player stats by player ID
     @GetMapping("/currentPlayerStats/{id}")

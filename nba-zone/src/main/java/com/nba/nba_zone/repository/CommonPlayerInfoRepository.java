@@ -16,6 +16,7 @@ public interface CommonPlayerInfoRepository extends JpaRepository<CommonPlayerIn
     // Method to find players by team abbreviation
     List<CommonPlayerInfo> findByTeamAbbreviation(String teamAbbreviation);
 
+
     // Method to find players by position
     List<CommonPlayerInfo> findByPosition(String position);
 

@@ -146,7 +146,7 @@ const GamesTab: React.FC = () => {
 
             return (
               <div key={gameHeader.gameId} className="game-card bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#333333]">
-                <Link href={`/game/${gameHeader.gameId}`}>
+                <Link href={`/games/${gameHeader.gameId}`}>
                   <div className="flex justify-between items-center mb-4">
                     <div className="flex flex-col items-center w-1/3">
                       <img src={getTeamLogo(gameHeader.homeTeamId)} alt={`${getTeamAbbreviation(gameHeader.homeTeamId, gameHeader.gameId)} Logo`} className="w-16 h-16 mb-2" />
