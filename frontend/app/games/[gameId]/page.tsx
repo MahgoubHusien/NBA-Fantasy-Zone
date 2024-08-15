@@ -164,56 +164,60 @@ const GameStatsPage: React.FC = () => {
     const [lineScores, setLineScores] = useState<LineScore[]>([]);
     const [teamStats, setTeamStats] = useState<TeamStats[]>([]);
     const [playerBoxStats, setPlayerBoxStats] = useState<PlayerBoxStats[]>([]);
-    const [gameHeader, setGameHeader] = useState<GameHeader | null>(null); // Add GameHeader state
+    const [gameHeader, setGameHeader] = useState<GameHeader | null>(null);  // Changed to store a single object
     const [activeTab, setActiveTab] = useState('stats');
 
     useEffect(() => {
         if (!gameId) {
-        console.log('No game ID provided.');
-        return;
+            console.log('No game ID provided.');
+            return;
         }
 
         const fetchGameData = async () => {
-        try {
-            console.log('Fetching game data for gameId:', gameId);
+            try {
+                console.log('Fetching game data for gameId:', gameId);
 
-            const lineScoreResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/linescores/${gameId}`);
-            const teamStatsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/team-stats`);
-            const playerBoxStatsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/playerboxstats/${removeLeadingZeros(gameId)}`);
-            const gameHeaderResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/headers/${gameId}`);
+                const lineScoreResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/linescores/${gameId}`);
+                const teamStatsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/team-stats`);
+                const playerBoxStatsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/playerboxstats/${removeLeadingZeros(gameId)}`);
+                const gameHeaderResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/headers/${gameId}`);
 
-            const lineScoreData = await lineScoreResponse.json();
-            const teamStatsData = await teamStatsResponse.json();
-            const playerBoxStatsData = await playerBoxStatsResponse.json();
-            const gameHeaderData = await gameHeaderResponse.json();
+                const lineScoreData = await lineScoreResponse.json();
+                const teamStatsData = await teamStatsResponse.json();
+                const playerBoxStatsData = await playerBoxStatsResponse.json();
+                const gameHeaderData = await gameHeaderResponse.json();
 
-            console.log('Fetched player box stats:', playerBoxStatsData);
+                console.log('Fetched line scores:', lineScoreData);
+                console.log('Fetched team stats:', teamStatsData);
+                console.log('Fetched player box stats:', playerBoxStatsData);
+                console.log('Fetched game header:', gameHeaderData); 
 
-            // Fetch CommonPlayerInfo for each player and combine with player box stats
-            const updatedPlayerBoxStats = await Promise.all(
-            playerBoxStatsData.map(async (player: PlayerBoxStats) => {
-                const playerInfoResponse = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/players/commonPlayerInfo/playerId/${player.playerId}`
+                // Set the game header to the first element of the array
+                setGameHeader(gameHeaderData.length > 0 ? gameHeaderData[0] : null);
+
+                // Fetch player positions and jersey numbers
+                const updatedPlayerBoxStats = await Promise.all(
+                    playerBoxStatsData.map(async (player: PlayerBoxStats) => {
+                        const playerInfoResponse = await fetch(
+                            `${process.env.NEXT_PUBLIC_API_URL}/players/commonPlayerInfo/playerId/${player.playerId}`
+                        );
+                        const playerInfoData: CommonPlayerInfo = await playerInfoResponse.json();
+
+                        return {
+                            ...player,
+                            position: playerInfoData.position || 'N/A',
+                            jersey: playerInfoData.jersey || 'N/A',
+                            fg3Pct: calculateFg3Pct(player.fg3m, player.fg3a),
+                        };
+                    })
                 );
-                const playerInfoData: CommonPlayerInfo = await playerInfoResponse.json();
 
-                return {
-                ...player,
-                commonPlayerId: playerInfoData.id, // Store CommonPlayerInfo id in player box stats
-                position: playerInfoData.position || 'N/A',
-                jersey: playerInfoData.jersey || 'N/A',
-                fg3Pct: calculateFg3Pct(player.fg3m, player.fg3a),
-                };
-            })
-            );
-
-            setLineScores(lineScoreData);
-            setTeamStats(Array.isArray(teamStatsData) ? teamStatsData : []);
-            setPlayerBoxStats(updatedPlayerBoxStats); // This is where playerBoxStats is set
-            setGameHeader(gameHeaderData);
-        } catch (error) {
-            console.error('Error fetching game data', error);
-        }
+                setLineScores(lineScoreData);
+                setTeamStats(Array.isArray(teamStatsData) ? teamStatsData : []);
+                setPlayerBoxStats(updatedPlayerBoxStats);
+            } catch (error) {
+                console.error('Error fetching game data', error);
+            }
         };
 
         fetchGameData();
@@ -331,7 +335,7 @@ const GameStatsPage: React.FC = () => {
         console.log('Rendering PlayerStatsTable for team:', teamName);
         
         return (
-            <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-300 mb-8" style={{ maxWidth: '1080px', margin: '0 auto', marginBottom: '50px' }}>
+            <div className="bg-white p-4 rounded-lg shadow-lg border border-[#333333] mb-8" style={{ maxWidth: '1080px', margin: '0 auto', marginBottom: '50px' }}>
             <div className="flex items-center mb-4">
                 <img src={logoUrl} alt={`${teamName} Logo`} className="w-10 h-10 mr-4" />
                 <h2 className="text-xl font-bold text-[#333333]">{teamName}</h2>
@@ -469,6 +473,7 @@ const GameStatsPage: React.FC = () => {
         <div className="text-center text-[#333333] space-y-2 w-1/3">
             {gameHeader ? (
             <>
+            {console.log(gameHeader)}
             <p className="text-sm">{gameHeader.gameDateEst}</p>
             <p className="text-sm">{gameHeader.arenaName}</p>
             <p className="text-2xl font-bold">{gameHeader.gameStatusText}</p>

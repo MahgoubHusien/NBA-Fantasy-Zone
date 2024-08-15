@@ -15,7 +15,7 @@ interface SearchResult {
 const Header = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-    const [isFocused, setIsFocused] = useState(false); 
+    const [isFocused, setIsFocused] = useState(false); // To handle focus state of the input
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
@@ -36,6 +36,7 @@ const Header = () => {
     };
 
     const handleInputBlur = () => {
+        // Delay the blur handling to allow click events on the results
         setTimeout(() => setIsFocused(false), 200);
     };
 
@@ -63,8 +64,8 @@ const Header = () => {
 
             const gameResults: SearchResult[] = games.map((game: any) => ({
                 type: 'game',
-                id: game.id,
-                name: `${game.homeTeamAbbreviation} vs ${game.visitorTeamAbbreviation}`,
+                id: game.gameId,
+                name: `${game.gameDateEst}: ${game.teamAbbreviation}`,
                 url: `/games/${game.gameId}`
             }));
 
@@ -102,25 +103,25 @@ const Header = () => {
                         <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                             <FontAwesomeIcon icon={faSearch} className="text-gray-500 h-5 w-5" />
                         </div>
-                    </div>
 
-                    {isFocused && searchResults.length > 0 && (
-                        <div className="absolute left-0 right-0 top-full mt-2 bg-white shadow-lg rounded-lg overflow-hidden">
-                            <ul>
-                                {searchResults.map(result => (
-                                    <li key={result.id} className="p-2 hover:bg-gray-100 border-b border-gray-200">
-                                        <Link href={result.url}>
-                                            <span className="block">
-                                                {result.type === 'player' && `Player: ${result.name}`}
-                                                {result.type === 'team' && `Team: ${result.name}`}
-                                                {result.type === 'game' && `Game: ${result.name}`}
-                                            </span>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+                        {isFocused && searchResults.length > 0 && (
+                            <div className="absolute mt-1 w-full bg-white shadow-lg rounded-lg overflow-hidden z-50">
+                                <ul>
+                                    {searchResults.map(result => (
+                                        <li key={result.id} className="p-2 hover:bg-gray-100 border-b border-gray-200">
+                                            <Link href={result.url}>
+                                                <span className="block text-sm text-gray-700">
+                                                    {result.type === 'player' && `Player: ${result.name}`}
+                                                    {result.type === 'team' && `Team: ${result.name}`}
+                                                    {result.type === 'game' && `Game: ${result.name}`}
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
                 </form>
 
                 <div className="hidden md:block">
