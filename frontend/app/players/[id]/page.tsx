@@ -200,7 +200,7 @@ const PlayerProfilePage = () => {
   return (
     <div className="container mx-auto p-10 bg-[#f9f9f9]">
       <div className="bg-white rounded-lg shadow-lg p-6 flex flex-wrap items-center justify-between space-x-6 border-2 border-[#333333]">
-        <div className="flex flex-col items-center justify-center flex-shrink-0">
+        <div className="flex flex-col items-center justify-center flex-shrink-0 ml-2">
           <img
             src={player.photoUrl || '/placeholder.png'}
             alt={`${player.firstName} ${player.lastName}`}
@@ -208,7 +208,7 @@ const PlayerProfilePage = () => {
           />
         </div>
         <div className="flex flex-col justify-center flex-grow space-y-2 relative left-12">
-          <h1 className="text-3xl font-bold text-[#333333]">{player.firstName} {player.lastName}</h1>
+          <h1 className="text-3xl font-bold text-[#333333]">{player.firstName}<br/> {player.lastName}</h1>
           <div className="text-m text-[#333333]-600">
             <p>{player.position} | {player.teamName}</p>
             <p>Jersey: {player.jersey}</p>
@@ -220,7 +220,7 @@ const PlayerProfilePage = () => {
         </div>
 
         <div className="flex flex-wrap space-x-4 w-full sm:w-auto flex-col sm:flex-row">
-          <div className="p-1 rounded-lg shadow-lg max-w-xs flex-1">
+          <div className="p-1 rounded-lg shadow-lg max-w-xs flex-1 mr-2">
             <div className="bg-white p-4 rounded-lg h-full">
               <h2 className="text-2xl font-bold mb-4 text-[#333333] text-center text-[#333333]">Top 5 Stats</h2>
               <div className="overflow-x-auto">

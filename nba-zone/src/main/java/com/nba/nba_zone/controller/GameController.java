@@ -1,9 +1,6 @@
 package com.nba.nba_zone.controller;
 
-import com.nba.nba_zone.model.GameHeader;
-import com.nba.nba_zone.model.LineScore;
-import com.nba.nba_zone.model.Games;
-import com.nba.nba_zone.model.PlayerBoxStats;
+import com.nba.nba_zone.model.*;
 import com.nba.nba_zone.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,6 +76,11 @@ public class GameController {
     public ResponseEntity<LineScore> getLineScoreByGameIdAndTeamId(@PathVariable String gameId, @PathVariable int teamId) {
         Optional<LineScore> lineScore = Optional.ofNullable(gameService.getLineScoreByGameIdAndTeamId(gameId, teamId));
         return lineScore.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/search-linescores")
+    public List<LineScore> searchLineScoresByName(@RequestParam String query) {
+        return gameService.searchLineScoresByName(query);
     }
 
     // Games Endpoints

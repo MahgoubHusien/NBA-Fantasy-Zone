@@ -1,9 +1,6 @@
 package com.nba.nba_zone.service;
 
-import com.nba.nba_zone.model.GameHeader;
-import com.nba.nba_zone.model.LineScore;
-import com.nba.nba_zone.model.Games;
-import com.nba.nba_zone.model.PlayerBoxStats;
+import com.nba.nba_zone.model.*;
 import com.nba.nba_zone.repository.GameHeaderRepository;
 import com.nba.nba_zone.repository.GamesRepository;
 import com.nba.nba_zone.repository.LineScoreRepository;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -67,6 +65,12 @@ public class GameService {
 
     public List<LineScore> getLineScoresByTeamId(int teamId) {
         return lineScoreRepository.findByTeamId(teamId);
+    }
+
+    public List<LineScore> searchLineScoresByName(String name) {
+        return lineScoreRepository.findAll().stream()
+                .filter(player -> player.getTeamName().toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     public LineScore getLineScoreByGameIdAndTeamId(String gameId, int teamId) {

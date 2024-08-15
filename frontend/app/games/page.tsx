@@ -135,7 +135,7 @@ const GamesTab: React.FC = () => {
   return (
     <div className="container mx-auto p-4 bg-[#f9f9f9]">
       <div className="title-container bg-white p-6 rounded-lg shadow-lg mb-8">
-        <h1 className="text-4xl font-extrabold text-center text-[#333333]">Today's Games</h1>
+        <h1 className="text-4xl font-extrabold text-center text-[#333333]">Latest Games</h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {gameHeaders

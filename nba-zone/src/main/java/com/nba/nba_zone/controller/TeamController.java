@@ -1,6 +1,7 @@
 package com.nba.nba_zone.controller;
 
 
+import com.nba.nba_zone.model.CommonPlayerInfo;
 import com.nba.nba_zone.model.Standings;
 import com.nba.nba_zone.model.TeamEstimatedMetrics;
 import com.nba.nba_zone.model.TeamStats;
@@ -36,6 +37,11 @@ public class TeamController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/search-teams")
+    public List<TeamStats> searchTeamsByName(@RequestParam String query) {
+        return teamService.searchTeamsByName(query);
     }
 
     @PostMapping("/team-stats")

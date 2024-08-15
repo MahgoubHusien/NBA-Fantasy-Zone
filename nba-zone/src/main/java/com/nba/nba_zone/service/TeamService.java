@@ -1,5 +1,6 @@
 package com.nba.nba_zone.service;
 
+import com.nba.nba_zone.model.CommonPlayerInfo;
 import com.nba.nba_zone.model.Standings;
 import com.nba.nba_zone.model.TeamEstimatedMetrics;
 import com.nba.nba_zone.model.TeamStats;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamService {
@@ -113,6 +115,11 @@ public class TeamService {
         return standingsRepository.findByConferenceOrderByWinPctDesc("West");
     }
 
+    public List<TeamStats> searchTeamsByName(String name) {
+        return teamStatsRepository.findAll().stream()
+                .filter(team -> team.getTeamName().toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 
     public Standings saveStandings(Standings standings) {
         return standingsRepository.save(standings);
