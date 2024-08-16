@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
 interface Player {
@@ -76,7 +76,7 @@ const LeagueLeadersPage: React.FC = () => {
   const [playersByCategory, setPlayersByCategory] = useState<{ [key: string]: Player[] }>({});
   const [topPlayers, setTopPlayers] = useState<Player[]>([]);
 
-  const fetchTopPlayers = async (category: string) => {
+  const fetchTopPlayers = useCallback(async (category: string) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-${category}`);
       const data = await response.json();
@@ -85,9 +85,9 @@ const LeagueLeadersPage: React.FC = () => {
       console.error(`Failed to fetch top players for ${category}:`, error);
       setPlayersByCategory((prev) => ({ ...prev, [category]: [] }));
     }
-  };
+  }, []);
 
-  const fetchTopOverallPlayers = async () => {
+  const fetchTopOverallPlayers = useCallback(async () => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/leagueLeaders`);
       const data = await response.json();
@@ -95,14 +95,14 @@ const LeagueLeadersPage: React.FC = () => {
     } catch (error) {
       console.error('Failed to fetch top overall players:', error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     categories.forEach((category) => {
       fetchTopPlayers(category.name);
     });
     fetchTopOverallPlayers();
-  }, []);
+  }, [fetchTopPlayers, fetchTopOverallPlayers]);
 
   return (
     <div className="container mx-auto p-4">
@@ -145,7 +145,7 @@ const LeagueLeadersPage: React.FC = () => {
         </table>
         <div className="flex justify-center mt-4">
           <Link href="/top-players">
-          <button className="bg-[#333333] hover:bg-[#1a1a1a] text-white font-semibold py-1.5 px-3 rounded-lg transition">
+            <button className="bg-[#333333] hover:bg-[#1a1a1a] text-white font-semibold py-1.5 px-3 rounded-lg transition">
               See More
             </button>
           </Link>

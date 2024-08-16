@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect, useCallback } from 'react';
 import PlayerCard from '@/components/player-card';
 
 interface Player {
@@ -78,9 +77,9 @@ const PlayersPage: React.FC = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [sortCriteria, setSortCriteria] = useState<string>('commonPlayerInfo');
 
-  const fetchPlayers = async (sortCriteria: string) => {
+  const fetchPlayers = useCallback(async (criteria: string) => {
     try {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/players/${sortCriteria}`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/players/${criteria}`;
       console.log('Fetching from URL:', url);
       const response = await fetch(url);
       if (!response.ok) {
@@ -92,11 +91,11 @@ const PlayersPage: React.FC = () => {
       console.error('Failed to fetch players:', error);
       setPlayers([]); 
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchPlayers(sortCriteria);
-  }, [sortCriteria]);
+  }, [sortCriteria, fetchPlayers]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortCriteria(event.target.value);

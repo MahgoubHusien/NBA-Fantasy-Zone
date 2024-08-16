@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
 interface TeamStandings {
@@ -39,37 +39,42 @@ interface TeamStandings {
   logoUrl: string;
 }
 
+
 const StandingsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'east' | 'west' | 'league'>('east');
   const [easternStandings, setEasternStandings] = useState<TeamStandings[]>([]);
   const [westernStandings, setWesternStandings] = useState<TeamStandings[]>([]);
   const [leagueStandings, setLeagueStandings] = useState<TeamStandings[]>([]);
 
-  useEffect(() => {
-    const fetchStandings = async () => {
-      try {
-        const eastResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/east`);
-        const westResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/west`);
-        const leagueResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/league`);
-        
-        const easternData = await eastResponse.json();
-        const westernData = await westResponse.json();
-        const leagueData = await leagueResponse.json();
+  const fetchStandings = useCallback(async () => {
+    try {
+      const [eastResponse, westResponse, leagueResponse] = await Promise.all([
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/east`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/west`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/league`)
+      ]);
 
-        console.log('Eastern Standings:', easternData);
-        console.log('Western Standings:', westernData);
-        console.log('League Standings:', leagueData);
+      const [easternData, westernData, leagueData] = await Promise.all([
+        eastResponse.json(),
+        westResponse.json(),
+        leagueResponse.json()
+      ]);
 
-        if (Array.isArray(easternData)) setEasternStandings(easternData);
-        if (Array.isArray(westernData)) setWesternStandings(westernData);
-        if (Array.isArray(leagueData)) setLeagueStandings(leagueData);
-      } catch (error) {
-        console.error('Failed to fetch standings:', error);
-      }
-    };
+      console.log('Eastern Standings:', easternData);
+      console.log('Western Standings:', westernData);
+      console.log('League Standings:', leagueData);
 
-    fetchStandings();
+      if (Array.isArray(easternData)) setEasternStandings(easternData);
+      if (Array.isArray(westernData)) setWesternStandings(westernData);
+      if (Array.isArray(leagueData)) setLeagueStandings(leagueData);
+    } catch (error) {
+      console.error('Failed to fetch standings:', error);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchStandings();
+  }, [fetchStandings]);
 
   const renderStandingsTable = (standings: TeamStandings[]) => {
     if (!Array.isArray(standings)) {
@@ -100,50 +105,50 @@ const StandingsPage: React.FC = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-          {standings.map((team, index) => (
-            <React.Fragment key={team.teamId}>
-              {activeTab !== 'league' && index === 6 && (
+            {standings.map((team, index) => (
+              <React.Fragment key={team.teamId}>
+                {activeTab !== 'league' && index === 6 && (
+                  <tr>
+                    <td colSpan={15} className="relative">
+                      <div className="absolute top-0 w-full border-t-2 border-dashed border-gray-400"></div>
+                    </td>
+                  </tr>
+                )}
+                {activeTab !== 'league' && index === 10 && (
+                  <tr>
+                    <td colSpan={15} className="relative">
+                      <div className="absolute top-0 w-full border-t-4 border-gray-700"></div>
+                    </td>
+                  </tr>
+                )}
                 <tr>
-                  <td colSpan={15} className="relative">
-                    <div className="absolute top-0 w-full border-t-2 border-dashed border-gray-400"></div>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">
+                    <Link href={`/teams/${team.teamId}`} className="text-[#333333]-600 hover:text-[#333333]-800 flex items-center justify-center">
+                      <img src={team.logoUrl} alt={`${team.teamName} Logo`} className="w-6 h-6 mr-2" />
+                      <span>{team.teamName}</span>
+                    </Link>
                   </td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.wins}-{team.losses}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.clinchIndicator}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.conferenceGamesBack}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.winPct.toFixed(3)}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.conferenceRecord}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.division}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.divisionRecord}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.home}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.road}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.lastTen}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.currentStreak}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.pointsPerGame.toFixed(1)}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.opponentPointsPerGame.toFixed(1)}</td>
+                  <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.differencePointsPerGame.toFixed(1)}</td>
                 </tr>
-              )}
-              {activeTab !== 'league' && index === 10 && (
-                <tr>
-                  <td colSpan={15} className="relative">
-                    <div className="absolute top-0 w-full border-t-4 border-gray-700"></div>
-                  </td>
-                </tr>
-              )}
-              <tr>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">
-                  <Link href={`/teams/${team.teamId}`} className="text-[#333333]-600 hover:text-[#333333]-800 flex items-center justify-center">
-                    <img src={team.logoUrl} alt={`${team.teamName} Logo`} className="w-6 h-6 mr-2" />
-                    <span>{team.teamName}</span>
-                  </Link>
-                </td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.wins}-{team.losses}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.clinchIndicator}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.conferenceGamesBack}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.winPct.toFixed(3)}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.conferenceRecord}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.division}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.divisionRecord}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.home}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.road}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.lastTen}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.currentStreak}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.pointsPerGame.toFixed(1)}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.opponentPointsPerGame.toFixed(1)}</td>
-                <td className="px-4 py-3 text-center whitespace-nowrap text-sm text-gray-500">{team.differencePointsPerGame.toFixed(1)}</td>
-              </tr>
-            </React.Fragment>
-          ))}
-        </tbody>
+              </React.Fragment>
+            ))}
+          </tbody>
         </table>
-        
+
         <div className="mt-6 text-sm text-gray-600">
           <p><strong>Legend:</strong></p>
           <ul className="mt-3 mb-3 flex flex-wrap gap-4 list-none">
@@ -160,8 +165,8 @@ const StandingsPage: React.FC = () => {
         </div>
       </div>
     );
-  }
-    
+  };
+
   return (
     <div className="container mx-auto p-4 max-w-4xl">
       <div className="title-container bg-white p-6 rounded-lg shadow-lg mb-6">
@@ -170,7 +175,7 @@ const StandingsPage: React.FC = () => {
       <div className="bg-white p-6 rounded-lg shadow-lg mb-6 border-2 border-[#333333]">
         <div className="flex flex-wrap justify-center mb-4">
           <button
-            className={`px-4 py-2 m-2 font-bold text-lg  ${activeTab === 'league' ? 'text-[#00BFA6] border-b-4 border-[#00BFA6]' : 'text-[#333333]'}`}
+            className={`px-4 py-2 m-2 font-bold text-lg ${activeTab === 'league' ? 'text-[#00BFA6] border-b-4 border-[#00BFA6]' : 'text-[#333333]'}`}
             onClick={() => setActiveTab('league')}
           >
             League
@@ -207,6 +212,5 @@ const StandingsPage: React.FC = () => {
     </div>
   );
 };
-
 
 export default StandingsPage;

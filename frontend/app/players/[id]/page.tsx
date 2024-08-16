@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
+
 
 type PlayerProfile = {
   id: number;
@@ -119,7 +120,7 @@ const getTopFiveStats = (ppg: number, apg: number, rpg: number, spg: number, top
     { name: 'SPG', value: spg },
     { name: 'TOPG', value: topg },
     { name: 'BPG', value: bpg },
-    { name: 'PFPG', value: pfpg }
+    { name: 'PFPG', value: pfpg },
   ];
   return stats.sort((a, b) => b.value - a.value).slice(0, 5);
 };
@@ -128,72 +129,58 @@ const PlayerProfilePage = () => {
   const { id } = useParams();
   const [player, setPlayer] = useState<PlayerProfile | null>(null);
 
-  useEffect(() => {
-    const fetchPlayer = async () => {
-      if (!id) return;
-  
-      try {
-        // Fetch common player info
-        const response1 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/commonPlayerInfo/${id}`);
-        const commonPlayerInfo = await response1.json();
-  
-        // Fetch current player stats
-        const response2 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/currentPlayerStats/${id}`);
-        const currentPlayerStats = await response2.json();
-  
-        // Fetch player fantasy stats
-        const response3 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/playerFantasyStats/${id}`);
-        const playerFantasyStats = await response3.json();
-  
-        // Merge the fetched player data
-        const playerData = { ...commonPlayerInfo, ...currentPlayerStats, ...playerFantasyStats };
-        setPlayer(playerData);
-  
-        // Fetch player rank using the playerId from the merged player object
-        const playerId = playerData.playerId; // Extract playerId from the merged player object
-        const rankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/leagueLeader/${playerId}`);
-        const rankData = await rankResponse.json();
-        const rank = rankData.rank || null;
-  
-        // Fetch additional rankings
-        const fg3PctRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-fg3pct-rank`);
-        const fg3PctRankData = await fg3PctRankResponse.json();
-        const fg3PctRank = fg3PctRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
-  
-        const dd2RankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-dd2-rank`);
-        const dd2RankData = await dd2RankResponse.json();
-        const dd2Rank = dd2RankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
-  
-        const td3RankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-td3-rank`);
-        const td3RankData = await td3RankResponse.json();
-        const td3Rank = td3RankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
-  
-        const wPctRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-wpct-rank`);
-        const wPctRankData = await wPctRankResponse.json();
-        const wPctRank = wPctRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
-  
-        const wRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-w-rank`);
-        const wRankData = await wRankResponse.json();
-        const wRank = wRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
-  
-        const lRankResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-l-rank`);
-        const lRankData = await lRankResponse.json();
-        const lRank = lRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
-  
-        // Set the state with the full player data, including all ranks
-        setPlayer({ ...playerData, rank, fg3PctRank, dd2Rank, td3Rank, wPctRank, wRank, lRank });
-      } catch (error) {
-        console.error('Error fetching player:', error);
-      }
-    };
-  
-    fetchPlayer();
+  const fetchPlayerData = useCallback(async () => {
+    if (!id) return;
+
+    try {
+      const [commonPlayerInfo, currentPlayerStats, playerFantasyStats] = await Promise.all([
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/commonPlayerInfo/${id}`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/currentPlayerStats/${id}`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/playerFantasyStats/${id}`).then((res) => res.json()),
+      ]);
+
+      const playerData = { ...commonPlayerInfo, ...currentPlayerStats, ...playerFantasyStats };
+      const playerId = playerData.playerId;
+
+      const [
+        rankData,
+        fg3PctRankData,
+        dd2RankData,
+        td3RankData,
+        wPctRankData,
+        wRankData,
+        lRankData,
+      ] = await Promise.all([
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/leagueLeader/${playerId}`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-fg3pct-rank`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-dd2-rank`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-td3-rank`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-wpct-rank`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-w-rank`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-l-rank`).then((res) => res.json()),
+      ]);
+
+      const rank = rankData.rank || null;
+      const fg3PctRank = fg3PctRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+      const dd2Rank = dd2RankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+      const td3Rank = td3RankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+      const wPctRank = wPctRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+      const wRank = wRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+      const lRank = lRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
+
+      setPlayer({ ...playerData, rank, fg3PctRank, dd2Rank, td3Rank, wPctRank, wRank, lRank });
+    } catch (error) {
+      console.error('Error fetching player:', error);
+    }
   }, [id]);
-  
+
+  useEffect(() => {
+    fetchPlayerData();
+  }, [fetchPlayerData]);
+
   if (!player) {
     return <p>Loading...</p>;
   }
-  
 
   const topFiveStats = getTopFiveStats(player.ppg, player.apg, player.rpg, player.spg, player.topg, player.bpg, player.pfpg);
 
@@ -208,7 +195,10 @@ const PlayerProfilePage = () => {
           />
         </div>
         <div className="flex flex-col justify-center flex-grow space-y-2 relative left-12">
-          <h1 className="text-3xl font-bold text-[#333333]">{player.firstName}<br/> {player.lastName}</h1>
+          <h1 className="text-3xl font-bold text-[#333333]">
+            {player.firstName}
+            <br /> {player.lastName}
+          </h1>
           <div className="text-m text-[#333333]-600">
             <p>{player.position} | {player.teamName}</p>
             <p>Jersey: {player.jersey}</p>
@@ -405,6 +395,6 @@ const PlayerProfilePage = () => {
         </div>
       </div>
     );
-  };
+};
 
-  export default PlayerProfilePage;
+export default PlayerProfilePage;

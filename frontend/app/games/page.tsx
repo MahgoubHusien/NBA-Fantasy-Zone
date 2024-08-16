@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 
 interface GameHeader {
@@ -86,50 +86,48 @@ const GamesTab: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const gameHeaderResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/headers`);
-        const lineScoreResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/linescores`);
-        const teamStatsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/team-stats`);
+        const [gameHeaderResponse, lineScoreResponse, teamStatsResponse] = await Promise.all([
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/headers`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/linescores`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/team-stats`),
+        ]);
 
-        const gameHeaderData = await gameHeaderResponse.json();
-        const lineScoreData = await lineScoreResponse.json();
-        const teamStatsData = await teamStatsResponse.json();
-
-        console.log("Game Headers: ", gameHeaderData);
-        console.log("Line Scores: ", lineScoreData);
-        console.log("Team Stats: ", teamStatsData);
+        const [gameHeaderData, lineScoreData, teamStatsData] = await Promise.all([
+          gameHeaderResponse.json(),
+          lineScoreResponse.json(),
+          teamStatsResponse.json(),
+        ]);
 
         setGameHeaders(gameHeaderData);
         setLineScores(lineScoreData);
         setTeamStats(Array.isArray(teamStatsData) ? teamStatsData : []);
       } catch (error) {
-        console.error("Error fetching data", error);
+        console.error('Error fetching data', error);
       }
     };
 
     fetchData();
   }, []);
 
-  const getTeamLogo = (teamId: number) => {
-    const team = teamStats.find(team => team.teamId === teamId);
-    console.log(`Fetching logo for teamId ${teamId}: ${team?.logoUrl}`);
-    return team ? team.logoUrl : "";
-  };
+  const getTeamLogo = useMemo(() => (teamId: number) => {
+    const team = teamStats.find((team) => team.teamId === teamId);
+    return team ? team.logoUrl : '';
+  }, [teamStats]);
 
-  const getTeamAbbreviation = (teamId: number, gameId: string) => {
-    const lineScore = lineScores.find(score => score.teamId === teamId && score.gameId === gameId);
-    console.log(`Fetching abbreviation for teamId ${teamId} in game ${gameId}: ${lineScore?.teamAbbreviation}`);
-    return lineScore ? lineScore.teamAbbreviation : "";
-  };
+  const getTeamAbbreviation = useMemo(() => (teamId: number, gameId: string) => {
+    const lineScore = lineScores.find((score) => score.teamId === teamId && score.gameId === gameId);
+    return lineScore ? lineScore.teamAbbreviation : '';
+  }, [lineScores]);
 
-  const getTeamRecord = (teamId: number) => {
-    const team = teamStats.find(team => team.teamId === teamId);
-    return team ? `${team.wins}-${team.losses}` : "0-0";
-  };
+  const getTeamRecord = useMemo(() => (teamId: number) => {
+    const team = teamStats.find((team) => team.teamId === teamId);
+    return team ? `${team.wins}-${team.losses}` : '0-0';
+  }, [teamStats]);
 
   const getScoreClass = (teamScore: number, opponentScore: number) => {
     return teamScore > opponentScore
-      ? "text-4xl font-bold text-white bg-[#00BFA6] rounded-lg px-2"
-      : "text-4xl font-bold text-[#333333]";
+      ? 'text-4xl font-bold text-white bg-[#00BFA6] rounded-lg px-2'
+      : 'text-4xl font-bold text-[#333333]';
   };
 
   return (
@@ -141,16 +139,29 @@ const GamesTab: React.FC = () => {
         {gameHeaders
           .filter((gameHeader) => gameHeader.gameSequence !== 1) // Filter out games with sequence 1
           .map((gameHeader) => {
-            const homeTeamScore = lineScores.find(score => score.teamId === gameHeader.homeTeamId && score.gameId === gameHeader.gameId)?.pts || 0;
-            const visitorTeamScore = lineScores.find(score => score.teamId === gameHeader.visitorTeamId && score.gameId === gameHeader.gameId)?.pts || 0;
+            const homeTeamScore = lineScores.find(
+              (score) => score.teamId === gameHeader.homeTeamId && score.gameId === gameHeader.gameId
+            )?.pts || 0;
+            const visitorTeamScore = lineScores.find(
+              (score) => score.teamId === gameHeader.visitorTeamId && score.gameId === gameHeader.gameId
+            )?.pts || 0;
 
             return (
-              <div key={gameHeader.gameId} className="game-card bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#333333]">
+              <div
+                key={gameHeader.gameId}
+                className="game-card bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#333333]"
+              >
                 <Link href={`/games/${gameHeader.gameId}`}>
                   <div className="flex justify-between items-center mb-4">
                     <div className="flex flex-col items-center w-1/3">
-                      <img src={getTeamLogo(gameHeader.homeTeamId)} alt={`${getTeamAbbreviation(gameHeader.homeTeamId, gameHeader.gameId)} Logo`} className="w-16 h-16 mb-2" />
-                      <span className="text-2xl font-semibold text-[#333333]">{getTeamAbbreviation(gameHeader.homeTeamId, gameHeader.gameId)}</span>
+                      <img
+                        src={getTeamLogo(gameHeader.homeTeamId)}
+                        alt={`${getTeamAbbreviation(gameHeader.homeTeamId, gameHeader.gameId)} Logo`}
+                        className="w-16 h-16 mb-2"
+                      />
+                      <span className="text-2xl font-semibold text-[#333333]">
+                        {getTeamAbbreviation(gameHeader.homeTeamId, gameHeader.gameId)}
+                      </span>
                       <span className="text-sm text-gray-600">{getTeamRecord(gameHeader.homeTeamId)}</span>
                       <span className={getScoreClass(homeTeamScore, visitorTeamScore)}>{homeTeamScore}</span>
                     </div>
@@ -160,8 +171,14 @@ const GamesTab: React.FC = () => {
                       <p className="text-lg font-bold">{gameHeader.gameStatusText}</p>
                     </div>
                     <div className="flex flex-col items-center w-1/3">
-                      <img src={getTeamLogo(gameHeader.visitorTeamId)} alt={`${getTeamAbbreviation(gameHeader.visitorTeamId, gameHeader.gameId)} Logo`} className="w-16 h-16 mb-2" />
-                      <span className="text-2xl font-semibold text-[#333333]">{getTeamAbbreviation(gameHeader.visitorTeamId, gameHeader.gameId)}</span>
+                      <img
+                        src={getTeamLogo(gameHeader.visitorTeamId)}
+                        alt={`${getTeamAbbreviation(gameHeader.visitorTeamId, gameHeader.gameId)} Logo`}
+                        className="w-16 h-16 mb-2"
+                      />
+                      <span className="text-2xl font-semibold text-[#333333]">
+                        {getTeamAbbreviation(gameHeader.visitorTeamId, gameHeader.gameId)}
+                      </span>
                       <span className="text-sm text-gray-600">{getTeamRecord(gameHeader.visitorTeamId)}</span>
                       <span className={getScoreClass(visitorTeamScore, homeTeamScore)}>{visitorTeamScore}</span>
                     </div>

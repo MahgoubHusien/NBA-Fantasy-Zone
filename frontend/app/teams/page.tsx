@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 
 interface Team {
@@ -14,20 +14,20 @@ interface Team {
 const TeamsPage: React.FC = () => {
   const [teams, setTeams] = useState<Team[]>([]);
 
-  useEffect(() => {
-    const fetchTeams = async () => {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings`);
-        const data = await response.json();
-        const sortedTeams = data.sort((a: Team, b: Team) => a.teamCity.localeCompare(b.teamCity));
-        setTeams(sortedTeams);
-      } catch (error) {
-        console.error('Failed to fetch teams:', error);
-      }
-    };
-
-    fetchTeams();
+  const fetchTeams = useCallback(async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings`);
+      const data = await response.json();
+      const sortedTeams = data.sort((a: Team, b: Team) => a.teamCity.localeCompare(b.teamCity));
+      setTeams(sortedTeams);
+    } catch (error) {
+      console.error('Failed to fetch teams:', error);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchTeams();
+  }, [fetchTeams]);
 
   return (
     <div className="container mx-auto p-4 bg-[#f9f9f9]">

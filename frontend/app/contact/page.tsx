@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import emailjs from '@emailjs/browser';
 
 const ContactPage: React.FC = () => {
@@ -11,7 +11,14 @@ const ContactPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const resetForm = () => {
+    setName('');
+    setEmail('');
+    setSubject('');
+    setMessage('');
+  };
+
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!name || !email || !subject || !message) {
@@ -28,20 +35,16 @@ const ContactPage: React.FC = () => {
 
     try {
       const result = await emailjs.send(
-        `${process.env.SERVICE_ID}`,
-        `${process.env.TEMPLATE_ID}`,  
+        process.env.SERVICE_ID as string,
+        process.env.TEMPLATE_ID as string,  
         templateParams,
-        `${process.env.PUBLIC_KEY}`
+        process.env.PUBLIC_KEY as string
       );
 
       if (result.status === 200) {
         setSubmitted(true);
         setError('');
-
-        setName('');
-        setEmail('');
-        setSubject('');
-        setMessage('');
+        resetForm();
       } else {
         setError('Something went wrong. Please try again.');
       }
@@ -49,7 +52,7 @@ const ContactPage: React.FC = () => {
       setError('Failed to send your message. Please check your internet connection and try again.');
       console.error('Failed to send email:', err);
     }
-  };
+  }, [name, email, subject, message]);
 
   return (
     <div className="container mx-auto p-4 bg-[#f9f9f9]">
