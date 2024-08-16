@@ -36,7 +36,7 @@ public class PlayerService {
 
     // Common Player Info Methods
     public List<CommonPlayerInfo> getAllCommonPlayerInfo() {
-        return commonPlayerInfoRepository.findAll();
+        return commonPlayerInfoRepository.findAllByOrderByLastNameAsc();
     }
 
     public Optional<CommonPlayerInfo> getCommonPlayerInfoByPlayerId(Integer playerId) {

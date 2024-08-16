@@ -24,7 +24,7 @@ public class CommonPlayerInfo extends PlayerBase {
     private String position;
     private String height;
     @Column(name = "photo")
-    private String photoURL;
+    private String photoUrl;
 
     // No-argument constructor
     public CommonPlayerInfo() {}
@@ -34,7 +34,7 @@ public class CommonPlayerInfo extends PlayerBase {
                             Double ppg, Double apg, Double rpg, Double spg, Double topg,
                             Double bpg, Double pfpg, String firstName, String lastName,
                             String weight, String teamName, String jersey,
-                            String position, String height, String photoURL) {
+                            String position, String height, String photoUrl) {
         super(id, playerId, teamAbbreviation);
         this.teamId = teamId;
         this.ppg = ppg;
@@ -51,7 +51,7 @@ public class CommonPlayerInfo extends PlayerBase {
         this.jersey = jersey;
         this.position = position;
         this.height = height;
-        this.photoURL = photoURL;
+        this.photoUrl = photoUrl;
     }
 
     // Getters and Setters
@@ -175,7 +175,7 @@ public class CommonPlayerInfo extends PlayerBase {
         this.height = height;
     }
 
-    public String getPhotoURL() { return photoURL; }
+    public String getPhotoUrl() { return photoUrl; }
 
-    public void setPhotoURL(String photoURL) { this.photoURL = photoURL; }
+    public void setPhotoUrl(String photoUrl) { this.photoUrl = photoUrl; }
 }

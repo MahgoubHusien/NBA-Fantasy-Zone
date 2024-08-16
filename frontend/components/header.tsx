@@ -77,7 +77,7 @@ const Header = () => {
 
     return (
         <div className="relative z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg">
-            <div className="flex h-[47px] items-center justify-between px-4">
+            <div className="flex h-[52px] items-center justify-between px-4">
                 <div className="flex items-center space-x-4">
                     <Link href="/" className="flex flex-row space-x-3 items-center justify-center md:hidden">
                         <img 

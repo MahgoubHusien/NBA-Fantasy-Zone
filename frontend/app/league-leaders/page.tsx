@@ -36,7 +36,7 @@ interface Player {
   nbaFantasyPts: number;
   dd2: number;
   td3: number;
-  photoUrl?: string;
+  photoUrl: string;
   [key: string]: any;
 }
 

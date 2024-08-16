@@ -1,5 +1,6 @@
 package com.nba.nba_zone.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
@@ -31,13 +32,15 @@ public class LeagueLeaders extends PlayerBase {
     private Integer eff;
     private Double astTov;
     private Double stlTov;
+    @Column(name = "photo")
+    private String photoUrl;
 
     // No-argument constructor
     public LeagueLeaders() {}
 
     // All-argument constructor
-    public LeagueLeaders(Long id, Integer playerId, String teamAbbreviation, Integer rank, String playerName, String team, Integer gp, Integer min, Integer fgm, Integer fga, Double fgPct, Integer fg3m, Integer fg3a, Double fg3Pct, Integer ftm, Integer fta, Double ftPct, Integer oreb, Integer dreb, Integer reb, Integer ast, Integer stl, Integer blk, Integer tov, Integer pf, Integer pts, Integer eff, Double astTov, Double stlTov) {
-        super(id, playerId, teamAbbreviation); // Calls the superclass constructor
+    public LeagueLeaders(Long id, Integer playerId, String teamAbbreviation, Integer rank, String playerName, String team, Integer gp, Integer min, Integer fgm, Integer fga, Double fgPct, Integer fg3m, Integer fg3a, Double fg3Pct, Integer ftm, Integer fta, Double ftPct, Integer oreb, Integer dreb, Integer reb, Integer ast, Integer stl, Integer blk, Integer tov, Integer pf, Integer pts, Integer eff, Double astTov, Double stlTov, String photoUrl) {
+        super(id, playerId, teamAbbreviation);
         this.rank = rank;
         this.playerName = playerName;
         this.team = team;
@@ -64,6 +67,7 @@ public class LeagueLeaders extends PlayerBase {
         this.eff = eff;
         this.astTov = astTov;
         this.stlTov = stlTov;
+        this.photoUrl = photoUrl;
     }
     // Getters and Setters
 
@@ -265,5 +269,13 @@ public class LeagueLeaders extends PlayerBase {
 
     public void setStlTov(Double stlTov) {
         this.stlTov = stlTov;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

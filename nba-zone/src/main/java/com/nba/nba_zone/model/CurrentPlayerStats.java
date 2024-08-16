@@ -1,5 +1,6 @@
 package com.nba.nba_zone.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -69,12 +70,14 @@ public class CurrentPlayerStats extends PlayerBase {
     private Integer cfid;
     private String cfparams;
     private String playerName;
+    @Column(name = "photo")
+    private String photoUrl;
 
     // No-argument constructor
     public CurrentPlayerStats() {}
 
     // All-argument constructor
-    public CurrentPlayerStats(Long id, Integer playerId, String teamAbbreviation, Integer age, Integer gp, Integer w, Integer l, Double wPct, Double min, Double fgm, Double fga, Double fgPct, Double fg3m, Double fg3a, Double fg3Pct, Double ftm, Double fta, Double ftPct, Double oreb, Double dreb, Double reb, Double ast, Double tov, Double stl, Double blk, Double blka, Double pf, Double pfd, Double pts, Double plusMinus, Double nbaFantasyPts, Integer dd2, Integer td3, Integer gpRank, Integer wRank, Integer lRank, Integer wPctRank, Integer minRank, Integer fgmRank, Integer fgaRank, Integer fgPctRank, Integer fg3mRank, Integer fg3aRank, Integer fg3PctRank, Integer ftmRank, Integer ftaRank, Integer ftPctRank, Integer orebRank, Integer drebRank, Integer rebRank, Integer astRank, Integer tovRank, Integer stlRank, Integer blkRank, Integer blkaRank, Integer pfRank, Integer pfdRank, Integer ptsRank, Integer plusMinusRank, Integer nbaFantasyPtsRank, Integer dd2Rank, Integer td3Rank, Integer cfid, String cfparams, String playerName) {
+    public CurrentPlayerStats(Long id, Integer playerId, String teamAbbreviation, Integer age, Integer gp, Integer w, Integer l, Double wPct, Double min, Double fgm, Double fga, Double fgPct, Double fg3m, Double fg3a, Double fg3Pct, Double ftm, Double fta, Double ftPct, Double oreb, Double dreb, Double reb, Double ast, Double tov, Double stl, Double blk, Double blka, Double pf, Double pfd, Double pts, Double plusMinus, Double nbaFantasyPts, Integer dd2, Integer td3, Integer gpRank, Integer wRank, Integer lRank, Integer wPctRank, Integer minRank, Integer fgmRank, Integer fgaRank, Integer fgPctRank, Integer fg3mRank, Integer fg3aRank, Integer fg3PctRank, Integer ftmRank, Integer ftaRank, Integer ftPctRank, Integer orebRank, Integer drebRank, Integer rebRank, Integer astRank, Integer tovRank, Integer stlRank, Integer blkRank, Integer blkaRank, Integer pfRank, Integer pfdRank, Integer ptsRank, Integer plusMinusRank, Integer nbaFantasyPtsRank, Integer dd2Rank, Integer td3Rank, Integer cfid, String cfparams, String playerName, String photoUrl) {
         super(id, playerId, teamAbbreviation); // Calls the superclass constructor
         this.age = age;
         this.gp = gp;
@@ -138,6 +141,7 @@ public class CurrentPlayerStats extends PlayerBase {
         this.cfid = cfid;
         this.cfparams = cfparams;
         this.playerName = playerName;
+        this.photoUrl = photoUrl;
     }
 
     // Getters and Setters
@@ -326,4 +330,7 @@ public class CurrentPlayerStats extends PlayerBase {
 
     public String getPlayerName() { return playerName; }
     public void setPlayerName(String playerName) { this.playerName = playerName; }
+
+    public String getPhotoUrl() { return photoUrl; }
+    public void setPhotoUrl(String photoUrl) { this.photoUrl = photoUrl; }
 }
