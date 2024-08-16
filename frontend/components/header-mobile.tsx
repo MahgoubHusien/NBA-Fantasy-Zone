@@ -206,7 +206,7 @@ const HeaderMobile = () => {
                                     <Link 
                                         href={item.path}
                                         onClick={() => toggleOpen()}
-                                        className={`flex w-full text-2xl ${
+                                        className={`flex w-full text-2xl text-[#333333]${
                                             item.path === pathname ? "font-bold" : ""
                                         }`}
                                     >
@@ -216,7 +216,7 @@ const HeaderMobile = () => {
                             )}
                             
                             {!isLastItem && (
-                                <MenuItem className="my-3 h-px w-full bg-gray-300" />
+                                <MenuItem className="my-3 h-px w-full bg-[#333333]" />
                             )}
                         </div>
                     )

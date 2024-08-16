@@ -13,15 +13,20 @@ const SideNav = () => {
   return (
     <div className="md:w-60 bg-white h-screen flex-1 fixed border-r border-zinc-200 hidden md:flex">
       <div className="flex flex-col space-y-6 w-full">
-        <Link
-          href="/"
-          className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6 border-b border-zinc-200 h-12 w-full"
-        >
-          <span className="h-7 w-7 bg-zinc-300 rounded-lg" />
-          <span className="font-bold text-xl hidden md:flex">Logo</span>
-        </Link>
+      <Link
+        href="/"
+        className="flex flex-col items-center justify-center border-b border-zinc-200 h-auto w-auto"  // Adjusted to auto sizing
+      >
+        <img 
+          src="/major.png"  
+          alt="Logo"
+          className="h-32 w-32 rounded-lg"  
+        />
+        <span className="font-bold text-xl text-[#333333] hidden md:flex">NBA Fantasy Zone</span> 
+      </Link>
 
-        <div className="flex flex-col space-y-2  md:px-6 ">
+
+        <div className="flex flex-col space-y-2 md:px-6">
           {SIDENAV_ITEMS.map((item, idx) => {
             return <MenuItem key={idx} item={item} />;
           })}
@@ -52,7 +57,7 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
           >
             <div className="flex flex-row space-x-4 items-center">
               {item.icon}
-              <span className="font-semibold text-xl  flex">{item.title}</span>
+              <span className="font-semibold text-xl flex">{item.title}</span>
             </div>
 
             <div className={`${subMenuOpen ? 'rotate-180' : ''} flex`}>
@@ -86,7 +91,7 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
           }`}
         >
           {item.icon}
-          <span className="font-semibold text-xl flex">{item.title}</span>
+          <span className="font-semibold text-base flex text-[#333333]">{item.title}</span>
         </Link>
       )}
     </div>

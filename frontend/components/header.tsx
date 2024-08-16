@@ -15,7 +15,7 @@ interface SearchResult {
 const Header = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-    const [isFocused, setIsFocused] = useState(false); // To handle focus state of the input
+    const [isFocused, setIsFocused] = useState(false); 
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
@@ -36,7 +36,6 @@ const Header = () => {
     };
 
     const handleInputBlur = () => {
-        // Delay the blur handling to allow click events on the results
         setTimeout(() => setIsFocused(false), 200);
     };
 
@@ -65,7 +64,7 @@ const Header = () => {
             const gameResults: SearchResult[] = games.map((game: any) => ({
                 type: 'game',
                 id: game.gameId,
-                name: `${game.gameDateEst}: ${game.teamAbbreviation}`,
+                name: `${game.gameDateEst}: ${game.homeTeamAbbreviation} vs ${game.visitorTeamAbbreviation}`,
                 url: `/games/${game.gameId}`
             }));
 
@@ -81,8 +80,11 @@ const Header = () => {
             <div className="flex h-[47px] items-center justify-between px-4">
                 <div className="flex items-center space-x-4">
                     <Link href="/" className="flex flex-row space-x-3 items-center justify-center md:hidden">
-                        <span className="h-7 w-7 bg-zinc-300 rounded-lg" />
-                        <span className="font-bold text-xl flex">Logo</span>
+                        <img 
+                            src="/major.png"  
+                            alt="Logo"
+                            className="h-12 w-12 rounded-lg" 
+                        />
                     </Link>
                 </div>
                 
@@ -90,7 +92,7 @@ const Header = () => {
                     className="flex flex-1 justify-center relative"
                     onSubmit={handleSearchSubmit}
                 >
-                    <div className="relative w-full max-w-lg">
+                    <div className="relative w-full max-w-md border border-[#333333] rounded-full">
                         <input 
                             type="text"
                             placeholder="Search players, teams, games..."
@@ -125,9 +127,7 @@ const Header = () => {
                 </form>
 
                 <div className="hidden md:block">
-                    <div className="h-8 w-8 rounded-full bg-zinc-300 flex items-center justify-center text-center">
-                        <span className="font-semibold text-sm">HQ</span>
-                    </div>
+                    {/* Other content */}
                 </div>
             </div>
         </div>

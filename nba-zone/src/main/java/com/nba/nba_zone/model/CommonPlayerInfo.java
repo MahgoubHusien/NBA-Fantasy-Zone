@@ -1,5 +1,6 @@
 package com.nba.nba_zone.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -22,6 +23,8 @@ public class CommonPlayerInfo extends PlayerBase {
     private String jersey;
     private String position;
     private String height;
+    @Column(name = "photo")
+    private String photoURL;
 
     // No-argument constructor
     public CommonPlayerInfo() {}
@@ -31,7 +34,7 @@ public class CommonPlayerInfo extends PlayerBase {
                             Double ppg, Double apg, Double rpg, Double spg, Double topg,
                             Double bpg, Double pfpg, String firstName, String lastName,
                             String weight, String teamName, String jersey,
-                            String position, String height) {
+                            String position, String height, String photoURL) {
         super(id, playerId, teamAbbreviation);
         this.teamId = teamId;
         this.ppg = ppg;
@@ -48,6 +51,7 @@ public class CommonPlayerInfo extends PlayerBase {
         this.jersey = jersey;
         this.position = position;
         this.height = height;
+        this.photoURL = photoURL;
     }
 
     // Getters and Setters
@@ -170,4 +174,8 @@ public class CommonPlayerInfo extends PlayerBase {
     public void setHeight(String height) {
         this.height = height;
     }
+
+    public String getPhotoURL() { return photoURL; }
+
+    public void setPhotoURL(String photoURL) { this.photoURL = photoURL; }
 }
