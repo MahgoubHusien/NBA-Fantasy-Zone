@@ -64,7 +64,7 @@ const Header = () => {
             const gameResults: SearchResult[] = games.map((game: any) => ({
                 type: 'game',
                 id: game.gameId,
-                name: `${game.gameDateEst}: ${game.homeTeamAbbreviation} vs ${game.visitorTeamAbbreviation}`,
+                name: `${game.gameDateEst}: ${game.teamAbbreviation}`,
                 url: `/games/${game.gameId}`
             }));
 
@@ -127,7 +127,6 @@ const Header = () => {
                 </form>
 
                 <div className="hidden md:block">
-                    {/* Other content */}
                 </div>
             </div>
         </div>
