@@ -41,10 +41,11 @@ target/
 
 # Ignore data files or directories that should not be tracked
 #Webscraped data
-mvp/player/  
+mvp/player/
+mvp/data/  
 mvp/team/
 game/games/
-data/
+
 
 
 # Ignore node_modules directory (if you have Node.js dependencies)
