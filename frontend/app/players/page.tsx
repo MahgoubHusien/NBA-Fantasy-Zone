@@ -5,6 +5,7 @@ import PlayerCard from '@/components/player-card';
 
 interface Player {
   id: number;
+  playerId: number;
   firstName: string;
   lastName: string;
   teamName: string;
@@ -80,7 +81,6 @@ const PlayersPage: React.FC = () => {
   const fetchPlayers = useCallback(async (criteria: string) => {
     try {
       const url = `${process.env.NEXT_PUBLIC_API_URL}/players/${criteria}`;
-      console.log('Fetching from URL:', url);
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Error fetching players: ${response.statusText}`);

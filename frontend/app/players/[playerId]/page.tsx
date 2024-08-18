@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
-
+import Image from 'next/image';
 
 type PlayerProfile = {
   id: number;
@@ -112,7 +112,15 @@ const formatHeight = (height: string) => {
 };
 const formatWeight = (weight: string) => `${weight} lbs`;
 
-const getTopFiveStats = (ppg: number, apg: number, rpg: number, spg: number, topg: number, bpg: number, pfpg: number) => {
+const getTopFiveStats = (
+  ppg: number, 
+  apg: number, 
+  rpg: number, 
+  spg: number, 
+  topg: number, 
+  bpg: number, 
+  pfpg: number
+) => {
   const stats = [
     { name: 'PPG', value: ppg },
     { name: 'APG', value: apg },
@@ -126,21 +134,21 @@ const getTopFiveStats = (ppg: number, apg: number, rpg: number, spg: number, top
 };
 
 const PlayerProfilePage = () => {
-  const { id } = useParams();
+  const params = useParams();
+  const playerId = params.playerId ? parseInt(params.playerId as string, 10) : null; // Ensure playerId is a number or null
   const [player, setPlayer] = useState<PlayerProfile | null>(null);
 
   const fetchPlayerData = useCallback(async () => {
-    if (!id) return;
+    if (playerId === null) return; // Handle case where playerId is null
 
     try {
       const [commonPlayerInfo, currentPlayerStats, playerFantasyStats] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/commonPlayerInfo/${id}`).then((res) => res.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/currentPlayerStats/${id}`).then((res) => res.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/playerFantasyStats/${id}`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/commonPlayerInfo/playerId/${playerId}`).then((res) => res.json()) as Promise<PlayerProfile>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/currentPlayerStats/playerId/${playerId}`).then((res) => res.json()) as Promise<PlayerProfile>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/playerFantasyStats/playerId/${playerId}`).then((res) => res.json()) as Promise<PlayerProfile>,
       ]);
 
       const playerData = { ...commonPlayerInfo, ...currentPlayerStats, ...playerFantasyStats };
-      const playerId = playerData.playerId;
 
       const [
         rankData,
@@ -151,16 +159,16 @@ const PlayerProfilePage = () => {
         wRankData,
         lRankData,
       ] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/leagueLeader/${playerId}`).then((res) => res.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-fg3pct-rank`).then((res) => res.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-dd2-rank`).then((res) => res.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-td3-rank`).then((res) => res.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-wpct-rank`).then((res) => res.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-w-rank`).then((res) => res.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-l-rank`).then((res) => res.json()),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/leagueLeader/${playerId}`).then((res) => res.json()) as Promise<{ rank: number }>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-fg3pct-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-dd2-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-td3-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-wpct-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-w-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-l-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
       ]);
 
-      const rank = rankData.rank || null;
+      const rank = rankData.rank ?? 0;
       const fg3PctRank = fg3PctRankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
       const dd2Rank = dd2RankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
       const td3Rank = td3RankData.findIndex((p: PlayerProfile) => p.playerId === playerId) + 1;
@@ -172,7 +180,7 @@ const PlayerProfilePage = () => {
     } catch (error) {
       console.error('Error fetching player:', error);
     }
-  }, [id]);
+  }, [playerId]);
 
   useEffect(() => {
     fetchPlayerData();
@@ -188,18 +196,20 @@ const PlayerProfilePage = () => {
     <div className="container mx-auto p-10 bg-[#f9f9f9]">
       <div className="bg-white rounded-lg shadow-lg p-6 flex flex-wrap items-center justify-between space-x-6 border-2 border-[#333333]">
         <div className="flex flex-col items-center justify-center flex-shrink-0 ml-2">
-          <img
-            src={player.photoUrl || '/placeholder.png'}
-            alt={`${player.firstName} ${player.lastName}`}
-            className="w-40 h-40 object-cover shadow-lg rounded-lg"
-          />
+        <Image
+          src={player.photoUrl || '/placeholder.png'}
+          alt={`${player.firstName} ${player.lastName}`}
+          width={160}
+          height={160}
+          className="w-40 h-40 object-cover shadow-lg rounded-lg"
+        />
         </div>
         <div className="flex flex-col justify-center flex-grow space-y-2 relative left-12">
           <h1 className="text-3xl font-bold text-[#333333]">
             {player.firstName}
             <br /> {player.lastName}
           </h1>
-          <div className="text-m text-[#333333]-600">
+          <div className="text-m text-[#333333]">
             <p>{player.position} | {player.teamName}</p>
             <p>Jersey: {player.jersey}</p>
             <p>Height: {formatHeight(player.height)}</p>

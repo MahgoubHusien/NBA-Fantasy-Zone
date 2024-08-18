@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface TeamStandings {
   teamId: number;
@@ -59,10 +60,6 @@ const StandingsPage: React.FC = () => {
         westResponse.json(),
         leagueResponse.json()
       ]);
-
-      console.log('Eastern Standings:', easternData);
-      console.log('Western Standings:', westernData);
-      console.log('League Standings:', leagueData);
 
       if (Array.isArray(easternData)) setEasternStandings(easternData);
       if (Array.isArray(westernData)) setWesternStandings(westernData);
@@ -125,7 +122,13 @@ const StandingsPage: React.FC = () => {
                   <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
                   <td className="px-4 py-3 text-center whitespace-nowrap text-sm font-medium text-gray-900">
                     <Link href={`/teams/${team.teamId}`} className="text-[#333333]-600 hover:text-[#333333]-800 flex items-center justify-center">
-                      <img src={team.logoUrl} alt={`${team.teamName} Logo`} className="w-6 h-6 mr-2" />
+                    <Image
+                      src={team.logoUrl}
+                      alt={`${team.teamName} Logo`}
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 mr-2"
+                    />
                       <span>{team.teamName}</span>
                     </Link>
                   </td>

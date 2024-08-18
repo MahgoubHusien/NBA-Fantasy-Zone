@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface GameHeader {
   gameId: string;
@@ -154,11 +155,13 @@ const GamesTab: React.FC = () => {
                 <Link href={`/games/${gameHeader.gameId}`}>
                   <div className="flex justify-between items-center mb-4">
                     <div className="flex flex-col items-center w-1/3">
-                      <img
+                    <Image
                         src={getTeamLogo(gameHeader.homeTeamId)}
                         alt={`${getTeamAbbreviation(gameHeader.homeTeamId, gameHeader.gameId)} Logo`}
+                        width={64} 
+                        height={64} 
                         className="w-16 h-16 mb-2"
-                      />
+                    />
                       <span className="text-2xl font-semibold text-[#333333]">
                         {getTeamAbbreviation(gameHeader.homeTeamId, gameHeader.gameId)}
                       </span>
@@ -171,11 +174,13 @@ const GamesTab: React.FC = () => {
                       <p className="text-lg font-bold">{gameHeader.gameStatusText}</p>
                     </div>
                     <div className="flex flex-col items-center w-1/3">
-                      <img
+                    <Image
                         src={getTeamLogo(gameHeader.visitorTeamId)}
                         alt={`${getTeamAbbreviation(gameHeader.visitorTeamId, gameHeader.gameId)} Logo`}
+                        width={64} 
+                        height={64} 
                         className="w-16 h-16 mb-2"
-                      />
+                    />
                       <span className="text-2xl font-semibold text-[#333333]">
                         {getTeamAbbreviation(gameHeader.visitorTeamId, gameHeader.gameId)}
                       </span>

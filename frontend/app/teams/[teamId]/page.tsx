@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useCallback} from 'react';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 
 interface TeamStats {
   assists: number;
@@ -196,8 +197,14 @@ const TeamStatsPage: React.FC = () => {
     <div className="container mx-auto p-4 max-w-4xl bg-[#f9f9f9]">
       <div className="bg-white p-6 rounded-lg shadow-lg mb-6 border-solid2">
         <div className="flex items-center justify-center mb-4 text-[#333333]">
-          <img src={standing.logoUrl || '/placeholder.png'} alt={`${standing.teamName} Logo`} className="w-40 h-40 mr-5 rounded-full" />
-          <div>
+        <Image
+          src={standing.logoUrl || '/placeholder.png'}
+          alt={`${standing.teamName} Logo`}
+          width={160} 
+          height={160} 
+          className="w-40 h-40 mr-5 rounded-full"
+        />          
+        <div>
             <h1 className="text-4xl font-extrabold text-[#333333] mb-2">{standing.teamCity} {standing.teamName}</h1>
             <p className="text-xl text-[#333333]">{standing.conference} Conference</p>
             <p className="text-xl text-[#333333]">Record: {standing.wins} - {standing.losses}</p>

@@ -1,6 +1,6 @@
 "use client";   
 
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState, RefObject } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SIDENAV_ITEMS } from "@/constants";
@@ -8,15 +8,14 @@ import { SideNavItem, MenuItemWithSubMenuProps } from '@/types';
 import { Icon } from '@iconify/react';
 import { motion, useCycle } from 'framer-motion';
 
-const useDimensions = (ref: any) => {
+const useDimensions = (ref: RefObject<HTMLDivElement>) => {
     const dimensions = useRef({ width: 0, height: 0 });
     useEffect(() => {
         if (ref.current) {
             dimensions.current.width = ref.current.offsetWidth;
             dimensions.current.height = ref.current.offsetHeight;
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ref]);
+    }, [ref.current]); 
     return dimensions.current;
 }
 
@@ -174,7 +173,7 @@ const Path = (props: any) => (
 
 const HeaderMobile = () => {
     const pathname = usePathname();
-    const containerRef = useRef(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const { height } = useDimensions(containerRef);
     const [isOpen, toggleOpen] = useCycle(false, true);
     return (

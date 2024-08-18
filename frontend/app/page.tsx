@@ -2,11 +2,18 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
+import Image from 'next/image';
+
 
 export default function Home() {
   return (
     <div className="container mx-auto p-4 bg-[#f9f9f9]">
-      <link rel="icon"href="/favicon.ico"sizes="48x48" />
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <title>NBA Fantasy Zone</title>
+        <meta name="description" content="Your ultimate destination for NBA stats, fantasy insights, and more" />
+      </Head>      
       <div className="header text-center mb-12">
         <h1 className="text-5xl font-extrabold text-[#333333] mb-4">Welcome to NBA Fantasy Zone!</h1>
         <p className="text-lg text-gray-600">Your ultimate destination for NBA stats, fantasy insights, and more</p>
@@ -48,9 +55,11 @@ type OptimizedLinkProps = {
 const OptimizedLink: React.FC<OptimizedLinkProps> = React.memo(({ href, imgSrc, alt, title, description }) => (
   <Link href={href}>
     <div className="border-4 border-[#333333] rounded-lg overflow-hidden h-96 flex flex-col justify-between hover:bg-[#f1f1f1] transition duration-300 cursor-pointer">
-      <img
+    <Image
         src={imgSrc}
         alt={alt}
+        width={500} 
+        height={300} 
         className="w-full h-48 object-cover"
       />
       <div className="p-6 text-center bg-white flex-grow flex flex-col justify-center">

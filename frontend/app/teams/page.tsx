@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Team {
   teamId: number;
@@ -38,9 +39,11 @@ const TeamsPage: React.FC = () => {
         {teams.map((team) => (
           <Link key={team.teamId} href={`/teams/${team.teamId}`}>
             <div className="team-card relative cursor-pointer overflow-hidden rounded-lg shadow-lg">
-              <img
+            <Image
                 src={team.logoUrl || '/placeholder.png'}
                 alt={team.teamName}
+                width={500} 
+                height={300} 
                 className="w-full h-48 object-cover transition-transform transform hover:scale-105"
               />
               <div className="team-name absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-xl font-bold opacity-0 hover:opacity-100 transition-opacity">

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -15,12 +16,14 @@ const SideNav = () => {
       <div className="flex flex-col space-y-6 w-full">
       <Link
         href="/"
-        className="flex flex-col items-center justify-center border-b border-zinc-200 h-auto w-auto"  // Adjusted to auto sizing
+        className="flex flex-col items-center justify-center border-b border-zinc-200 h-auto w-auto" 
       >
-        <img 
+        <Image 
           src="/major.png"  
           alt="Logo"
-          className="h-32 w-32 rounded-lg"  
+          width={128} 
+          height={128} 
+          className="rounded-lg"  
         />
         <span className="font-bold text-xl text-[#333333] hidden md:flex">NBA Fantasy Zone</span> 
       </Link>

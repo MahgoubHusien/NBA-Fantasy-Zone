@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface GameHeader {
     gameId: string;
@@ -168,13 +169,11 @@ const GameStatsPage: React.FC = () => {
 
   useEffect(() => {
     if (!gameId) {
-      console.log('No game ID provided.');
       return;
     }
 
     const fetchGameData = async () => {
       try {
-        console.log('Fetching game data for gameId:', gameId);
 
         const [lineScoreResponse, teamStatsResponse, playerBoxStatsResponse, gameHeaderResponse] = await Promise.all([
           fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/linescores/${gameId}`),
@@ -188,10 +187,6 @@ const GameStatsPage: React.FC = () => {
         const playerBoxStatsData = await playerBoxStatsResponse.json();
         const gameHeaderData = await gameHeaderResponse.json();
 
-        console.log('Fetched line scores:', lineScoreData);
-        console.log('Fetched team stats:', teamStatsData);
-        console.log('Fetched player box stats:', playerBoxStatsData);
-        console.log('Fetched game header:', gameHeaderData);
 
         setGameHeader(gameHeaderData.length > 0 ? gameHeaderData[0] : null);
 
@@ -303,15 +298,12 @@ const GameStatsPage: React.FC = () => {
     );
 
     if (filteredPlayerStats.length === 0) {
-      console.log('No player stats available.');
       return <div>No player stats available.</div>;
     }
 
     const team = teamStats.find((team) => team.teamId === teamId);
     const teamName = team ? team.teamName : 'Team';
     const logoUrl = team ? team.logoUrl : '';
-
-    console.log('Rendering PlayerStatsTable for team:', teamName);
 
     return (
       <div className="bg-white p-4 rounded-lg shadow-lg border border-[#333333] mb-8" style={{ maxWidth: '1080px', margin: '0 auto', marginBottom: '50px' }}>
@@ -437,11 +429,13 @@ const GameStatsPage: React.FC = () => {
         <div className="flex justify-between items-center">
           <div className="flex flex-col items-center w-1/3">
             <Link href={`/teams/${lineScores[0].teamId}`}>
-              <img
-                src={getTeamLogo(lineScores[0].teamId, teamStats)}
-                alt={`${getTeamAbbreviation(lineScores[0].teamId, gameId, lineScores)} Logo`}
-                className="w-24 h-24 mb-2"
-              />
+            <Image
+              src={getTeamLogo(lineScores[0].teamId, teamStats)}
+              alt={`${getTeamAbbreviation(lineScores[0].teamId, gameId, lineScores)} Logo`}
+              width={96} 
+              height={96} 
+              className="w-24 h-24 mb-2"
+            />
             </Link>
             <span className="text-3xl font-semibold text-[#333333]">{getTeamAbbreviation(lineScores[0].teamId, gameId, lineScores)}</span>
             <span className="text-sm text-gray-600">{getTeamRecord(lineScores[0].teamId, gameId, lineScores)}</span>
@@ -460,11 +454,13 @@ const GameStatsPage: React.FC = () => {
           </div>
           <div className="flex flex-col items-center w-1/3">
             <Link href={`/teams/${lineScores[1].teamId}`}>
-              <img
-                src={getTeamLogo(lineScores[1].teamId, teamStats)}
-                alt={`${getTeamAbbreviation(lineScores[1].teamId, gameId, lineScores)} Logo`}
-                className="w-24 h-24 mb-2"
-              />
+            <Image
+              src={getTeamLogo(lineScores[1].teamId, teamStats)}
+              alt={`${getTeamAbbreviation(lineScores[1].teamId, gameId, lineScores)} Logo`}
+              width={96} // Add width
+              height={96} // Add height
+              className="w-24 h-24 mb-2"
+            />
             </Link>
             <span className="text-3xl font-semibold text-[#333333]">{getTeamAbbreviation(lineScores[1].teamId, gameId, lineScores)}</span>
             <span className="text-sm text-gray-600">{getTeamRecord(lineScores[1].teamId, gameId, lineScores)}</span>

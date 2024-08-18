@@ -35,6 +35,40 @@ type LeagueLeader = {
 
 const formatPercentage = (value: number) => (value).toFixed(3);
 
+const getFg3Pct = (player: LeagueLeader) => {
+  return player.fg3Pct !== null ? player.fg3Pct : formatPercentage(player.fg3m / player.fg3a);
+};
+
+const TableRow: React.FC<{ player: LeagueLeader }> = React.memo(({ player }) => (
+  <tr key={player.id}>
+    <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{player.rank}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{player.playerName}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.gp}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.min}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fgm}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fga}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fgPct}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fg3m}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fg3a}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{getFg3Pct(player)}</td>                  
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.ftm}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fta}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.ftPct}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.oreb}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.dreb}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.reb}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.ast}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.stl}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.blk}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.tov}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.pf}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.pts}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.eff}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.astTov}</td>
+    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.stlTov}</td>
+  </tr>
+));
+
 const TopPlayersPage: React.FC = () => {
   const [leagueLeaders, setLeagueLeaders] = useState<LeagueLeader[]>([]);
 
@@ -91,33 +125,7 @@ const TopPlayersPage: React.FC = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {leagueLeaders.map((player) => (
-                <tr key={player.id}>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{player.rank}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{player.playerName}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.gp}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.min}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fgm}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fga}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fgPct}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fg3m}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fg3a}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fg3Pct !== null ? player.fg3Pct : (formatPercentage(player.fg3m/player.fg3a))}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.ftm}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.fta}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.ftPct}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.oreb}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.dreb}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.reb}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.ast}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.stl}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.blk}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.tov}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.pf}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.pts}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.eff}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.astTov}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{player.stlTov}</td>
-                </tr>
+                <TableRow key={player.id} player={player} />
               ))}
             </tbody>
           </table>

@@ -4,12 +4,30 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 interface SearchResult {
     type: 'player' | 'team' | 'game';
     id: number;
     name: string;
     url: string;
+}
+
+interface Player {
+    id: number;
+    firstName: string;
+    lastName: string;
+}
+
+interface Team {
+    teamId: number;
+    teamName: string;
+}
+
+interface Game {
+    gameId: number;
+    gameDateEst: string;
+    teamAbbreviation: string;
 }
 
 const Header = () => {
@@ -41,7 +59,7 @@ const Header = () => {
 
     async function searchEverything(query: string): Promise<SearchResult[]> {
         try {
-            const [players, teams, games] = await Promise.all([
+            const [players, teams, games]: [Player[], Team[], Game[]] = await Promise.all([
                 fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/search-players?query=${encodeURIComponent(query)}`).then(res => res.json()),
                 fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/search-teams?query=${encodeURIComponent(query)}`).then(res => res.json()),
                 fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/search-linescores?query=${encodeURIComponent(query)}`).then(res => res.json())
@@ -80,11 +98,13 @@ const Header = () => {
             <div className="flex h-[52px] items-center justify-between px-4">
                 <div className="flex items-center space-x-4">
                     <Link href="/" className="flex flex-row space-x-3 items-center justify-center md:hidden">
-                        <img 
-                            src="/major.png"  
-                            alt="Logo"
-                            className="h-12 w-12 rounded-lg" 
-                        />
+                    <Image 
+                        src="/major.png"  
+                        alt="Logo"
+                        width={48}
+                        height={48}
+                        className="h-12 w-12 rounded-lg" 
+/>
                     </Link>
                 </div>
                 

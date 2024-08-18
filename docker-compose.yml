@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    image: your_image_name
+    build:
+      context: .
+    secrets:
+      - service_id
+      - template_id
+      - public_key
+    environment:
+      - SERVICE_ID_FILE=/run/secrets/service_id
+      - TEMPLATE_ID_FILE=/run/secrets/template_id
+      - PUBLIC_KEY_FILE=/run/secrets/public_key
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  backend:
+    build: ./nba-zone
+    ports:
+      - "8080:8080"
+    networks:
+      - nba-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - nba-network
+
+networks:
+  nba-network:
+    driver: bridge

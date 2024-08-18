@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+
 
 interface Player {
   id: number;
@@ -127,12 +129,14 @@ const LeagueLeadersPage: React.FC = () => {
               <tr key={player.id} className="hover:bg-[#333333]-100 transition border-b last:border-b-0">
                 <td className="py-3 px-4">{index + 1}</td>
                 <td className="py-3 px-4 flex items-center">
-                  <img
-                    src={player.photoUrl || '/placeholder.png'}
-                    alt={player.playerName}
-                    className="w-10 h-10 object-cover rounded-full mr-4"
-                  />
-                  <Link href={`/players/${player.id}`} className="text-#333333 hover:underline flex items-center space-x-2">
+                <Image
+                  src={player.photoUrl || '/placeholder.png'}
+                  alt={player.playerName}
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 object-cover rounded-full mr-4"
+                />
+                  <Link href={`/players/${player.playerId}`} className="text-[#333333] hover:underline flex items-center space-x-2">
                     <span>{player.playerName}</span>
                   </Link>
                 </td>
@@ -156,7 +160,7 @@ const LeagueLeadersPage: React.FC = () => {
         {categories.map((category) => (
           <div key={category.name} className="category-card p-4 rounded-lg shadow-lg bg-white">
             <h2 className="text-2xl font-semibold mb-2 gradient-title text-center">{category.label}</h2>
-            <div className="flex justify-between mb-2 text-#333333 text-sm text-center">
+            <div className="flex justify-between mb-2 text-[#333333] text-sm text-center">
               <span>Rank</span>
               <span>Name</span>
               <span>{category.unit}</span>
@@ -165,12 +169,14 @@ const LeagueLeadersPage: React.FC = () => {
               {playersByCategory[category.name]?.slice(0, 5).map((player, index) => (
                 <li key={index} className="flex justify-between py-2 border-b last:border-b-0">
                   <span>{index + 1}</span>
-                  <Link href={`/players/${player.id}`} className="text-#333333 hover:underline flex items-center space-x-2">
-                    <img
-                      src={player.photoUrl || '/placeholder.png'}
-                      alt={player.playerName}
-                      className="w-8 h-8 object-cover rounded-full mr-2"
-                    />
+                  <Link href={`/players/${player.playerId}`} className="text-[#333333] hover:underline flex items-center space-x-2">
+                  <Image
+                    src={player.photoUrl || '/placeholder.png'}
+                    alt={player.playerName}
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 object-cover rounded-full mr-4"
+                  />
                     <span>{player.playerName} ({player.teamAbbreviation})</span>
                   </Link>
                   <span>
@@ -258,7 +264,7 @@ const LeagueLeadersPage: React.FC = () => {
           border-radius: 1rem;
           font-weight: 600;
           transition: all 0.3s ease;
-          background: #33333; 
+          background: #333333; 
           color: white;
         }
         

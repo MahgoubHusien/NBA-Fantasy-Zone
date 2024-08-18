@@ -49,18 +49,34 @@ public class PlayerController {
     }
 
 
-    // Retrieve current player stats by player ID
+    // Retrieve current player stats by ID
     @GetMapping("/currentPlayerStats/{id}")
     public ResponseEntity<CurrentPlayerStats> getCurrentPlayerStatsById(@PathVariable Long id) {
         CurrentPlayerStats playerStats = playerService.getCurrentPlayerStatsById(id);
         return new ResponseEntity<>(playerStats, HttpStatus.OK);
     }
 
-    // Retrieve player fantasy stats by player ID
+    @GetMapping("/currentPlayerStats/playerId/{playerId}")
+    public ResponseEntity<CurrentPlayerStats> getCurrentPlayerStatsByPlayerId(@PathVariable Integer playerId) {
+        Optional<CurrentPlayerStats> playerStats = playerService.getCurrentPlayerStatsByPlayerId(playerId);
+        return playerStats
+                .map(stats -> new ResponseEntity<>(stats, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    // Retrieve player fantasy stats by ID
     @GetMapping("/playerFantasyStats/{id}")
     public ResponseEntity<PlayerFantasyStats> getPlayerFantasyStatsById(@PathVariable Long id) {
         PlayerFantasyStats playerFantasyStats = playerService.getPlayerFantasyStatsById(id);
         return new ResponseEntity<>(playerFantasyStats, HttpStatus.OK);
+    }
+
+    @GetMapping("/playerFantasyStats/playerId/{playerId}")
+    public ResponseEntity<PlayerFantasyStats> getPlayerFantasyStatsByPlayerId(@PathVariable Integer playerId) {
+        Optional<PlayerFantasyStats> playerFantasyStats = playerService.getPlayerFantasyStatsByPlayerId(playerId);
+        return playerFantasyStats
+                .map(stats -> new ResponseEntity<>(stats, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // League Leaders Endpoints

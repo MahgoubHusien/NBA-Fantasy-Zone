@@ -53,6 +53,10 @@ public class PlayerService {
     }
 
     // Current Player Stats Methods
+    public Optional<CurrentPlayerStats> getCurrentPlayerStatsByPlayerId(Integer playerId) {
+        return currentPlayerStatsRepository.findByPlayerId(playerId);
+    }
+
     public List<CurrentPlayerStats> getAllCurrentPlayerStats() {
         return currentPlayerStatsRepository.findAll();
     }
@@ -331,6 +335,10 @@ public class PlayerService {
     public PlayerFantasyStats getPlayerFantasyStatsById(Long id) {
         return playerFantasyStatsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Player not found"));
+    }
+
+    public Optional<PlayerFantasyStats> getPlayerFantasyStatsByPlayerId(Integer playerId) {
+        return playerFantasyStatsRepository.findByPlayerId(playerId);
     }
 
     @Transactional
