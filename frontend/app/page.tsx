@@ -6,6 +6,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div className="container mx-auto p-4 bg-[#f9f9f9]">
+      <link rel="icon"href="/favicon.ico"sizes="48x48" />
       <div className="header text-center mb-12">
         <h1 className="text-5xl font-extrabold text-[#333333] mb-4">Welcome to NBA Fantasy Zone!</h1>
         <p className="text-lg text-gray-600">Your ultimate destination for NBA stats, fantasy insights, and more</p>
