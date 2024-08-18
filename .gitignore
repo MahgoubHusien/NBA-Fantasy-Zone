@@ -42,7 +42,7 @@ target/
 # Ignore data files or directories that should not be tracked
 #Webscraped data
 mvp/player/
-mvp/data/  
+zone/mvp/data/
 mvp/team/
 game/games/
 
