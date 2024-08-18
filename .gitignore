@@ -44,7 +44,7 @@ target/
 mvp/player/  
 mvp/team/
 game/games/
-mvp/data
+data
 
 
 # Ignore node_modules directory (if you have Node.js dependencies)
