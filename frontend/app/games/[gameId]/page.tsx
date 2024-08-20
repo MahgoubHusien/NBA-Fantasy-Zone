@@ -222,7 +222,7 @@ const GameStatsPage: React.FC = () => {
   const homeTeamScore = lineScores.find((score) => score.teamId === lineScores[0].teamId && score.gameId === gameId)?.pts || 0;
   const visitorTeamScore = lineScores.find((score) => score.teamId !== lineScores[0].teamId && score.gameId === gameId)?.pts || 0;
 
-  const BoxScoreTable = () => {
+  const BoxScoreTable: React.FC = () => {
     const maxOvertimes = useMemo(
       () =>
         Math.max(
@@ -235,6 +235,7 @@ const GameStatsPage: React.FC = () => {
         ),
       [lineScores]
     );
+    BoxScoreTable.displayName = "BoxScoreTable";
 
     const overtimeColumns = () => {
       return Array.from({ length: maxOvertimes }, (_, i) => (
@@ -308,7 +309,7 @@ const GameStatsPage: React.FC = () => {
     return (
       <div className="bg-white p-4 rounded-lg shadow-lg border border-[#333333] mb-8" style={{ maxWidth: '1080px', margin: '0 auto', marginBottom: '50px' }}>
         <div className="flex items-center mb-4">
-          <img src={logoUrl} alt={`${teamName} Logo`} className="w-10 h-10 mr-4" />
+          <Image src={logoUrl} alt={`${teamName} Logo`} className="w-10 h-10 mr-4" width={40} height={40}/>
           <h2 className="text-xl font-bold text-[#333333]">{teamName}</h2>
         </div>
         <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400" style={{ width: '100%' }}>
@@ -375,6 +376,8 @@ const GameStatsPage: React.FC = () => {
     );
   };
 
+  PlayerStatsTable.displayName = "PlayerStatsTable";
+
   const TeamStatsComponent = ({ teamId }: { teamId: number }) => {
     const teamName = useMemo(
       () => teamStats.find((team) => team.teamId === teamId)?.teamName || '',
@@ -385,7 +388,7 @@ const GameStatsPage: React.FC = () => {
     return (
       <div className="bg-white p-4 rounded-lg shadow-lg border border-[#333333] mb-8">
         <div className="flex items-center mb-4">
-          <img src={logoUrl} alt={`${teamName} Logo`} className="w-10 h-10 mr-4" />
+          <Image src={logoUrl} alt={`${teamName} Logo`} className="w-10 h-10 mr-4" width={40} height={40}/>
           <h2 className="text-xl font-bold text-[#333333]">{teamName}</h2>
         </div>
         <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400">
@@ -422,6 +425,8 @@ const GameStatsPage: React.FC = () => {
     );
   };
 
+  TeamStatsComponent.displayName = "TeamStatsComponent";
+
   return (
     <div className="container mx-auto p-4 bg-[#f9f9f9]">
       {/* Game Card */}
@@ -457,8 +462,8 @@ const GameStatsPage: React.FC = () => {
             <Image
               src={getTeamLogo(lineScores[1].teamId, teamStats)}
               alt={`${getTeamAbbreviation(lineScores[1].teamId, gameId, lineScores)} Logo`}
-              width={96} // Add width
-              height={96} // Add height
+              width={96} 
+              height={96} 
               className="w-24 h-24 mb-2"
             />
             </Link>

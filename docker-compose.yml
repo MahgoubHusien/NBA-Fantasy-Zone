@@ -1,35 +1,48 @@
 version: '3.8'
 
 services:
-  app:
-    image: your_image_name
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB_FILE: /run/secrets/POSTGRES_DB
+      POSTGRES_USER_FILE: /run/secrets/POSTGRES_USER
+      POSTGRES_PASSWORD_FILE: /run/secrets/POSTGRES_PASSWORD
+    secrets:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    networks:
+      - nba-network
+
+
+  backend:
     build:
-      context: .
+      context: ./nba-zone
+    secrets:
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    ports:
+      - "8080:8080"
+    networks:
+      - nba-network
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend  
     secrets:
       - service_id
       - template_id
       - public_key
     environment:
-      - SERVICE_ID_FILE=/run/secrets/service_id
+      - NEXT_PUBLIC_API_URL=http://backend:8080/api
       - TEMPLATE_ID_FILE=/run/secrets/template_id
+      - SERVICE_ID_FILE=/run/secrets/service_id
       - PUBLIC_KEY_FILE=/run/secrets/public_key
-    ports:
-      - "3000:3000"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  backend:
-    build: ./nba-zone
-    ports:
-      - "8080:8080"
-    networks:
-      - nba-network
-
-  frontend:
-    build: ./frontend
     ports:
       - "3000:3000"
     networks:
@@ -38,3 +51,17 @@ services:
 networks:
   nba-network:
     driver: bridge
+
+secrets:
+  POSTGRES_DB:
+    file: ./secrets/POSTGRES_DB.txt
+  POSTGRES_USER:
+    file: ./secrets/POSTGRES_USER.txt
+  POSTGRES_PASSWORD:
+    file: ./secrets/POSTGRES_PASSWORD.txt
+  service_id:
+    file: ./secrets/SERVICE_ID.txt
+  template_id:
+    file: ./secrets/TEMPLATE_ID.txt
+  public_key:
+    file: ./secrets/PUBLIC_KEY.txt

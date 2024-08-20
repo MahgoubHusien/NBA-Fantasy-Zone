@@ -55,11 +55,11 @@ type OptimizedLinkProps = {
 const OptimizedLink: React.FC<OptimizedLinkProps> = React.memo(({ href, imgSrc, alt, title, description }) => (
   <Link href={href}>
     <div className="border-4 border-[#333333] rounded-lg overflow-hidden h-96 flex flex-col justify-between hover:bg-[#f1f1f1] transition duration-300 cursor-pointer">
-    <Image
+      <Image
         src={imgSrc}
         alt={alt}
-        width={500} 
-        height={300} 
+        width={500}
+        height={300}
         className="w-full h-48 object-cover"
       />
       <div className="p-6 text-center bg-white flex-grow flex flex-col justify-center">
@@ -69,3 +69,6 @@ const OptimizedLink: React.FC<OptimizedLinkProps> = React.memo(({ href, imgSrc, 
     </div>
   </Link>
 ));
+
+OptimizedLink.displayName = "OptimizedLink";
+

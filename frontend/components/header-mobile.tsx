@@ -80,6 +80,9 @@ const MenuItem = ({
     );
 };
 
+MenuItem.displayName = "MenuItem";
+
+
 const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
     item,
     toggleOpen,
@@ -130,6 +133,9 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
     );
 };
 
+MenuItemWithSubMenu.displayName = "MenuItemWithSubMenu";
+
+
 const MenuToggle = ({ toggle }: { toggle: any }) => (
     <button
       onClick={toggle}
@@ -159,6 +165,9 @@ const MenuToggle = ({ toggle }: { toggle: any }) => (
       </svg>
     </button>
   );
+
+  MenuToggle.displayName = "MenuToggle";
+
   
 
 const Path = (props: any) => (
@@ -170,6 +179,9 @@ const Path = (props: any) => (
         {...props}
     />
 );
+
+Path.displayName = "Path";
+
 
 const HeaderMobile = () => {
     const pathname = usePathname();

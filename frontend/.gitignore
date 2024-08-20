@@ -45,3 +45,9 @@ docker-compose.yml
 .git
 .env
 
+#Ignore secret files
+/NEXT_PUBLIC_API_URL.txt
+/PUBLIC_KEY.txt
+/SERVICE_ID.txt
+/TEMPLATE_ID.txt
+

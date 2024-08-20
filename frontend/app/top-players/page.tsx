@@ -69,6 +69,8 @@ const TableRow: React.FC<{ player: LeagueLeader }> = React.memo(({ player }) => 
   </tr>
 ));
 
+TableRow.displayName = "TableRow";
+
 const TopPlayersPage: React.FC = () => {
   const [leagueLeaders, setLeagueLeaders] = useState<LeagueLeader[]>([]);
 

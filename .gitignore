@@ -65,5 +65,15 @@ out/
 *.swp
 *~
 
+#Ignore secret files
+/secrets
 
-
+#Ignore Secret Files
+/src/main/resources/DB_HOST.txt
+/src/main/resources/DB_NAME.txt
+/src/main/resources/DB_PASSWORD.txt
+/src/main/resources/DB_PORT.txt
+/src/main/resources/DB_USER.txt
+/src/main/resources/.env
+/nba-zone/entrypoint.sh
+Dockerfile
