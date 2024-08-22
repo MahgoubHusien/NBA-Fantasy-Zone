@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/games")
-
 public class GameController {
 
     private final GameService gameService;
