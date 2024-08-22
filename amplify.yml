@@ -21,6 +21,7 @@ applications:
       phases:
         preBuild:
           commands:
+            - export JAVA_HOME=/usr/lib/jvm/java-11-openjdk  
             - cd nba-zone
             - ./mvnw install
         build:
