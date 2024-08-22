@@ -80,7 +80,7 @@ const PlayersPage: React.FC = () => {
 
   const fetchPlayers = useCallback(async (criteria: string) => {
     try {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/players/${criteria}`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/players/${criteria}`;
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Error fetching players: ${response.statusText}`);

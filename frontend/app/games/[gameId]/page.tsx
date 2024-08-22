@@ -176,10 +176,10 @@ const GameStatsPage: React.FC = () => {
       try {
 
         const [lineScoreResponse, teamStatsResponse, playerBoxStatsResponse, gameHeaderResponse] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/linescores/game/${gameId}`),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/team-stats`),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/playerboxstats/${removeLeadingZeros(gameId)}`),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/headers/${gameId}`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games/linescores/game/${gameId}`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/team-stats`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games/playerboxstats/${removeLeadingZeros(gameId)}`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games/headers/${gameId}`),
         ]);
 
         const lineScoreData = await lineScoreResponse.json();
@@ -191,7 +191,7 @@ const GameStatsPage: React.FC = () => {
         setGameHeader(gameHeaderData.length > 0 ? gameHeaderData[0] : null);
 
         const commonPlayerInfoRequests = playerBoxStatsData.map((player: PlayerBoxStats) =>
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/commonPlayerInfo/playerId/${player.playerId}`)
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/commonPlayerInfo/playerId/${player.playerId}`)
         );
         
         const commonPlayerInfoResponses = await Promise.all(commonPlayerInfoRequests);

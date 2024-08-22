@@ -80,7 +80,7 @@ const LeagueLeadersPage: React.FC = () => {
 
   const fetchTopPlayers = useCallback(async (category: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-${category}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/top-${category}`);
       const data = await response.json();
       setPlayersByCategory((prev) => ({ ...prev, [category]: Array.isArray(data) ? data : [] }));
     } catch (error) {
@@ -91,7 +91,7 @@ const LeagueLeadersPage: React.FC = () => {
 
   const fetchTopOverallPlayers = useCallback(async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/leagueLeaders`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/leagueLeaders`);
       const data = await response.json();
       setTopPlayers(data.slice(0, 5));
     } catch (error) {

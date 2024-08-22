@@ -88,9 +88,9 @@ const GamesTab: React.FC = () => {
     const fetchData = async () => {
       try {
         const [gameHeaderResponse, lineScoreResponse, teamStatsResponse] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/headers`),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/linescores`),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/team-stats`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games/headers`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games/linescores`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/team-stats`),
         ]);
 
         const [gameHeaderData, lineScoreData, teamStatsData] = await Promise.all([

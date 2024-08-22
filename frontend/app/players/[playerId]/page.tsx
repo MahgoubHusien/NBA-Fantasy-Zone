@@ -143,9 +143,9 @@ const PlayerProfilePage = () => {
 
     try {
       const [commonPlayerInfo, currentPlayerStats, playerFantasyStats] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/commonPlayerInfo/playerId/${playerId}`).then((res) => res.json()) as Promise<PlayerProfile>,
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/currentPlayerStats/playerId/${playerId}`).then((res) => res.json()) as Promise<PlayerProfile>,
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/playerFantasyStats/playerId/${playerId}`).then((res) => res.json()) as Promise<PlayerProfile>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/commonPlayerInfo/playerId/${playerId}`).then((res) => res.json()) as Promise<PlayerProfile>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/currentPlayerStats/playerId/${playerId}`).then((res) => res.json()) as Promise<PlayerProfile>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/playerFantasyStats/playerId/${playerId}`).then((res) => res.json()) as Promise<PlayerProfile>,
       ]);
 
       const playerData = { ...commonPlayerInfo, ...currentPlayerStats, ...playerFantasyStats };
@@ -159,13 +159,13 @@ const PlayerProfilePage = () => {
         wRankData,
         lRankData,
       ] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/leagueLeader/${playerId}`).then((res) => res.json()) as Promise<{ rank: number }>,
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-fg3pct-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-dd2-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-td3-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-wpct-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-w-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/top-l-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/leagueLeader/${playerId}`).then((res) => res.json()) as Promise<{ rank: number }>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/top-fg3pct-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/top-dd2-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/top-td3-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/top-wpct-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/top-w-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/top-l-rank`).then((res) => res.json()) as Promise<PlayerProfile[]>,
       ]);
 
       const rank = rankData.rank ?? 0;

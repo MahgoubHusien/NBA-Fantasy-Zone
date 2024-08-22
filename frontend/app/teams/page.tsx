@@ -17,7 +17,7 @@ const TeamsPage: React.FC = () => {
 
   const fetchTeams = useCallback(async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/standings`);
       const data = await response.json();
       const sortedTeams = data.sort((a: Team, b: Team) => a.teamCity.localeCompare(b.teamCity));
       setTeams(sortedTeams);

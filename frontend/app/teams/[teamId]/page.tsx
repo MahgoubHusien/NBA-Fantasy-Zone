@@ -161,10 +161,10 @@ const TeamStatsPage: React.FC = () => {
   const fetchTeamData = useCallback(async () => {
     try {
       const [statsResponse, metricsResponse, standingsResponse, playersResponse] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/team-stats/${teamId}`),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/team-estimated-metrics/${teamId}`),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/${teamId}`),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/team/${teamId}`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/team-stats/${teamId}`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/team-estimated-metrics/${teamId}`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/standings/${teamId}`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/team/${teamId}`),
       ]);
 
       const [statsData, metricsData, standingsData, playersData] = await Promise.all([

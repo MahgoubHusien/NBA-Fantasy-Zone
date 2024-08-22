@@ -50,9 +50,9 @@ const StandingsPage: React.FC = () => {
   const fetchStandings = useCallback(async () => {
     try {
       const [eastResponse, westResponse, leagueResponse] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/east`),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/west`),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/standings/league`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/standings/east`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/standings/west`),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/standings/league`)
       ]);
 
       const [easternData, westernData, leagueData] = await Promise.all([
