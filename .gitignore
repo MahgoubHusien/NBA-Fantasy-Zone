@@ -78,6 +78,7 @@ out/
 /nba-zone/entrypoint.sh
 /nba-zone/src/main/resources/application.properties
 /nba-zone/src/main/resources/application-prod.properties
-
+/frontend/.env.production
+/frontend/.env.local
 
 Dockerfile

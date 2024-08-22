@@ -37,6 +37,7 @@ next-env.d.ts
 
 # .gitignore
 .env.local
+.env.production
 
 node_modules
 npm-debug.log
