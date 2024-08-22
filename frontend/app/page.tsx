@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Image from 'next/image';
 
-
 export default function Home() {
   return (
     <div className="container mx-auto p-4 bg-[#f9f9f9]">
