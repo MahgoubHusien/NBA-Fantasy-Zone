@@ -79,6 +79,7 @@ interface TeamStats {
   losses: number;
 }
 
+
 const GamesTab: React.FC = () => {
   const [gameHeaders, setGameHeaders] = useState<GameHeader[]>([]);
   const [lineScores, setLineScores] = useState<LineScore[]>([]);
