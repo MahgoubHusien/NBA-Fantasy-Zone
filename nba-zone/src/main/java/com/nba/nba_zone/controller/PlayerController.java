@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/players")
+@CrossOrigin(origins = {"http://localhost:8080", "https://main.d1gp0n5z2qrzt6.amplifyapp.com"})
 public class PlayerController {
 
     private final PlayerService playerService;

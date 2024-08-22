@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/teams")
+@CrossOrigin(origins = {"http://localhost:8080", "https://main.d1gp0n5z2qrzt6.amplifyapp.com"})
 
 public class TeamController {
 
