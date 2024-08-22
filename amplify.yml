@@ -21,7 +21,10 @@ applications:
       phases:
         preBuild:
           commands:
-            - export JAVA_HOME=/Users/mahgoubhusien/Library/Java/JavaVirtualMachines/corretto-21.0.3/Contents/Home
+            - wget https://download.java.net/java/GA/jdk21/latest/binaries/openjdk-21_linux-x64_bin.tar.gz
+            - tar xvf openjdk-21_linux-x64_bin.tar.gz
+            - export JAVA_HOME=$PWD/jdk-21
+            - export PATH=$JAVA_HOME/bin:$PATH
             - cd nba-zone
             - ./mvnw install
         build:
