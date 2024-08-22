@@ -1,31 +1,32 @@
 version: 1
 applications:
-  - appRoot: frontend
+  - appRoot: .
     frontend:
       phases:
         preBuild:
           commands:
+            - cd frontend
             - npm install
         build:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: .next
+        baseDirectory: frontend/.next
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
-  - appRoot: nba-zone
+          - frontend/node_modules/**/*
     backend:
       phases:
         preBuild:
           commands:
+            - cd nba-zone
             - ./mvnw install
         build:
           commands:
             - ./mvnw package
       artifacts:
-        baseDirectory: target
+        baseDirectory: nba-zone/target
         files:
           - '*.jar'
