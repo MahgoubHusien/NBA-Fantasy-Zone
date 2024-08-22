@@ -157,15 +157,6 @@ const calculateFg3Pct = (fg3m: number, fg3a: number) => {
   return (fg3m / fg3a).toFixed(3);
 };
 
-export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games`);
-  const games = await res.json();
-
-  return games.map((game: any) => ({
-    gameId: game.gameId,
-  }));
-}
-
 const GameStatsPage: React.FC = () => {
   const { gameId: gameIdParam } = useParams();
   const gameId = Array.isArray(gameIdParam) ? gameIdParam[0] : gameIdParam;
@@ -185,7 +176,7 @@ const GameStatsPage: React.FC = () => {
       try {
 
         const [lineScoreResponse, teamStatsResponse, playerBoxStatsResponse, gameHeaderResponse] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/linescores/${gameId}`),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/linescores/game/${gameId}`),
           fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/team-stats`),
           fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/playerboxstats/${removeLeadingZeros(gameId)}`),
           fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/headers/${gameId}`),
