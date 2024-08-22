@@ -5,7 +5,6 @@ applications:
       phases:
         preBuild:
           commands:
-            - cd ../frontend
             - npm install
         build:
           commands:
@@ -17,12 +16,6 @@ applications:
       cache:
         paths:
           - node_modules/**/*
-    backend:
-      phases:
-        build:
-          commands:
-            - cd ../nba-zone
-            - ./mvnw package
   - appRoot: nba-zone
     backend:
       phases:
