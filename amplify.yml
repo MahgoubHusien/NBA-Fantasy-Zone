@@ -21,7 +21,7 @@ applications:
       phases:
         preBuild:
           commands:
-            - export JAVA_HOME=/usr/lib/jvm/java-11-openjdk  
+            - export JAVA_HOME=/Users/mahgoubhusien/Library/Java/JavaVirtualMachines/corretto-21.0.3/Contents/Home
             - cd nba-zone
             - ./mvnw install
         build:
