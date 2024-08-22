@@ -6,12 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-//@EnableScheduling
+@EnableScheduling
 public class NbaZoneApplication {
 
 	public static void main(String[] args) {
+		// Load environment variables
 		Dotenv dotenv = Dotenv.load();
 
+		// Run the Spring Boot application
 		SpringApplication.run(NbaZoneApplication.class, args);
 	}
 }

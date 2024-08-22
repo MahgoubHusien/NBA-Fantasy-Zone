@@ -57,11 +57,11 @@ public class GameController {
         return new ResponseEntity<>(gameService.getAllLineScores(), HttpStatus.OK);
     }
 
-    @GetMapping("/linescores/{gameId}")
-    public ResponseEntity<List<LineScore>> getLineScoreByGameId(@PathVariable String gameId) {
-        List<LineScore> lineScore = gameService.getLineScoreByGameId(gameId);
-        return new ResponseEntity<>(lineScore, HttpStatus.OK);
-    }
+//    @GetMapping("/linescores/{gameId}")
+//    public ResponseEntity<List<LineScore>> getLineScoreByGameId(@PathVariable String gameId) {
+//        List<LineScore> lineScore = gameService.getLineScoreByGameId(gameId);
+//        return new ResponseEntity<>(lineScore, HttpStatus.OK);
+//    }
 
     @GetMapping("/linescores/game/{gameId}")
     public ResponseEntity<List<LineScore>> getLineScoresByGameId(@PathVariable String gameId) {
@@ -73,11 +73,11 @@ public class GameController {
         return new ResponseEntity<>(gameService.getLineScoresByTeamId(teamId), HttpStatus.OK);
     }
 
-    @GetMapping("/linescores/game/{gameId}/team/{teamId}")
-    public ResponseEntity<LineScore> getLineScoreByGameIdAndTeamId(@PathVariable String gameId, @PathVariable int teamId) {
-        Optional<LineScore> lineScore = Optional.ofNullable(gameService.getLineScoreByGameIdAndTeamId(gameId, teamId));
-        return lineScore.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+//    @GetMapping("/linescores/game/{gameId}/team/{teamId}")
+//    public ResponseEntity<LineScore> getLineScoreByGameIdAndTeamId(@PathVariable String gameId, @PathVariable int teamId) {
+//        Optional<LineScore> lineScore = Optional.ofNullable(gameService.getLineScoreByGameIdAndTeamId(gameId, teamId));
+//        return lineScore.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 
     @GetMapping("/search-linescores")
     public List<LineScore> searchLineScoresByName(@RequestParam String query) {

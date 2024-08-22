@@ -3,42 +3,49 @@ package com.nba.nba_zone.scheduler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 
 @Component
 public class DataUpdateScheduler {
 
-    // Schedule the task to run every hour
-    @Scheduled(fixedRate = 3600000) // 3600000 milliseconds = 1 hour
-    public void runPythonScript() {
-        try {
-            // Path to the Python script
-            String scriptPath = "./data/players.p";
+    // Schedule to run all Python scripts every Monday at midnight
+    @Scheduled(cron = "0 0 0 * * MON")
+    public void runAllPythonScripts() {
+        executePythonScript("./data/players.py");
+        executePythonScript("./data/coaches.py");
+        executePythonScript("./data/teams.py");
+        executePythonScript("./data/scoreboard.py");
+        executePythonScript("./data/games.py");
+        executePythonScript("./data/standings.py");
+        executePythonScript("./data/leagueleaders.py");
+    }
 
-            // Command to execute the Python script
+    private void executePythonScript(String scriptPath) {
+        try (FileWriter fw = new FileWriter("update_data.log", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter logWriter = new PrintWriter(bw)) {
+
             ProcessBuilder processBuilder = new ProcessBuilder("python3", scriptPath);
-
-            // Redirect error stream to the standard output
             processBuilder.redirectErrorStream(true);
-
-            // Start the process
             Process process = processBuilder.start();
 
-            // Read the output from the process
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
+                    logWriter.println(line);
                 }
             }
 
-            // Wait for the process to complete
             int exitCode = process.waitFor();
             if (exitCode != 0) {
-                System.err.println("Python script failed with exit code: " + exitCode);
+                logWriter.println("Python script failed with exit code: " + exitCode);
             } else {
-                System.out.println("Python script executed successfully.");
+                logWriter.println("Python script executed successfully.");
             }
         } catch (Exception e) {
             e.printStackTrace();

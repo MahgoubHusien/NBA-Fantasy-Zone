@@ -1,7 +1,6 @@
 package com.nba.nba_zone.controller;
 
 
-import com.nba.nba_zone.model.CommonPlayerInfo;
 import com.nba.nba_zone.model.Standings;
 import com.nba.nba_zone.model.TeamEstimatedMetrics;
 import com.nba.nba_zone.model.TeamStats;
@@ -17,8 +16,6 @@ import java.util.List;
 
 public class TeamController {
 
-    @Autowired
-    private TeamService TeamService;
     @Autowired
     private TeamService teamService;
 
@@ -55,7 +52,7 @@ public class TeamController {
     public ResponseEntity<TeamStats> updateTeamStats(@PathVariable Integer teamId, @RequestBody TeamStats teamStats) {
         TeamStats existingTeamStats = teamService.getTeamStatsById(teamId);
         if (existingTeamStats != null) {
-            teamStats.setTeamId(teamId); // Ensure the ID remains the same
+            teamStats.setTeamId(teamId);
             TeamStats updatedTeamStats = teamService.saveTeamStats(teamStats);
             return ResponseEntity.ok(updatedTeamStats);
         } else {

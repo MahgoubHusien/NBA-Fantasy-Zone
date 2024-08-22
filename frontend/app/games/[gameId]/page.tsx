@@ -157,6 +157,15 @@ const calculateFg3Pct = (fg3m: number, fg3a: number) => {
   return (fg3m / fg3a).toFixed(3);
 };
 
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/games`);
+  const games = await res.json();
+
+  return games.map((game: any) => ({
+    gameId: game.gameId,
+  }));
+}
+
 const GameStatsPage: React.FC = () => {
   const { gameId: gameIdParam } = useParams();
   const gameId = Array.isArray(gameIdParam) ? gameIdParam[0] : gameIdParam;

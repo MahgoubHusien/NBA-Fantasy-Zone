@@ -69,11 +69,15 @@ out/
 /secrets
 
 #Ignore Secret Files
-/src/main/resources/DB_HOST.txt
-/src/main/resources/DB_NAME.txt
-/src/main/resources/DB_PASSWORD.txt
-/src/main/resources/DB_PORT.txt
-/src/main/resources/DB_USER.txt
-/src/main/resources/.env
+/nba-zone/src/main/resources/DB_HOST.txt
+/nba-zone/src/main/resources/DB_NAME.txt
+/nba-zone/src/main/resources/DB_PASSWORD.txt
+/nba-zone/src/main/resources/DB_PORT.txt
+/nba-zone/src/main/resources/DB_USER.txt
+/nba-zone/src/main/resources/.env
 /nba-zone/entrypoint.sh
+/nba-zone/src/main/resources/application.properties
+/nba-zone/src/main/resources/application-prod.properties
+
+
 Dockerfile
