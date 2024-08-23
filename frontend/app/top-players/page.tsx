@@ -77,6 +77,7 @@ const TopPlayersPage: React.FC = () => {
   useEffect(() => {
     const fetchLeagueLeaders = async () => {
       try {
+        
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/leagueLeaders`);
         const data = await response.json();
         setLeagueLeaders(data);
