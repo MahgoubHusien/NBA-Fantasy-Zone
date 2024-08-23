@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/games")
-@CrossOrigin(origins = {"http://localhost:8080", "https://main.dmk56u49qaw4w.amplifyapp.com/"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.nbafantasyzone.com"})
 public class GameController {
 
     private final GameService gameService;
