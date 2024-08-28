@@ -1,4 +1,4 @@
-![NBA Fantasy Zone](.frontend/public/major.png)
+![NBA Fantasy Zone](frontend/public/major.png)
 
 # 🏀 NBA Fantasy Zone
 
