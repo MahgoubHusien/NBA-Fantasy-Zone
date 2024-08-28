@@ -19,8 +19,6 @@ Welcome to **NBA Fantasy Zone** — your ultimate hub for real-time NBA stats, g
 
 ## 🧠 Machine Learning Models
 
-Our advanced machine learning models analyze historical and real-time data to provide predictions with high accuracy:
-
 - **MVP Prediction**: Analyzes player performance metrics over decades to predict the most likely MVP.
 - **Game Outcome Prediction**: Evaluates team stats, player metrics, and historical game data to forecast the outcome of upcoming games.
 
