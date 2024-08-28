@@ -60,9 +60,9 @@ const Header = () => {
     async function searchEverything(query: string): Promise<SearchResult[]> {
         try {
             const [players, teams, games]: [Player[], Team[], Game[]] = await Promise.all([
-                fetch(`${process.env.NEXT_PUBLIC_API_URL}/players/search-players?query=${encodeURIComponent(query)}`).then(res => res.json()),
-                fetch(`${process.env.NEXT_PUBLIC_API_URL}/teams/search-teams?query=${encodeURIComponent(query)}`).then(res => res.json()),
-                fetch(`${process.env.NEXT_PUBLIC_API_URL}/games/search-linescores?query=${encodeURIComponent(query)}`).then(res => res.json())
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/players/search-players?query=${encodeURIComponent(query)}`).then(res => res.json()),
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/teams/search-teams?query=${encodeURIComponent(query)}`).then(res => res.json()),
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games/search-linescores?query=${encodeURIComponent(query)}`).then(res => res.json())
             ]);
 
             const playerResults: SearchResult[] = players.map((player: any) => ({
