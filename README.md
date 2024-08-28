@@ -1,6 +1,6 @@
-![NBA Fantasy Zone](frontend/public/major.png)
-
 # 🏀 NBA Fantasy Zone
+
+<img src="frontend/public/major.png" alt="NBA Fantasy Zone" width="500"/>
 
 Welcome to **NBA Fantasy Zone** — your ultimate hub for real-time NBA stats, game predictions, and MVP forecasts. Built with cutting-edge technologies, NBA Fantasy Zone delivers a seamless and interactive experience for basketball enthusiasts, data analysts, and fantasy sports players.
 
