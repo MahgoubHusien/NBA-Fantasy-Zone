@@ -6,6 +6,8 @@
 
 Welcome to **NBA Fantasy Zone** — your ultimate hub for real-time NBA stats, game predictions, and MVP forecasts. Built with cutting-edge technologies, NBA Fantasy Zone delivers a seamless and interactive experience for basketball enthusiasts, data analysts, and fantasy sports players.
 
+Try it out!  www.nbafantasyzone.com
+
 ## 🚀 Features
 
 - **Real-Time NBA Stats**: Stay updated with the latest player and team statistics throughout the NBA season.
